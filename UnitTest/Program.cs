@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Diagnostics;
-using Alglorithms;
-
+using Algorithms;
 namespace UniTest
 {
     class Program
     {
         static void Main(string[] args)
         {
-            BacktrackProblems test = new BacktrackProblems();
+            BacktrackProlems test = new BacktrackProlems();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -2, 0, 1, 1, 2 };
-            //ArrayProblems test = new ArrayProblems();
+            ArrayProblems test1 = new ArrayProblems();
             // var result = test.ThreeSum2(newArr);
             // Console.WriteLine(ArrayProblems.toString(result));
             // int[] newArr2 = { 2, 1, 0, -1 };
@@ -19,7 +18,7 @@ namespace UniTest
             // Console.WriteLine(ArrayProblems.toString(result2));
             // Console.WriteLine("---2.DynamicProgramming---");
             // int[] newArr3 = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-            // DynamicProgramming test2 = new DynamicProgramming();
+            DynamicProgramming test2 = new DynamicProgramming();
             // var result3 = test2.MaxSubArraySum(newArr3);
             // Console.WriteLine(result3);
             // var result4 = test2.climbStair(60);

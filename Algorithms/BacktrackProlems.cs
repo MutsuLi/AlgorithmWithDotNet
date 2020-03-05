@@ -1,11 +1,14 @@
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alglorithms
+namespace Algorithms
 {
-    public class BacktrackProblems
+
+
+    public class BacktrackProlems
     {
         /// <summary>
         ///39. 组合总和
@@ -86,6 +89,7 @@ namespace Alglorithms
                 recursionList.RemoveAt(recursionList.Count - 1);
             }
         }
+
         /// <summary>
         /// 给定一个没有重复数字的序列，返回其所有可能的全排列。
         /// 输入: [1,2,3]
@@ -120,6 +124,105 @@ namespace Alglorithms
             recursionList[i] = recursionList[j];
             recursionList[j] = temp;
         }
-    }
 
+
+        //401. 二进制手表
+        public IList<String> ReadBinaryWatch(int num)
+        {
+            List<String> result = new List<String>();
+            int[] nums = new int[10];
+            binaryTrackBack(result, nums, 0, num);
+            return result;
+        }
+        public void binaryTrackBack(List<String> result, int[] nums, int layer, int count)
+        {
+            if (count <= 0)
+            {
+                String time = caculate(nums);
+                if (time.Length != 0 && time != null)
+                {
+                    result.Add(caculate(nums));
+                }
+                return;
+            }
+            for (int i = layer; i < nums.Length; i++)
+            {
+                nums[i] = 1;
+                count--;
+                binaryTrackBack(result, nums, i + 1, count);
+                nums[i] = 0;
+                count++;
+            }
+
+        }
+
+        public string caculate(int[] nums)
+        {
+            string result = "";
+            if (nums.Length == 0 && nums == null)
+            {
+                return result;
+            }
+            int hour = nums[3] + nums[2] * 2 + nums[1] * 4 + nums[0] * 8;
+            if (hour >= 12) return result;
+            int minute = nums[9] + nums[8] * 2 + nums[7] * 4 + nums[6] * 8 + nums[5] * 16 + nums[4] * 32;
+            if (minute > 59) return result;
+            return (minute < 10) ? hour + ":0" + minute : hour + ":" + minute;
+        }
+
+        // 78. 子集     
+        // 输入: nums = [1,2,3]  
+        public IList<IList<int>> Subsets(int[] nums)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> recursionList = new List<int>(nums);
+            subsetBackTrack(nums, recursionList, result, 0);
+            return result;
+        }
+        public void subsetBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int layer)
+        {
+            if (!result.Contains(recursionList))
+            {
+                result.Add(new List<int>(recursionList));
+            }
+
+            for (int i = layer; i < nums.Length; i++)
+            {
+                recursionList.Add(nums[i]);
+                subsetBackTrack(nums, recursionList, result, i + 1);
+                recursionList.RemoveAt(recursionList.Count - 1);
+            }
+
+        }
+        //77. 组合
+        public IList<IList<int>> Combine(int n, int k)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> recursionList = new List<int>();
+            int[] nums = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                nums[i] = i + 1;
+            }
+            combineBackTrack(nums, recursionList, result, k, 0);
+            return result;
+        }
+
+
+        public void combineBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int k, int layer)
+        {
+            if (layer > nums.Length || recursionList.Count > k) return;
+            if (recursionList.Count == k && !result.Contains(recursionList))
+            {
+                result.Add(new List<int>(recursionList));
+            }
+
+            for (int i = layer; i < nums.Length; i++)
+            {
+                recursionList.Add(nums[i]);
+                combineBackTrack(nums, recursionList, result, k, i + 1);
+                recursionList.RemoveAt(recursionList.Count - 1);
+            }
+        }
+    }
 }

@@ -26,9 +26,9 @@
             // "WARNING16": "button at the bottom of this file.",
             // "WARNING17": "*********************************************************************************",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/UniTest/bin/Debug/netcoreapp3.1/UniTest.dll",
+            "program": "${workspaceFolder}/UnitTest/bin/Debug/netcoreapp3.1/UnitTest.dll",
             "args": [],
-            "cwd": "${workspaceFolder}/UniTest",
+            "cwd": "${workspaceFolder}/UnitTest",
             "console": "internalConsole",
             "stopAtEntry": false
         },

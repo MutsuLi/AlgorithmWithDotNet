@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 
-namespace Alglorithms
+namespace Algorithms
 {
-   public class DynamicProgramming
+    public class DynamicProgramming
     {
         //Maximum Subarray
         //53. 最大子序和
@@ -92,13 +92,14 @@ namespace Alglorithms
                 {
                     sum = nums[i];
                 }
-                else {
+                else
+                {
                     sum += nums[i];
                 }
 
-                if (sum>max)
+                if (sum > max)
                 {
-                    max = sum;               
+                    max = sum;
                 }
 
             }
