@@ -1,0 +1,8 @@
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\bin\Debug\netstandard2.0\Alglorithms.deps.json
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\bin\Debug\netstandard2.0\Alglorithms.dll
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\bin\Debug\netstandard2.0\Alglorithms.pdb
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\obj\Debug\netstandard2.0\Alglorithms.csprojAssemblyReference.cache
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\obj\Debug\netstandard2.0\Alglorithms.AssemblyInfoInputs.cache
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\obj\Debug\netstandard2.0\Alglorithms.AssemblyInfo.cs
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\obj\Debug\netstandard2.0\Alglorithms.dll
+d:\develop\ricardo\.net core\Algorithms\Alglorithms\obj\Debug\netstandard2.0\Alglorithms.pdb

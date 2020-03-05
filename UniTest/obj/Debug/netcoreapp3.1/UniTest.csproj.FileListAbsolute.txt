@@ -1,0 +1,14 @@
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.exe
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.deps.json
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.runtimeconfig.json
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.runtimeconfig.dev.json
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.dll
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\UniTest.pdb
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\Alglorithms.dll
+d:\develop\ricardo\.net core\Algorithms\UniTest\bin\Debug\netcoreapp3.1\Alglorithms.pdb
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.csprojAssemblyReference.cache
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.AssemblyInfoInputs.cache
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.AssemblyInfo.cs
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.csproj.CopyComplete
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.dll
+d:\develop\ricardo\.net core\Algorithms\UniTest\obj\Debug\netcoreapp3.1\UniTest.pdb
