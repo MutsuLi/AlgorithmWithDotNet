@@ -34,8 +34,9 @@ namespace UniTest
             // Console.WriteLine(result7);
             // int[] newArr8 = { 1, 2, 3 };
             // Console.WriteLine(ArrayProblems.toString(test.Permute(newArr8)));
-            int[] newArr9 = { 10, 1, 2, 7, 6, 1, 5 };
-            test.CombinationSum2(newArr9, 8);
+            //test.CombinationSum3(2, 18);
+            int[] newArr9 = { 1, 2, 2 };
+            test.SubsetsWithDup(newArr9);
         }
 
         //private static void ThreadFuncOne()

@@ -46,9 +46,9 @@ namespace Algorithms
                 recursionList.RemoveAt(recursionList.Count - 1);
             }
         }
-
+        #region leetcode 40
         /// <summary>
-        ///40. 组合总和 II
+        ///组合总和 II
         /// 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
         /// candidates 中的每个数字在每个组合中只能使用一次。
         /// 输入:candidates = [10,1,2,7,6,1,5], target = 8
@@ -83,13 +83,59 @@ namespace Algorithms
 
             for (int i = layer; i < candidates.Length; i++)
             {
-                if (i > layer && candidates[i] == candidates[i - 1]) continue;
+                if (candidates[i] == candidates[i - 1]) continue;
                 recursionList.Add(candidates[i]);
                 combination2BackTrack(candidates, recursionList, result, target, i + 1);
                 recursionList.RemoveAt(recursionList.Count - 1);
             }
         }
 
+        #endregion
+        #region leetcode 216
+        /// <summary>
+        ///组合总和 II
+        /// 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。
+        /// candidates 中的每个数字在每个组合中只能使用一次。
+        /// 输入:candidates = [10,1,2,7,6,1,5], target = 8
+        /// [
+        /// [1, 7],
+        /// [1, 2, 5],
+        /// [2, 6],
+        /// [1, 1, 6]
+        /// ]
+        /// 输出:[[7],[2,2,3]]
+        /// </summary>
+        /// <param name="k"></param>
+        /// <param name="n"></param>
+        /// <returns></returns>
+
+        public IList<IList<int>> CombinationSum3(int k, int n)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> recursionList = new List<int>();
+            int[] nums = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            combination3BackTrack(nums, recursionList, result, n, 0, k);
+            return result;
+        }
+        public void combination3BackTrack(int[] candidates, List<int> recursionList, List<IList<int>> result, int target, int layer, int num)
+        {
+
+            if (target < recursionList.Sum()) return;
+            if (recursionList.Count == num && target == recursionList.Sum())
+            {
+                result.Add(new List<int>(recursionList));
+                return;
+            }
+
+            for (int i = layer; i < candidates.Length; i++)
+            {
+                recursionList.Add(candidates[i]);
+                combination3BackTrack(candidates, recursionList, result, target, i + 1, num);
+                recursionList.RemoveAt(recursionList.Count - 1);
+            }
+        }
+        #endregion
+        #region 
         /// <summary>
         /// 给定一个没有重复数字的序列，返回其所有可能的全排列。
         /// 输入: [1,2,3]
@@ -124,6 +170,8 @@ namespace Algorithms
             recursionList[i] = recursionList[j];
             recursionList[j] = temp;
         }
+
+        #endregion
 
 
         //401. 二进制手表
@@ -169,7 +217,7 @@ namespace Algorithms
             if (minute > 59) return result;
             return (minute < 10) ? hour + ":0" + minute : hour + ":" + minute;
         }
-
+        #region 78
         // 78. 子集     
         // 输入: nums = [1,2,3]  
         public IList<IList<int>> Subsets(int[] nums)
@@ -194,6 +242,36 @@ namespace Algorithms
             }
 
         }
+        #endregion
+
+        #region 90
+        public IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> recursionList = new List<int>();
+            Array.Sort(nums);
+            SubsetsWithDupBackTrack(nums, recursionList, result, 0);
+            return result;
+        }
+
+        public void SubsetsWithDupBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int layer)
+        {
+            if (recursionList.Count <= nums.Length)
+            {
+                result.Add(new List<int>(recursionList));
+            }
+
+            for (int i = layer; i < nums.Length; i++)
+            {
+                if (i > layer && nums[i] == nums[i - 1]) continue;
+                recursionList.Add(nums[i]);
+                SubsetsWithDupBackTrack(nums, recursionList, result, i + 1);
+                recursionList.RemoveAt(recursionList.Count - 1);
+            }
+
+        }
+        #endregion
+
         //77. 组合
         public IList<IList<int>> Combine(int n, int k)
         {
