@@ -35,8 +35,9 @@ namespace UniTest
             // int[] newArr8 = { 1, 2, 3 };
             // Console.WriteLine(ArrayProblems.toString(test.Permute(newArr8)));
             //test.CombinationSum3(2, 18);
-            int[] newArr9 = { 1, 2, 2 };
-            test.SubsetsWithDup(newArr9);
+            //int[] newArr9 = { 1, 2, 2 };
+            //test.SubsetsWithDup(newArr9);
+            test.GetPermutation(9, 273815);
         }
 
         //private static void ThreadFuncOne()

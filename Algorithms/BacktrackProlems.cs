@@ -302,5 +302,49 @@ namespace Algorithms
                 recursionList.RemoveAt(recursionList.Count - 1);
             }
         }
+
+        #region 60
+        /*
+        *
+        * 给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。
+        * 按大小顺序列出所有排列情况，并一一标记.给定 n 和 k，返回第 k 个排列。
+        *
+        *
+        *
+        *        
+        */
+        public List<IList<int>> GetPermutation(int n, int k)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            List<int> recursionList = new List<int>();
+            int[] nums = new int[n];
+            for (int i = 0; i < n; i++)
+            {
+                nums[i] = i + 1;
+            }
+            GetPermutationBackTrack(nums, recursionList, result, k, n, 0);
+            return result;
+        }
+
+        public void GetPermutationBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int k, int n, int layer)
+        {
+            if (recursionList.Count > n) return;
+            if (recursionList.Count == n)
+            {
+                result.Add(new List<int>(recursionList));
+                return;
+            }
+
+            for (int i = layer; i < nums.Length; i++)
+            {
+                if (recursionList.Contains(nums[i])) continue;
+                recursionList.Add(nums[i]);
+                GetPermutationBackTrack(nums, recursionList, result, k, n, layer);
+                recursionList.RemoveAt(recursionList.Count - 1);
+            }
+        }
+
+
+        #endregion
     }
 }
