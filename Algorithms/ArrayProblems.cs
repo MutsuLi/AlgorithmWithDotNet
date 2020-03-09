@@ -224,6 +224,51 @@ namespace Algorithms
             }
             return result.ToArray();
         }
+
+        //16. 最接近的三数之和
+        //nums = [-1，2，1，-4] target = 1
+        //2
+        public int ThreeSumClosest(int[] nums, int target)
+        {
+            int result = 0;
+            int length = nums.Length;
+            if (nums == null && nums.Length < 3) return result;
+            Array.Sort(nums);
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > target) break;
+                if (i > 0 && nums[i] == nums[i - 1]) continue;
+                int start = i;
+                int end = nums.Length - 1;
+                while (start < end)
+                {
+                    int sum = nums[i] + nums[start] + nums[end];
+                    if (sum == target)
+                    {
+                        return sum;
+                    }
+                    else if (sum < result && result < target)
+                    {
+                        result = sum;
+                        if (start < end && nums[start] == nums[start + 1]) start++;
+                        start++;
+                    }
+                    else if (sum < result && result > target)
+                    {
+
+                    }
+                    else if (sum > result && sum > target)
+                    {
+                        result = sum;
+                        if (start < end && nums[end] == nums[end - 1]) end--;
+                        end--;
+                    }
+                }
+
+            }
+            return result;
+        }
+
     }
 }
 
