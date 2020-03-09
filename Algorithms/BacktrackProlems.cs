@@ -308,43 +308,59 @@ namespace Algorithms
         *
         * 给出集合 [1,2,3,…,n]，其所有元素共有 n! 种排列。
         * 按大小顺序列出所有排列情况，并一一标记.给定 n 和 k，返回第 k 个排列。
-        *
-        *
-        *
+        * 
         *        
         */
-        public List<IList<int>> GetPermutation(int n, int k)
+        //使用递归超时,应改成迭代或数学方法
+        //Cantor expansion
+        int[] fact = { 1, 1, 2, 6, 24, 120, 720, 5040, 40320, 362880 };
+        public String GetPermutation(int n, int k)
         {
-            List<IList<int>> result = new List<IList<int>>();
-            List<int> recursionList = new List<int>();
-            int[] nums = new int[n];
+            char[] current = new char[n];
+            List<char> targetList = new List<char>("123456789".Substring(0, n).ToCharArray());
+            int currNum = k;
+            int remainder = k - 1;
             for (int i = 0; i < n; i++)
             {
-                nums[i] = i + 1;
+                currNum = remainder / fact[n - i - 1];
+                remainder = remainder % fact[n - i - 1];
+                current[i] = targetList[currNum];
+                targetList.RemoveAt(currNum);
             }
-            GetPermutationBackTrack(nums, recursionList, result, k, n, 0);
-            return result;
+            return new String(current);
         }
 
-        public void GetPermutationBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int k, int n, int layer)
-        {
-            if (recursionList.Count > n) return;
-            if (recursionList.Count == n)
-            {
-                result.Add(new List<int>(recursionList));
-                return;
-            }
+        //backtrack
+        // public List<IList<int>> GetPermutation(int n, int k)
+        // {
+        //     List<IList<int>> result = new List<IList<int>>();
+        //     List<int> recursionList = new List<int>();
+        //     int[] nums = new int[n];
+        //     for (int i = 0; i < n; i++)
+        //     {
+        //         nums[i] = i + 1;
+        //     }
+        //     GetPermutationBackTrack(nums, recursionList, result, k, n, 0);
+        //     return result;
+        // }
 
-            for (int i = layer; i < nums.Length; i++)
-            {
-                if (recursionList.Contains(nums[i])) continue;
-                recursionList.Add(nums[i]);
-                GetPermutationBackTrack(nums, recursionList, result, k, n, layer);
-                recursionList.RemoveAt(recursionList.Count - 1);
-            }
-        }
+        // public void GetPermutationBackTrack(int[] nums, List<int> recursionList, List<IList<int>> result, int k, int n, int layer)
+        // {
+        //     if (recursionList.Count > n) return;
+        //     if (recursionList.Count == n)
+        //     {
+        //         result.Add(new List<int>(recursionList));
+        //         return;
+        //     }
 
-
+        //     for (int i = layer; i < nums.Length; i++)
+        //     {
+        //         if (recursionList.Contains(nums[i])) continue;
+        //         recursionList.Add(nums[i]);
+        //         GetPermutationBackTrack(nums, recursionList, result, k, n, layer);
+        //         recursionList.RemoveAt(recursionList.Count - 1);
+        //     }
+        // }
         #endregion
     }
 }
