@@ -9,7 +9,7 @@ namespace UniTest
         {
             BacktrackProlems test = new BacktrackProlems();
             // Console.WriteLine("---1.ArrayProblems---");
-            int[] newArr = { -1, 0, 1, 2, -1, -4};
+            int[] newArr = { -1, 0, 1, 2, -1, -4 };
             ArrayProblems test1 = new ArrayProblems();
             var result = test1.ThreeSum(newArr);
             Console.WriteLine(ArrayProblems.toString(result));
@@ -38,6 +38,12 @@ namespace UniTest
             //int[] newArr9 = { 1, 2, 2 };
             //test.SubsetsWithDup(newArr9);
             //test.GetPermutation(9, 273815);
+            int[] newArr16 = { -1, 2, 1, -4 };
+            var result16 = test1.ThreeSumClosest(newArr16, 1);
+            Console.WriteLine(result16);
+            int[] newArr31 = { 2,3,1 };
+            test1.NextPermutation(newArr31);
+
         }
 
         //private static void ThreadFuncOne()

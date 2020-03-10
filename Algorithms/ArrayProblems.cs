@@ -230,37 +230,28 @@ namespace Algorithms
         //2
         public int ThreeSumClosest(int[] nums, int target)
         {
-            int result = 0;
             int length = nums.Length;
-            if (nums == null && nums.Length < 3) return result;
+            if (nums == null && nums.Length < 3) return 0;
             Array.Sort(nums);
+            int result = nums[0] + nums[1] + nums[nums.Length - 1];
             for (int i = 0; i < nums.Length; i++)
             {
-                if (nums[i] > target) break;
-                if (i > 0 && nums[i] == nums[i - 1]) continue;
                 int start = i;
                 int end = nums.Length - 1;
                 while (start < end)
                 {
                     int sum = nums[i] + nums[start] + nums[end];
+                    if (Math.Abs(sum - target) < Math.Abs(result - target)) result = sum;
                     if (sum == target)
                     {
                         return sum;
                     }
-                    else if (sum < result && result < target)
+                    else if (sum < target)
                     {
-                        result = sum;
-                        if (start < end && nums[start] == nums[start + 1]) start++;
                         start++;
                     }
-                    else if (sum < result && result > target)
+                    else if (sum > target)
                     {
-
-                    }
-                    else if (sum > result && sum > target)
-                    {
-                        result = sum;
-                        if (start < end && nums[end] == nums[end - 1]) end--;
                         end--;
                     }
                 }
@@ -268,6 +259,70 @@ namespace Algorithms
             }
             return result;
         }
+
+        #region 31 下一个排列
+        /*
+        *
+        * 实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
+        * 如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。
+        * 
+        *        
+        */
+        // 1,2,3 → 1,3,2
+        // 3,2,1 → 1,2,3
+        // 1,1,5 → 1,5,1
+        // 1,4,3,2 ->21
+        // 1, 4, 3, 2 => 
+        //Cantor expansion
+
+        public void NextPermutation(int[] nums)
+        {
+            // int[] fact = new int[nums.Length + 1];
+            // fact[0] = fact[1] = 1; // 0的阶乘为1
+            // for (int i = 2; i < nums.Length + 1; i++)
+            // {
+            //     fact[i] = fact[i - 1] * i;
+            // }
+            // k-1=a1*(n-1)!+a2*(n-2)!+....
+            // 1, 4, 3, 2 
+            // 231
+
+            // The above is the principle of the next_permutation () function.
+            // 1.找到最大索引k，以使a [k] <a [k + 1]。如果不存在这样的索引，则该排列为最后的排列，直接翻转。
+            // 2.找出最大索引l，使a [k] <a [l]。由于k +1是这样的索引，因此l定义明确，并且满足k <l。
+            // 3.将a [k]与a [l]交换。
+            // 4.反转从a [k +1]到最后一个元素a [n]的序列。
+            if (nums == null || nums.Length <= 1) return;
+            int i = nums.Length - 1;
+            int j = i - 1;
+            while (j > 0 && (nums[j] >= nums[i]))
+            {
+                i--;
+                j--;
+            }
+            int k = j + 1;
+            if (nums[j] >= nums[i])
+            {
+                Array.Reverse(nums);
+            }
+            else
+            {
+                while (k < nums.Length - 1 && (nums[k] > nums[j]))
+                {
+                    k++;
+                }
+                if (nums[k] > nums[j])
+                {
+                    int temp = nums[j];
+                    nums[j] = nums[k];
+                    nums[k] = temp;
+                }
+                Array.Reverse(nums, i, nums.Length - i);
+
+            }
+            Console.WriteLine(toString(new List<int>(nums)));
+        }
+        #endregion 31   
 
     }
 }
