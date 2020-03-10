@@ -260,7 +260,7 @@ namespace Algorithms
             return result;
         }
 
-        #region 31 下一个排列
+        #region 31 下一个排列(重要)
         /*
         *
         * 实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。
@@ -277,16 +277,6 @@ namespace Algorithms
 
         public void NextPermutation(int[] nums)
         {
-            // int[] fact = new int[nums.Length + 1];
-            // fact[0] = fact[1] = 1; // 0的阶乘为1
-            // for (int i = 2; i < nums.Length + 1; i++)
-            // {
-            //     fact[i] = fact[i - 1] * i;
-            // }
-            // k-1=a1*(n-1)!+a2*(n-2)!+....
-            // 1, 4, 3, 2 
-            // 231
-
             // The above is the principle of the next_permutation () function.
             // 1.找到最大索引k，以使a [k] <a [k + 1]。如果不存在这样的索引，则该排列为最后的排列，直接翻转。
             // 2.找出最大索引l，使a [k] <a [l]。由于k +1是这样的索引，因此l定义明确，并且满足k <l。
@@ -300,22 +290,26 @@ namespace Algorithms
                 i--;
                 j--;
             }
-            int k = j + 1;
+            int l = j + 1;
             if (nums[j] >= nums[i])
             {
                 Array.Reverse(nums);
             }
             else
             {
-                while (k < nums.Length - 1 && (nums[k] > nums[j]))
+                for (int k = j; k <= nums.Length - 1; k++)
                 {
-                    k++;
+                    if (nums[k] <= nums[j])
+                    {
+                        continue;
+                    }
+                    l = k;
                 }
-                if (nums[k] > nums[j])
+                if (nums[l] > nums[j])
                 {
                     int temp = nums[j];
-                    nums[j] = nums[k];
-                    nums[k] = temp;
+                    nums[j] = nums[l];
+                    nums[l] = temp;
                 }
                 Array.Reverse(nums, i, nums.Length - i);
 

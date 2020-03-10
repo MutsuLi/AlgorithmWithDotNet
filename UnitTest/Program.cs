@@ -41,7 +41,7 @@ namespace UniTest
             int[] newArr16 = { -1, 2, 1, -4 };
             var result16 = test1.ThreeSumClosest(newArr16, 1);
             Console.WriteLine(result16);
-            int[] newArr31 = { 2,3,1 };
+            int[] newArr31 = { 4, 3, 2, 1 };
             test1.NextPermutation(newArr31);
 
         }
