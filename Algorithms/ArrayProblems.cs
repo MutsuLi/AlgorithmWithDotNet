@@ -318,6 +318,93 @@ namespace Algorithms
         }
         #endregion 31   
 
+        #region cantorExpansion
+        public int cantorExpansion(int[] nums)
+        {
+            List<int> permute = new List<int>(new int[] { 1, 1 });
+            for (int i = 2; i < nums.Length + 1; i++)
+            {
+                permute.Add(i * permute[i - 1]);
+            }
+            int result = 0;
+            if (nums == null || nums.Length == 0) return result;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int count = 0;
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    if (nums[i] > nums[j]) count++;
+                }
+                result += count * permute[nums.Length - 1 - i];
+            }
+            return result;
+        }
+        #endregion
+
+        #region deCantorExpansion
+        public int[] deCantorExpansion(int n, int targetNum)
+        {
+            List<int> permute = new List<int>(new int[] { 1, 1 });
+            List<int> targetList = new List<int>();
+            for (int i = 0; i < n; i++)
+            {
+                targetList.Add(i + 1);
+            }
+            for (int i = 2; i < n + 1; i++)
+            {
+                permute.Add(i * permute[i - 1]);
+            }
+            List<int> result = new List<int>();
+            int KaN = targetNum - 1;
+            int remainder = KaN;
+            for (int i = 0; i < n; i++)
+            {
+                int currNum = remainder / permute[n - i - 1];
+                remainder = remainder % permute[n - i - 1];
+                result.Add(targetList[currNum]);
+                targetList.RemoveAt(currNum);
+            }
+            Console.WriteLine(toString(new List<int>(result.ToArray())));
+            return result.ToArray();
+        }
+        #endregion
+
+        //Given an array nums containing n + 1 integers where each integer is between 1 and n(inclusive), prove that at least one duplicate number must exist.
+        //Assume that there is only one duplicate number, find the duplicate one. 
+        //Input: [1,3,4,2,2]
+        //Output: 2  
+        //Input: [3,1,6,5,3,4,2]
+        // Output: 3
+
+        #region 287. Find the Duplicate Number
+        //Floyd's Tortoise and Hare
+        // tag:low&&quick pointer 
+        public int FindDuplicate(int[] nums)
+        {
+            int length = nums.Length;
+            if (null == nums || length == 0) return 0;
+            int tortoise = nums[0], hare = nums[0];
+
+            do
+            {
+                //(motivate linkedlist)
+                tortoise = nums[tortoise];
+                hare = nums[nums[hare]];
+            } while (hare != tortoise);
+
+            int ptr1 = nums[0];
+            int ptr2 = tortoise;
+
+            // Find the "entrance" to the cycle.
+            while (ptr1 != ptr2)
+            {
+                ptr1 = nums[ptr1];
+                ptr2 = nums[ptr2];
+            }
+            return ptr1;
+        }
+
+        #endregion
     }
 }
 

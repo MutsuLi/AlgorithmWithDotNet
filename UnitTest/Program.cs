@@ -43,6 +43,9 @@ namespace UniTest
             Console.WriteLine(result16);
             int[] newArr31 = { 4, 3, 2, 1 };
             test1.NextPermutation(newArr31);
+            int[] newArrtest = { 2, 3, 1 };
+            Console.WriteLine(test1.cantorExpansion(newArrtest));
+            test1.deCantorExpansion(5, 96);
 
         }
 
