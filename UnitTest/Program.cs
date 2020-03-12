@@ -46,6 +46,10 @@ namespace UniTest
             int[] newArrtest = { 2, 3, 1 };
             Console.WriteLine(test1.cantorExpansion(newArrtest));
             test1.deCantorExpansion(5, 96);
+            int[][] newArr64 = { new int[] { 1, 3, 1 }, new int[] { 1, 5, 1 }, new int[] { 4, 2, 1 } };
+            Console.WriteLine(test2.MinPathSum(newArr64));
+            int[] newArr229 = { 1, 2, 3, 4, 3, 1, 5, 67, 82, 1, 1 };
+            Console.WriteLine(test1.MajorityElement(newArr229));
 
         }
 

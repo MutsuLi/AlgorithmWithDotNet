@@ -405,6 +405,36 @@ namespace Algorithms
         }
 
         #endregion
+
+        #region 229
+        // Given an integer array of size n, find all elements that appear more than [n/3] times.
+        // Note: The algorithm should run in linear time and in O(1) space.
+        // Example 1:
+        // Input: [3,2,3]
+        // Output: [3]
+        // Example 2:
+        // Input: [1,1,1,3,3,2,2,2]
+        // Output: [1,2]
+        // SPACE:O(1) TIME:O(N)
+        public IList<int> MajorityElement(int[] nums)
+        {
+            // List<int> result = new List<int>();
+            // Array.Sort(nums);
+            // int width = nums.Length / 3;
+            // for (int i = 0; i < nums.Length - width; i++)
+            // {
+            //     if ((nums[i] == nums[i + width]) && !result.Contains(nums[i]))
+            //     {
+            //         result.Add(nums[i]);
+            //         i = i + width;
+            //     }
+            // }
+            // return result;
+            List<int> result = new List<int>();
+            return result;
+
+        }
+        #endregion
     }
 }
 
