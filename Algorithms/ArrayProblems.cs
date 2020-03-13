@@ -416,9 +416,10 @@ namespace Algorithms
         // Input: [1,1,1,3,3,2,2,2]
         // Output: [1,2]
         // SPACE:O(1) TIME:O(N)
+        // (1)暴力(2)摩尔投票法
         public IList<int> MajorityElement(int[] nums)
         {
-            // List<int> result = new List<int>();
+            List<int> result = new List<int>();
             // Array.Sort(nums);
             // int width = nums.Length / 3;
             // for (int i = 0; i < nums.Length - width; i++)
@@ -430,9 +431,57 @@ namespace Algorithms
             //     }
             // }
             // return result;
-            List<int> result = new List<int>();
-            return result;
+            int count1 = 0, count2 = 0;
+            int target1 = nums[0], target2 = nums[0];
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == target1)
+                {
+                    count1++;
+                    continue;
+                }
+                if (nums[i] == target2)
+                {
+                    count2++;
+                    continue;
+                }
+                if (count1 == 0)
+                {
+                    target1 = nums[i];
+                    count1++;
+                    continue;
+                }
+                if (count2 == 0)
+                {
+                    target2 = nums[i];
+                    count2++;
+                    continue;
+                }
+                count1--;
+                count2--;
+            }
 
+            int numcount1 = 0, numcount2 = 0;
+            foreach (int each in nums)
+            {
+                if (each == target1)
+                {
+                    numcount1++;
+                }
+                else if (each == target2)
+                {
+                    numcount2++;
+                }
+            }
+            if (numcount1 > nums.Length / 3)
+            {
+                result.Add(target1);
+            }
+            if (numcount2 > nums.Length / 3)
+            {
+                result.Add(target2);
+            }
+            return result;
         }
         #endregion
     }

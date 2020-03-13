@@ -124,12 +124,34 @@ namespace Algorithms
             int rowNum = grid.Length; //n
             int columnNum = grid[0].Length; //m
             int[] dp = new int[columnNum];
+            for (int i = 0; i < rowNum; i++)
+            {
+                for (int j = 0; j < rowNum; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        dp[j] = grid[i][j];
+                    }
+                    else if (i == 0)
+                    {
+                        dp[j] = dp[j - 1] + grid[i][j];
+                    }
+                    else if (j == 0)
+                    {
+                        dp[j] = dp[j] + grid[i][j];
+                    }
+                    else
+                    {
+                        dp[j] = Math.Min(dp[j], dp[j - 1]) + grid[i][j];
+                    }
+                }
+            }
             return dp[columnNum - 1];
         }
 
         #endregion
 
-        
+
 
 
     }
