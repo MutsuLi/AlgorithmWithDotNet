@@ -108,51 +108,87 @@ namespace Algorithms
         }
 
 
-        #region 
+        #region 64
         // Given a m x n grid filled with non-negative numbers, find a path from top left to bottom right which minimizes the sum of all numbers along its path.
         // Note: You can only move either down or right at any point in time.
         // Input:
         // [
         //   [1,3,1],
         //   [1,5,1],
-        //   [4,2,1]
+        //   [4,2,1]    
         // ]
         // Output: 7
         // Explanation: Because the path 1→3→1→1→1 minimizes the sum.
+        //dp[i][j]=Min(d[i-1][j],d[i][j-1])+grid[i][j];
         public int MinPathSum(int[][] grid)
         {
             int rowNum = grid.Length; //n
             int columnNum = grid[0].Length; //m
-            int[] dp = new int[columnNum];
+            int[][] dp = new int[rowNum][];
             for (int i = 0; i < rowNum; i++)
             {
-                for (int j = 0; j < rowNum; j++)
+                dp[i] = new int[columnNum];
+                for (int j = 0; j < columnNum; j++)
                 {
                     if (i == 0 && j == 0)
                     {
-                        dp[j] = grid[i][j];
+                        dp[i][j] = grid[i][j];
                     }
                     else if (i == 0)
                     {
-                        dp[j] = dp[j - 1] + grid[i][j];
+                        dp[i][j] = dp[i][j - 1] + grid[i][j];
                     }
                     else if (j == 0)
                     {
-                        dp[j] = dp[j] + grid[i][j];
+                        dp[i][j] = dp[i - 1][j] + grid[i][j];
                     }
                     else
                     {
-                        dp[j] = Math.Min(dp[j], dp[j - 1]) + grid[i][j];
+                        dp[i][j] = Math.Min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
                     }
                 }
             }
-            return dp[columnNum - 1];
+            return dp[rowNum - 1][columnNum - 1];
         }
 
         #endregion
 
+        #region 62. Unique Paths
 
+        //A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+        // The robot can only move either down or right at any point in time. 
+        //The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+        // How many possible unique paths are there?
 
+        // Input: m = 3, n = 2
+        // Output: 3
+        //1---1---1
+        //1---1---1
+        //1---1---1
+        //dp[i][j]=d[i-1]d[j]+d[i]d[j-1]
 
+        public int UniquePaths(int m, int n)
+        {
+            int rowNum = m;
+            int columnNum = n;
+            int[][] dp = new int[rowNum][];
+            for (int i = 0; i < rowNum; i++)
+            {
+                dp[i] = new int[columnNum];
+                for (int j = 0; j < columnNum; j++)
+                {
+                    if (i == 0 || j == 0)
+                    {
+                        dp[i][j] = 1;
+                    }
+                    else
+                    {
+                        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                    }
+                }
+            }
+            return dp[rowNum - 1][columnNum - 1];
+        }
+        #endregion
     }
 }
