@@ -11,6 +11,7 @@ namespace UniTest
             // Console.WriteLine("---1.ArrayProblems---");
             int[] newArr = { -1, 0, 1, 2, -1, -4 };
             ArrayProblems test1 = new ArrayProblems();
+            ArrayProblems2 test22 = new ArrayProblems2();
             var result = test1.ThreeSum(newArr);
             Console.WriteLine(ArrayProblems.toString(result));
             // int[] newArr2 = { 2, 1, 0, -1 };
@@ -38,6 +39,7 @@ namespace UniTest
             //int[] newArr9 = { 1, 2, 2 };
             //test.SubsetsWithDup(newArr9);
             //test.GetPermutation(9, 273815);
+            //a=a^b b=b^a^b=a a=a^b^a=b
             int[] newArr16 = { -1, 2, 1, -4 };
             var result16 = test1.ThreeSumClosest(newArr16, 1);
             Console.WriteLine(result16);
@@ -51,7 +53,8 @@ namespace UniTest
             int[] newArr229 = { 2, 2, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9 };
             Console.WriteLine(test1.MajorityElement(newArr229));
             Console.WriteLine(test2.UniquePaths(7, 3));
-
+            int[] newArr137 = { 2,2,2,3,1,5,1,1,5,5 };
+            Console.WriteLine(test22.SingleNumber(newArr137));
         }
 
         //private static void ThreadFuncOne()
