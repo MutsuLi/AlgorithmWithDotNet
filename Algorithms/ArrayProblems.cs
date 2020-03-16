@@ -484,6 +484,52 @@ namespace Algorithms
             return result;
         }
         #endregion
+
+        #region
+        public bool ContainsDuplicate(int[] nums)
+        {
+            Array.Sort(nums);
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                for (int j = i + 1; j < nums.Length - 1; j++)
+                {
+                    if (nums[i] == nums[j])
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        #endregion
+
+
+        #region 442
+
+        // Given an array of integers, 1 ≤ a[i] ≤ n (n = size of array), some elements appear twice and others appear once.
+        // Find all the elements that appear twice in this array.
+        // Could you do it without extra space and in O(n) runtime?
+        // Input:[4,3,2,7,8,2,3,1]
+        // Output:[2,3]
+
+        public IList<int> FindDuplicates(int[] nums)
+        {
+            List<int> result = new List<int>();
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                int nextNum = Math.Abs(nums[i]);
+                if (nums[nextNum - 1] > 0)
+                {
+                    nums[nextNum - 1] *= -1;
+                }
+                else
+                {
+                    result.Add(Math.Abs(nums[i]));
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }
 
