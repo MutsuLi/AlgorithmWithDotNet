@@ -11,7 +11,6 @@ namespace UniTest
             // Console.WriteLine("---1.ArrayProblems---");
             int[] newArr = { -1, 0, 1, 2, -1, -4 };
             ArrayProblems test1 = new ArrayProblems();
-            ArrayProblems2 test22 = new ArrayProblems2();
             var result = test1.ThreeSum(newArr);
             Console.WriteLine(ArrayProblems.toString(result));
             // int[] newArr2 = { 2, 1, 0, -1 };
@@ -54,7 +53,7 @@ namespace UniTest
             Console.WriteLine(test1.MajorityElement(newArr229));
             Console.WriteLine(test2.UniquePaths(7, 3));
             int[] newArr137 = { 2,2,2,3,1,5,1,1,5,5 };
-            Console.WriteLine(test22.SingleNumber(newArr137));
+            Console.WriteLine(test1.SingleNumber(newArr137));
         }
 
         //private static void ThreadFuncOne()
