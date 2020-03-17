@@ -190,5 +190,59 @@ namespace Algorithms
             return dp[rowNum - 1][columnNum - 1];
         }
         #endregion
+
+        #region 63. Unique Paths II
+        // A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+        // The robot can only move either down or right at any point in time. 
+        // The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+        // Now consider if some obstacles are added to the grids. How many unique paths would there be?
+        // Input:
+        // [
+        //   [0,1,0,0,0],
+        //   [1,0,0,0,0],
+        //   [0,0,0,0,0],
+        //   [0,0,0,0,0]
+        // ]
+        // Output: 2
+
+        public int UniquePathsWithObstacles(int[][] obstacleGrid)
+        {
+            if (null == obstacleGrid || obstacleGrid.Length == 0 || obstacleGrid[0][0] == 1) return 0;
+
+            int rowNum = obstacleGrid.Length;
+            int columnNum = obstacleGrid[0].Length;
+            int[][] dp = new int[rowNum][];
+
+            for (int i = 0; i < rowNum; i++)
+            {
+                dp[i] = new int[columnNum];
+
+                for (int j = 0; j < columnNum; j++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        dp[i][j] = 1;
+                    }
+                    else if (obstacleGrid[i][j] == 1)
+                    {
+                        dp[i][j] = 0;
+                    }
+                    else if (i == 0)
+                    {
+                        dp[i][j] = dp[i][j - 1];
+                    }
+                    else if (j == 0)
+                    {
+                        dp[i][j] = dp[i - 1][j] ;
+                    }
+                    else
+                    {
+                        dp[i][j] = dp[i - 1][j] + dp[i][j - 1];
+                    }
+                }
+            }
+            return dp[rowNum - 1][columnNum - 1];
+        }
+        #endregion
     }
 }

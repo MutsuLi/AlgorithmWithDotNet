@@ -532,7 +532,7 @@ namespace Algorithms
         #endregion
 
 
-          #region Name
+        #region Name
         // Given a non-empty array of integers, every element appears three times except for one, which appears exactly once. Find that single one.
         // Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
         // Input: [0,1,0,1,0,1,99]
@@ -553,6 +553,35 @@ namespace Algorithms
             }
             return seenOnce;
         }
+        #endregion
+
+        #region 209. Minimum Size Subarray Sum
+        // Given an array of n positive integers and a positive integer s, find the minimal length of a contiguous subarray of which the sum ≥ s. 
+        // If there isn't one, return 0 instead.
+        //Input: s = 7, nums = [2,3,1,2,4,3] Output: 2
+        // Explanation: the subarray[4, 3] has the minimal length under                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    the problem constraint.
+        // Follow up:
+        // If you have figured out the O(n) solution, try coding another solution of which the time complexity is O(n log n). 
+
+        public int MinSubArrayLen(int s, int[] nums)
+        {
+            if (nums.Length == 0 || nums == null) return 0;
+            int sum = 0;
+            int result = int.MaxValue;
+            int frontIndex = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                sum += nums[i];
+                while (sum >= s)
+                {
+                    result = Math.Min(result, i + 1 - frontIndex);
+                    sum -= nums[frontIndex++];
+                }
+            }
+            return (sum == int.MaxValue) ? 0 : result;
+        }
+
+
         #endregion
     }
 }

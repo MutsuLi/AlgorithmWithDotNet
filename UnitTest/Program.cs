@@ -51,9 +51,14 @@ namespace UniTest
             Console.WriteLine(test2.MinPathSum(newArr64));
             int[] newArr229 = { 2, 2, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9 };
             Console.WriteLine(test1.MajorityElement(newArr229));
-            Console.WriteLine(test2.UniquePaths(7, 3));
-            int[] newArr137 = { 2,2,2,3,1,5,1,1,5,5 };
+            Console.WriteLine("UniquePaths:" + test2.UniquePaths(7, 3));
+            int[] newArr137 = { 2, 2, 2, 3, 1, 5, 1, 1, 5, 5 };
             Console.WriteLine(test1.SingleNumber(newArr137));
+            int[] newArr209 = { 5, 1, 3, 5, 10, 7, 4, 9, 2, 8, 15 };
+            Console.WriteLine(test1.MinSubArrayLen(15, newArr209));
+            //[[0,1,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
+            int[][] newArr63 = { new int[] { 0, 1, 0, 0, 0 }, new int[] { 1, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 } };
+            Console.WriteLine("UniquePathsWithObstacles:" + test2.UniquePathsWithObstacles(newArr63));
         }
 
         //private static void ThreadFuncOne()
