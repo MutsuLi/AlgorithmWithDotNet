@@ -59,6 +59,10 @@ namespace UniTest
             //[[0,1,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
             int[][] newArr63 = { new int[] { 0, 1, 0, 0, 0 }, new int[] { 1, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 } };
             Console.WriteLine("UniquePathsWithObstacles:" + test2.UniquePathsWithObstacles(newArr63));
+            int[] newArr152 = { 2, -2, 3, 4 };
+            Console.WriteLine("MaxProduct:" + test2.MaxProduct(newArr152));
+            int[] newArr300 = { 1, 5, 2, 6, 3, 7, 4 };
+            Console.WriteLine("LengthOfLIS:" + test2.LengthOfLIS(newArr300));
         }
 
         //private static void ThreadFuncOne()

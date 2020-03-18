@@ -233,7 +233,7 @@ namespace Algorithms
                     }
                     else if (j == 0)
                     {
-                        dp[i][j] = dp[i - 1][j] ;
+                        dp[i][j] = dp[i - 1][j];
                     }
                     else
                     {
@@ -243,6 +243,97 @@ namespace Algorithms
             }
             return dp[rowNum - 1][columnNum - 1];
         }
+        #endregion
+
+        #region 152. Maximum Product Subarray
+        // Given an integer array nums, find the contiguous subarray within an array (containing at least one number) which has the largest product.
+        // Example 1:
+        // Input: [2,3,-2,4]
+        // Output: 6
+        // Explanation: [2,3] has the largest product 6.
+        // dp[i]=max(nums[i],dp[i-1]*nums[i])
+        public int MaxProduct(int[] nums)
+        {
+            int dpMax = 1, dpMin = 1;
+            int max = int.MinValue;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] < 0)
+                {
+                    int temp = dpMax;
+                    dpMax = dpMin;
+                    dpMin = temp;
+                }
+                dpMax = Math.Max(dpMax * nums[i], nums[i]);
+                dpMin = Math.Min(dpMin * nums[i], nums[i]);
+                max = Math.Max(dpMax, max);
+                // Console.WriteLine($"{i}----dpMax:{dpMax} dpMin:{dpMin} max:{max}");
+            }
+            return max;
+        }
+
+        #endregion
+        #region 300. Longest Increasing Subsequence
+
+        // Given an unsorted array of integers, find the length of longest increasing subsequence.
+        // Input: [10,9,2,5,3,7,101,18]
+        // Output: 4 
+        // Explanation: The longest increasing subsequence is [2,3,7,101], therefore the length is 4.
+        // Note:
+        // There may be more than one LIS combination, it is only necessary for you to return the length.
+        // Your algorithm should run in O(n2) complexity.
+        // Follow up: Could you improve it to O(n log n) time complexity?
+
+        public int LengthOfLIS(int[] nums)
+        {
+            #region first try
+            //  int maxLength = 0;
+            // if (nums.Length == 0 && nums == null) return maxLength;
+            // if (nums.Length == 1) return 1;
+            // for (int i = 0; i < nums.Length; i++)
+            // {
+            //     int tempMax = 1;
+            //     int currentMax = nums[i];
+            //     int currentSecMax = nums[i];
+            //     for (int j = i + 1; j < nums.Length; j++)
+            //     {
+            //         if (nums[j] > currentMax)
+            //         {
+            //             tempMax++;
+            //             currentSecMax = currentMax;
+            //             currentMax = nums[j];
+            //         }
+            //         else if (nums[j] < currentMax && nums[j] > currentSecMax)
+            //         {
+            //             currentMax = nums[j];
+            //         }
+            //         maxLength = Math.Max(maxLength, tempMax);
+            //     }
+            // }
+            // return maxLength;
+            if (nums.Length == 0 || nums == null) return 0;
+            if (nums.Length == 1) return 1;
+            int[] dp = new int[nums.Length];
+            dp[0] = 1;
+            int maxlength = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                int currentlength = 0;
+                for (int j = 0; j < i; j++)
+                {
+                    if (nums[j] < nums[i])
+                    {
+                        currentlength = Math.Max(currentlength, dp[j]);
+                    }
+                    // maxLength = Math.Max(maxLength, tempMax);
+                }
+                dp[i] = currentlength + 1;
+                maxlength = Math.Max(dp[i], maxlength);
+            }
+            return maxlength;
+            #endregion first try
+        }
+
         #endregion
     }
 }

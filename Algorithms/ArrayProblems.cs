@@ -549,7 +549,7 @@ namespace Algorithms
             {
                 seenOnce = ~seenTwice & (seenOnce ^ num);
                 seenTwice = ~seenOnce & (seenTwice ^ num);
-                Console.WriteLine($"num:{num},seenOnce:{seenOnce},seenTwice:{seenTwice}");
+                //Console.WriteLine($"num:{num},seenOnce:{seenOnce},seenTwice:{seenTwice}");
             }
             return seenOnce;
         }
@@ -580,7 +580,9 @@ namespace Algorithms
             }
             return (sum == int.MaxValue) ? 0 : result;
         }
+        #endregion
 
+        #region 
 
         #endregion
     }
