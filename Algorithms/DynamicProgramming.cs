@@ -335,5 +335,72 @@ namespace Algorithms
         }
 
         #endregion
+
+        #region 120. Triangle
+
+        // Given a triangle, find the minimum path sum from top to bottom.
+        // Each step you may move to adjacent numbers on the row below.
+        // For example, given the following triangle
+        // [
+        //      [2],
+        //     [3,4],
+        //    [6,5,7],
+        //   [4,1,8,3]
+        // ]
+        // The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
+        // Note:Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
+        // dp[i][j]=min(dp[i-1][j-1],dp[i-1][j])+triangle[i][j]
+        public int MinimumTotal(IList<IList<int>> triangle)
+        {
+            int rowNum = triangle.Count;
+            int[] dp = new int[rowNum];
+            int prev = 0;
+            for (int i = 0; i < rowNum; i++)
+            {
+                int columnNum = triangle[i].Count;
+                for (int j = 0; j <= i; j++)
+                {
+                    int curr = dp[j];
+                    if (i == 0 && j == 0) dp[j] = triangle[i][j];
+                    else if (j == 0) dp[j] = curr + triangle[i][j];
+                    else if (j == i) dp[j] = prev + triangle[i][j];
+                    else
+                    {
+                        dp[j] = Math.Min(prev, curr) + triangle[i][j];
+                    }
+                    prev = curr;
+                }
+            }
+            int minValue = dp[0];
+            for (int j = 1; j < rowNum; j++)
+            {
+                minValue = Math.Min(dp[j], minValue);
+            }
+            return minValue;
+            #region space O(n^2)
+            // int rowNum = triangle.Count;
+            // int[][] dp = new int[rowNum][];
+            // for (int i = 0; i < rowNum; i++)
+            // {
+            //     int columnNum = triangle[i].Count;
+            //     dp[i] = new int[columnNum];
+            //     for (int j = 0; j < columnNum; j++)
+            //     {
+            //         if (i == 0 && j == 0) dp[i][j] = triangle[i][j];
+            //         else if (j == 0) dp[i][j] = dp[i - 1][j] + triangle[i][j];
+            //         else if (j == columnNum - 1) dp[i][j] = dp[i - 1][j - 1] + triangle[i][j];
+            //         else if (j > 0 && j < columnNum - 1) dp[i][j] = Math.Min(dp[i - 1][j - 1], dp[i - 1][j]) + triangle[i][j];
+            //     }
+            // }
+            // int minValue = dp[rowNum - 1][0];
+            // for (int j = 1; j < rowNum; j++)
+            // {
+            //     minValue = Math.Min(dp[rowNum - 1][j], minValue);
+            // }
+            // return minValue;
+            #endregion O(n^2)
+
+        }
+        #endregion
     }
 }
