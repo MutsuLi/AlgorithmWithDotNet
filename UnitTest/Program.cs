@@ -65,6 +65,8 @@ namespace UniTest
             Console.WriteLine("LengthOfLIS:" + test2.LengthOfLIS(newArr300));
             int[][] newArr120 = { new int[] { 2 }, new int[] { 3, 4 }, new int[] { 6, 5, 7 }, new int[] { 4, 1, 8, 3 } };
             Console.WriteLine("MinimumTotal:" + test2.MinimumTotal(newArr120));
+            char[][] newArr221 = { new char[] { '1' } };
+            Console.WriteLine("MaximalSquare:" + test2.MaximalSquare(newArr221));
         }
 
         //private static void ThreadFuncOne()

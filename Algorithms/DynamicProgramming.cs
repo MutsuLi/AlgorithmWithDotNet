@@ -402,5 +402,65 @@ namespace Algorithms
 
         }
         #endregion
+
+        #region 113. Path Sum II
+        public class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int x) { val = x; }
+        }
+        //Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.
+        //sum=22
+        // intput:
+        //       5
+        //      / \
+        //     4   8
+        //    /   / \
+        //   11  13  4
+        //  /  \    / \
+        // 7    2  5   1
+        // output:
+        //[
+        //    [5,4,11,2],
+        //    [5,8,4,5]
+        // ]
+        public IList<IList<int>> PathSum(TreeNode root, int sum)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            return result;
+        }
+        #endregion
+
+        #region 221. Maximal Square
+        // Given a 2D binary matrix filled with 0's and 1's, find the largest square containing only 1's and return its area.
+        // Input: 
+        // 1 0 1 0 0
+        // 1 0 1 1 1
+        // 1 1 1 1 1
+        // 1 0 0 1 0
+        // Output: 4
+        public int MaximalSquare(char[][] matrix)
+        {
+            if (matrix.Length == 0 || matrix == null) return 0;
+            int width = matrix[0].Length;
+            int length = matrix.Length;
+            int[][] dp = new int[length][];
+            for (int i = 0; i < length; i++)
+            {
+                dp[i] = new int[width];
+            }
+            int maxsqlen = 0;
+            for (int i = 1; i < length; i++)
+            {
+                for (int j = 1; j < width; j++)
+                {
+                    
+                }
+            }
+            return 0;
+        }
+        #endregion
     }
 }
