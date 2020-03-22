@@ -11,6 +11,7 @@ namespace UniTest
             // Console.WriteLine("---1.ArrayProblems---");
             int[] newArr = { -1, 0, 1, 2, -1, -4 };
             ArrayProblems test1 = new ArrayProblems();
+
             var result = test1.ThreeSum(newArr);
             Console.WriteLine(ArrayProblems.toString(result));
             // int[] newArr2 = { 2, 1, 0, -1 };
@@ -67,6 +68,13 @@ namespace UniTest
             Console.WriteLine("MinimumTotal:" + test2.MinimumTotal(newArr120));
             char[][] newArr221 = { new char[] { '1' } };
             Console.WriteLine("MaximalSquare:" + test2.MaximalSquare(newArr221));
+            BinarySearch test4 = new BinarySearch();
+            int[] Arr33 = { 2, 5, 6, 0, 0, 1, 2 };
+            Console.WriteLine("RotatedSortArrayI:" + test4.RotatedSortArrayI(Arr33, 0));
+            int[] Arr81 = { 1, 3, 1, 1, 1, 1 };
+            Console.WriteLine("RotatedSortArrayII:" + test4.RotatedSortArrayII(Arr81, 3));
+            int[] Arr162 = { 3, 2, 1 };
+            Console.WriteLine("FindPeakElement:" + test4.FindPeakElement(Arr162));
         }
 
         //private static void ThreadFuncOne()
