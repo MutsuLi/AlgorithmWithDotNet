@@ -66,7 +66,7 @@ namespace UniTest
             Console.WriteLine("LengthOfLIS:" + test2.LengthOfLIS(newArr300));
             int[][] newArr120 = { new int[] { 2 }, new int[] { 3, 4 }, new int[] { 6, 5, 7 }, new int[] { 4, 1, 8, 3 } };
             Console.WriteLine("MinimumTotal:" + test2.MinimumTotal(newArr120));
-            char[][] newArr221 = { new char[] { '1' } };
+            char[][] newArr221 = { new char[] { '1', '0', '1', '0', '0' }, new char[] { '1', '0', '1', '1', '1' }, new char[] { '1', '1', '1', '1', '1' }, new char[] { '1', '0', '0', '1', '0' } };
             Console.WriteLine("MaximalSquare:" + test2.MaximalSquare(newArr221));
             BinarySearch test4 = new BinarySearch();
             int[] Arr33 = { 2, 5, 6, 0, 0, 1, 2 };

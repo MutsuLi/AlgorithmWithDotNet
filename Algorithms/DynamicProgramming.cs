@@ -441,25 +441,37 @@ namespace Algorithms
         // 1 1 1 1 1
         // 1 0 0 1 0
         // Output: 4
+        // dp[i,j]=max(dp[i-1][j-1],dp[i-1][j],dp[i][j])+1 //dp[i][j] 以(i,j)右下顶点的正方形边长 i>1 j>1
         public int MaximalSquare(char[][] matrix)
         {
             if (matrix.Length == 0 || matrix == null) return 0;
             int width = matrix[0].Length;
             int length = matrix.Length;
             int[][] dp = new int[length][];
+            int maxsqlen = 0;
             for (int i = 0; i < length; i++)
             {
                 dp[i] = new int[width];
-            }
-            int maxsqlen = 0;
-            for (int i = 1; i < length; i++)
-            {
-                for (int j = 1; j < width; j++)
+                for (int j = 0; j < width; j++)
                 {
-                    
+                    if (i == 0 || j == 0)
+                    {
+                        if (matrix[i][j] == '1')
+                        {
+                            dp[i][j] = 1;
+                            maxsqlen = Math.Max(maxsqlen, dp[i][j]);
+                        }
+                    }
+                    else if (matrix[i][j] == '1')
+                    {
+                        dp[i][j] = Math.Min(Math.Min(dp[i - 1][j - 1], dp[i - 1][j]), dp[i][j - 1]) + 1;
+                        maxsqlen = Math.Max(maxsqlen, dp[i][j]);
+                        Console.WriteLine(maxsqlen);
+                    }
+
                 }
             }
-            return 0;
+            return maxsqlen * maxsqlen;
         }
         #endregion
     }
