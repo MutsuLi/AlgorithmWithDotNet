@@ -142,5 +142,35 @@ namespace Algorithms
             return start;
         }
         #endregion
+        #region 153. Find Minimum in Rotated Sorted Array
+
+        // Input: [3,4,5,1,2] 
+        // Output: 1
+        //2 3 4 5 1
+        //1 2 3 4 5 
+        //5,1,2,3,4
+        //4 5 1 2 3 
+        public int FindMin(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            int start = 0;
+            int end = nums.Length - 1;
+            if (nums.Length == 1 || nums[start] < nums[end]) return nums[0];
+            while (start <= end)
+            {
+                int mid = (start + end) / 2;
+                if (mid == nums.Length - 1) break;
+                if (nums[mid] > nums[mid + 1])
+                {
+                    return nums[mid + 1];
+                }
+                else if (nums[mid] <= nums[mid + 1])
+                {
+                    start = mid + 1;
+                }
+            }
+            return -1;
+        }
+        #endregion
     }
 }
