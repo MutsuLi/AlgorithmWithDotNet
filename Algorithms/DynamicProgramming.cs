@@ -440,8 +440,17 @@ namespace Algorithms
         // 1 0 1 1 1
         // 1 1 1 1 1
         // 1 0 0 1 0
+
         // Output: 4
-        // dp[i,j]=max(dp[i-1][j-1],dp[i-1][j],dp[i][j])+1 //dp[i][j] 以(i,j)右下顶点的正方形边长 i>1 j>1
+        // dp[i,j]=min(dp[i-1][j-1],dp[i-1][j],dp[i][j])+1 //dp[i][j] 以(i,j)右下顶点的正方形边长 i>1 j>1
+        /*   
+        *  0 1 1 1 1 
+        *  1 1 1 1 1 
+        *  1 1 1 1 1 
+        *  1 1 1 1 1 
+        *  1 1 1 1 ?
+        *  ?=min(4,4,3)
+        */
         public int MaximalSquare(char[][] matrix)
         {
             if (matrix.Length == 0 || matrix == null) return 0;
