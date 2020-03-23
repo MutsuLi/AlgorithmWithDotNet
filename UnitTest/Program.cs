@@ -75,8 +75,10 @@ namespace UniTest
             Console.WriteLine("RotatedSortArrayII:" + test4.RotatedSortArrayII(Arr81, 3));
             int[] Arr162 = { 3, 2, 1 };
             Console.WriteLine("FindPeakElement:" + test4.FindPeakElement(Arr162));
-            int[] Arr153 = { 4, 5, 1, 2, 3};
+            int[] Arr153 = { 4, 5, 1, 2, 3 };
             Console.WriteLine("FindMin:" + test4.FindMin(Arr153));
+            int[] Arr154 = { 4, 4, 5, 5, 1, 2, 3, 3 };
+            Console.WriteLine("FindMinII:" + test4.FindMinII(Arr154));
         }
 
         //private static void ThreadFuncOne()

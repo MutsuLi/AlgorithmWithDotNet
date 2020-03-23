@@ -176,10 +176,9 @@ namespace Algorithms
 
         // Input: [3,4,5,1,2] 
         // Output: 1
-        //2 3 4 5 1
-        //1 2 3 4 5 
-        //5,1,2,3,4
-        //4 5 1 2 3 
+        //1 2 2 3 4 5 
+        //5,1,2,2,3,4,4
+        //4,4, 5 1 2 3 
         public int FindMinII(int[] nums)
         {
             if (nums.Length == 0) return 0;
@@ -189,7 +188,12 @@ namespace Algorithms
             while (start < end)
             {
                 int mid = (start + end) >> 1;
-                if (nums[mid] > nums[end])
+                if (nums[start] == nums[mid] && nums[mid] == nums[end])
+                {
+                    start++;
+                    end--;
+                }
+                else if (nums[mid] > nums[end])
                 {
                     start = mid + 1;
                 }
