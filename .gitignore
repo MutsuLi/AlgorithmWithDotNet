@@ -6,7 +6,6 @@
 *.userosscache
 *.sln.docstates
 .vscode/
-*.sln
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
