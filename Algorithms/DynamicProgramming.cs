@@ -483,5 +483,68 @@ namespace Algorithms
             return maxsqlen * maxsqlen;
         }
         #endregion
+        #region  85. Maximal Rectangle
+        // Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing only 1's and return its area.
+        // Input:
+        // [
+        //   ["1","0","1","0","0"],
+        //   ["1","0","1","1","1"],
+        //   ["1","1","1","1","1"],
+        //   ["1","0","0","1","0"]
+        // ]
+        // Output: 6
+        public int MaximalRectangle(char[][] matrix)
+        {
+            return 0;
+        }
+        #endregion
+        #region 279. Perfect Squares
+        // Given a positive integer n, find the least number of perfect square numbers (for example, 1, 4, 9, 16, ...) which sum to n.
+        // Input: n = 12
+        // Output: 3 
+        // Explanation: 12 = 4 + 4 + 4.
+        //dp[i]=dp[i-1]+max(...)
+        public int NumSquares(int n)
+        {
+            int curr = (int)Math.Floor(Math.Sqrt(n));
+            int lastValue = n;
+            int count = 0;
+            int num = curr;
+            while (lastValue != 0)
+            {
+                if (lastValue - num * num > 1)
+                {
+                    for (int i = num; lastValue - i * i >= 0 && i > 0; i--)
+                    {
+                        lastValue -= i * i;
+                        Console.WriteLine($"lastValue:{lastValue + i * i} i:{i}");
+                        count++;
+                    }
+                }
+                else
+                {
+                    num--;
+                }
+            }
+            return count;
+            //  int curr = (int)Math.Floor(Math.Sqrt(n));
+            // int lastValue = n;
+            // int num = curr;
+            // List<List<int>> dp = new List<List<int>>();
+            // while (lastValue != 0)
+            // {
+            //     int currSquare = (int)Math.Pow(num, 2);
+            //     if (lastValue - currSquare >= (int)Math.Pow(num - 1, 2))
+            //     {
+            //         lastValue -= currSquare;
+            //     }
+            //     else
+            //     {
+            //         num--;
+            //     }
+            // }
+            // return count;
+        }
+        #endregion
     }
 }

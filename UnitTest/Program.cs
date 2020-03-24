@@ -79,6 +79,10 @@ namespace UniTest
             Console.WriteLine("FindMin:" + test4.FindMin(Arr153));
             int[] Arr154 = { 4, 4, 5, 5, 1, 2, 3, 3 };
             Console.WriteLine("FindMinII:" + test4.FindMinII(Arr154));
+            int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
+            Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
+            test1.SetZeroes(newArr73);
+            Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
         }
 
         //private static void ThreadFuncOne()

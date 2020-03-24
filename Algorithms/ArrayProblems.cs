@@ -582,8 +582,57 @@ namespace Algorithms
         }
         #endregion
 
-        #region 
+        #region 73. Set Matrix Zeroes
+        //Given a m x n matrix, if an element is 0, set its entire row and column to 0. Do it in-place.
+        // Input: 
+        // [
+        //   [0,1,2,0],
+        //   [3,4,5,2],
+        //   [1,3,1,5]
+        // ]
+        // Output: 
+        // [
+        //   [0,0,0,0],
+        //   [0,4,5,0],
+        //   [0,3,1,0]
+        // ]
+        //space o(1)
 
+        public void SetZeroes(int[][] matrix)
+        {
+            int n = matrix[0].Length;
+            int m = matrix.Length;
+            HashSet<int> oneRow = new HashSet<int>();
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (!oneRow.Contains((i + 1) * n + j) && matrix[i][j] == 0)
+                    {
+                        for (int k = 0; k < m; k++)
+                        {
+                            int index = (k + 1) * n + j;
+                            if (!oneRow.Contains(index) && matrix[k][j] != 0)
+                            {
+                                matrix[k][j] = 0;
+                                Console.WriteLine($"{index}:k:{k} m:matrix[{i}][{k}]");
+                                oneRow.Add(index);
+                            }
+                        }
+                        for (int k = 0; k < n; k++)
+                        {
+                            int index = (i + 1) * n + k;
+                            if (!oneRow.Contains(index) && matrix[i][k] != 0)
+                            {
+                                matrix[i][k] = 0;
+                                Console.WriteLine($"{index}:n:matrix[{k}][{j}]");
+                                oneRow.Add(index);
+                            }
+                        }
+                    }
+                }
+            }
+        }
         #endregion
     }
 }
