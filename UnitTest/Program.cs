@@ -8,18 +8,18 @@ namespace UniTest
         static void Main(string[] args)
         {
             BacktrackProlems test = new BacktrackProlems();
-            // Console.WriteLine("---1.ArrayProblems---");
-            int[] newArr = { -1, 0, 1, 2, -1, -4 };
+            DynamicProgramming DP = new DynamicProgramming();
+            BinarySearch test4 = new BinarySearch();
             ArrayProblems test1 = new ArrayProblems();
-
-            var result = test1.ThreeSum(newArr);
-            Console.WriteLine(ArrayProblems.toString(result));
+            // Console.WriteLine("---1.ArrayProblems---");
+            // int[] newArr = { -1, 0, 1, 2, -1, -4 };
+            // var result = test1.ThreeSum(newArr);
+            // Console.WriteLine(ArrayProblems.toString(result));
             // int[] newArr2 = { 2, 1, 0, -1 };
             // var result2 = test.FourSum(newArr2, 2);
             // Console.WriteLine(ArrayProblems.toString(result2));
             // Console.WriteLine("---2.DynamicProgramming---");
             // int[] newArr3 = { -2, 1, -3, 4, -1, 2, 1, -5, 4 };
-            DynamicProgramming test2 = new DynamicProgramming();
             // var result3 = test2.MaxSubArraySum(newArr3);
             // Console.WriteLine(result3);
             // var result4 = test2.climbStair(60);
@@ -49,26 +49,25 @@ namespace UniTest
             Console.WriteLine(test1.cantorExpansion(newArrtest));
             test1.deCantorExpansion(5, 96);
             int[][] newArr64 = { new int[] { 1, 2, 5 }, new int[] { 3, 2, 1 } };
-            Console.WriteLine(test2.MinPathSum(newArr64));
+            Console.WriteLine(DP.MinPathSum(newArr64));
             int[] newArr229 = { 2, 2, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9 };
             Console.WriteLine(test1.MajorityElement(newArr229));
-            Console.WriteLine("UniquePaths:" + test2.UniquePaths(7, 3));
+            Console.WriteLine("UniquePaths:" + DP.UniquePaths(7, 3));
             int[] newArr137 = { 2, 2, 2, 3, 1, 5, 1, 1, 5, 5 };
             Console.WriteLine(test1.SingleNumber(newArr137));
             int[] newArr209 = { 5, 1, 3, 5, 10, 7, 4, 9, 2, 8, 15 };
             Console.WriteLine(test1.MinSubArrayLen(15, newArr209));
             //[[0,1,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
             int[][] newArr63 = { new int[] { 0, 1, 0, 0, 0 }, new int[] { 1, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 } };
-            Console.WriteLine("UniquePathsWithObstacles:" + test2.UniquePathsWithObstacles(newArr63));
+            Console.WriteLine("UniquePathsWithObstacles:" + DP.UniquePathsWithObstacles(newArr63));
             int[] newArr152 = { 2, -2, 3, 4 };
-            Console.WriteLine("MaxProduct:" + test2.MaxProduct(newArr152));
+            Console.WriteLine("MaxProduct:" + DP.MaxProduct(newArr152));
             int[] newArr300 = { 1, 5, 2, 6, 3, 7, 4 };
-            Console.WriteLine("LengthOfLIS:" + test2.LengthOfLIS(newArr300));
+            Console.WriteLine("LengthOfLIS:" + DP.LengthOfLIS(newArr300));
             int[][] newArr120 = { new int[] { 2 }, new int[] { 3, 4 }, new int[] { 6, 5, 7 }, new int[] { 4, 1, 8, 3 } };
-            Console.WriteLine("MinimumTotal:" + test2.MinimumTotal(newArr120));
+            Console.WriteLine("MinimumTotal:" + DP.MinimumTotal(newArr120));
             char[][] newArr221 = { new char[] { '1', '0', '1', '0', '0' }, new char[] { '1', '0', '1', '1', '1' }, new char[] { '1', '1', '1', '1', '1' }, new char[] { '1', '0', '0', '1', '0' } };
-            Console.WriteLine("MaximalSquare:" + test2.MaximalSquare(newArr221));
-            BinarySearch test4 = new BinarySearch();
+            Console.WriteLine("MaximalSquare:" + DP.MaximalSquare(newArr221));
             int[] Arr33 = { 2, 5, 6, 0, 0, 1, 2 };
             Console.WriteLine("RotatedSortArrayI:" + test4.RotatedSortArrayI(Arr33, 0));
             int[] Arr81 = { 1, 3, 1, 1, 1, 1 };
@@ -79,10 +78,12 @@ namespace UniTest
             Console.WriteLine("FindMin:" + test4.FindMin(Arr153));
             int[] Arr154 = { 4, 4, 5, 5, 1, 2, 3, 3 };
             Console.WriteLine("FindMinII:" + test4.FindMinII(Arr154));
-            int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
-            Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
-            test1.SetZeroes(newArr73);
-            Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
+            //[279. Perfect Squares]
+            Console.WriteLine("279. Perfect Squares:" + DP.NumSquares(43));
+            //int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
+            //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
+            // test1.SetZeroes(newArr73);
+            // Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
         }
 
         //private static void ThreadFuncOne()

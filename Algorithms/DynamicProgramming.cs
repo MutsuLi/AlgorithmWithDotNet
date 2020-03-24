@@ -506,44 +506,35 @@ namespace Algorithms
         //dp[i]=dp[i-1]+max(...)
         public int NumSquares(int n)
         {
-            int curr = (int)Math.Floor(Math.Sqrt(n));
-            int lastValue = n;
-            int count = 0;
-            int num = curr;
-            while (lastValue != 0)
+
+            // for square in square_nums:
+            //     if k < square:
+            //         break
+            //     new_num = minNumSquares(k - square) + 1
+            //     min_num = min(min_num, new_num)
+            // return min_num
+
+            int num = (int)Math.Sqrt(n) + 1;
+            int[] SquareDict = new int[num];
+            for (int i = 0; i < num; i++)
             {
-                if (lastValue - num * num > 1)
+                SquareDict[i] = i * i;
+            }
+            int[] dp = new int[n + 1];
+            for (int i = 0; i < n + 1; i++)
+            {
+                dp[i] = i;
+            }
+            for (int i = 1; i <= n; i++)
+            {
+                for (int j = 1; j < num; j++)
                 {
-                    for (int i = num; lastValue - i * i >= 0 && i > 0; i--)
-                    {
-                        lastValue -= i * i;
-                        Console.WriteLine($"lastValue:{lastValue + i * i} i:{i}");
-                        count++;
-                    }
-                }
-                else
-                {
-                    num--;
+                    if (i < SquareDict[j]) break;
+                    dp[i] = Math.Min(dp[i], dp[i - SquareDict[j]] + 1);
+                    // Console.WriteLine($"lastValue:{lastValue + SquareDict[j]} count:{count + 1}");
                 }
             }
-            return count;
-            //  int curr = (int)Math.Floor(Math.Sqrt(n));
-            // int lastValue = n;
-            // int num = curr;
-            // List<List<int>> dp = new List<List<int>>();
-            // while (lastValue != 0)
-            // {
-            //     int currSquare = (int)Math.Pow(num, 2);
-            //     if (lastValue - currSquare >= (int)Math.Pow(num - 1, 2))
-            //     {
-            //         lastValue -= currSquare;
-            //     }
-            //     else
-            //     {
-            //         num--;
-            //     }
-            // }
-            // return count;
+            return dp[n];
         }
         #endregion
     }
