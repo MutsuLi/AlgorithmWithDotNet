@@ -10,7 +10,7 @@ namespace UniTest
             BacktrackProlems test = new BacktrackProlems();
             DynamicProgramming DP = new DynamicProgramming();
             BinarySearch test4 = new BinarySearch();
-            ArrayProblems test1 = new ArrayProblems();
+            ArrayProblems APS = new ArrayProblems();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
             // var result = test1.ThreeSum(newArr);
@@ -41,22 +41,22 @@ namespace UniTest
             //test.GetPermutation(9, 273815);
             //a=a^b b=b^a^b=a a=a^b^a=b
             int[] newArr16 = { -1, 2, 1, -4 };
-            var result16 = test1.ThreeSumClosest(newArr16, 1);
+            var result16 = APS.ThreeSumClosest(newArr16, 1);
             Console.WriteLine(result16);
             int[] newArr31 = { 4, 3, 2, 1 };
-            test1.NextPermutation(newArr31);
+            APS.NextPermutation(newArr31);
             int[] newArrtest = { 2, 3, 1 };
-            Console.WriteLine(test1.cantorExpansion(newArrtest));
-            test1.deCantorExpansion(5, 96);
+            Console.WriteLine(APS.cantorExpansion(newArrtest));
+            APS.deCantorExpansion(5, 96);
             int[][] newArr64 = { new int[] { 1, 2, 5 }, new int[] { 3, 2, 1 } };
             Console.WriteLine(DP.MinPathSum(newArr64));
             int[] newArr229 = { 2, 2, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9, 3, 9 };
-            Console.WriteLine(test1.MajorityElement(newArr229));
+            Console.WriteLine(APS.MajorityElement(newArr229));
             Console.WriteLine("UniquePaths:" + DP.UniquePaths(7, 3));
             int[] newArr137 = { 2, 2, 2, 3, 1, 5, 1, 1, 5, 5 };
-            Console.WriteLine(test1.SingleNumber(newArr137));
+            Console.WriteLine(APS.SingleNumber(newArr137));
             int[] newArr209 = { 5, 1, 3, 5, 10, 7, 4, 9, 2, 8, 15 };
-            Console.WriteLine(test1.MinSubArrayLen(15, newArr209));
+            Console.WriteLine(APS.MinSubArrayLen(15, newArr209));
             //[[0,1,0,0,0],[1,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]]
             int[][] newArr63 = { new int[] { 0, 1, 0, 0, 0 }, new int[] { 1, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 }, new int[] { 0, 0, 0, 0, 0 } };
             Console.WriteLine("UniquePathsWithObstacles:" + DP.UniquePathsWithObstacles(newArr63));
@@ -80,6 +80,10 @@ namespace UniTest
             Console.WriteLine("FindMinII:" + test4.FindMinII(Arr154));
             //[279. Perfect Squares]
             Console.WriteLine("279. Perfect Squares:" + DP.NumSquares(43));
+            int[][] newArr48 = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+            Console.WriteLine(ArrayProblems.toString(newArr48));
+            APS.Rotate(newArr48);
+            Console.WriteLine("48. Rotated:" + ArrayProblems.toString(newArr48));
             //int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
             //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             // test1.SetZeroes(newArr73);

@@ -634,6 +634,42 @@ namespace Algorithms
             }
         }
         #endregion
+
+        #region 48. Rotate Image
+        // You are given an n x n 2D matrix representing an image.
+        // Rotate the image by 90 degrees (clockwise).
+        //matrix = 
+        // [
+        //   [1,2,3], 
+        //   [4,5,6],  
+        //   [7,8,9]     
+        //   
+        // ],
+        // (2,0) (1,-1) (0,-2)  y=x-(m-1) y=-x+b
+
+        public void Rotate(int[][] matrix)
+        {
+            int m = matrix.Length;
+            bool[] used = new bool[m * m];
+            //int n = matrix[0].Length;
+            //0,2=>m-1
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < m; j++)
+                {
+                    if (Math.Abs(i - j) != m - 1)
+                    {
+                        int temp = matrix[m - 1 - j][m - 1 - j + i];
+                        matrix[m - 1 - j + i][m - 1 - j] = matrix[i][j];
+                        matrix[i][j] = temp;
+                        Console.WriteLine($"matrix[{i}][{j}] : matrix[{m - 1 - j}][{m - 1 - j + i}]");
+                    }
+                }
+                Console.WriteLine(ArrayProblems.toString(matrix));
+            }
+        }
+
+        #endregion
     }
 }
 
