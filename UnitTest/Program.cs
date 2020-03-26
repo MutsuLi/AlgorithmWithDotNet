@@ -11,6 +11,7 @@ namespace UniTest
             DynamicProgramming DP = new DynamicProgramming();
             BinarySearch test4 = new BinarySearch();
             ArrayProblems APS = new ArrayProblems();
+            StringProblems SP = new StringProblems();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
             // var result = test1.ThreeSum(newArr);
@@ -84,6 +85,8 @@ namespace UniTest
             Console.WriteLine(ArrayProblems.toString(newArr48));
             APS.Rotate(newArr48);
             Console.WriteLine("48. Rotated:" + ArrayProblems.toString(newArr48));
+            string[] Arr49 = { "eat", "tea", "tan", "ate", "nat", "bat" };
+            Console.WriteLine("48. Rotated:" + SP.GroupAnagrams(Arr49));
             //int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
             //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             // test1.SetZeroes(newArr73);

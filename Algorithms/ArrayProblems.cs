@@ -650,25 +650,27 @@ namespace Algorithms
         public void Rotate(int[][] matrix)
         {
             int m = matrix.Length;
-            bool[] used = new bool[m * m];
             //int n = matrix[0].Length;
             //0,2=>m-1
             for (int i = 0; i < m; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (int j = 0; j < i; j++)
                 {
-                    if (Math.Abs(i - j) != m - 1)
-                    {
-                        int temp = matrix[m - 1 - j][m - 1 - j + i];
-                        matrix[m - 1 - j + i][m - 1 - j] = matrix[i][j];
-                        matrix[i][j] = temp;
-                        Console.WriteLine($"matrix[{i}][{j}] : matrix[{m - 1 - j}][{m - 1 - j + i}]");
-                    }
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
                 }
-                Console.WriteLine(ArrayProblems.toString(matrix));
+            }
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < m / 2; j++)
+                {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[i][m - 1 - j];
+                    matrix[i][m - 1 - j] = temp;
+                }
             }
         }
-
         #endregion
     }
 }
