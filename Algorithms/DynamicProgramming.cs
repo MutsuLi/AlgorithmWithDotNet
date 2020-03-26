@@ -537,5 +537,33 @@ namespace Algorithms
             return dp[n];
         }
         #endregion
+        #region 264. Ugly Number II
+        // Write a program to find the n-th ugly number.
+        // Ugly numbers are positive numbers whose prime factors only include 2, 3, 5. 
+
+        // Input: n = 10
+        // Output: 12
+        // Explanation: 1, 2, 3, 4, 5, 6, 8, 9, 10, 12 is the sequence of the first 10 ugly numbers.
+        // 1,2,3,5
+        // dp[i]=min(d[i-1]*2,dp[i-1]*3,dp[i-1]*5)
+        // 2^x * 3^y * 5^z
+        //dp[i]=2^x+1*3
+        public int NthUglyNumber(int n)
+        {
+            int[] dp = new int[n + 1];
+            int index1 = 0;
+            int index2 = 0;
+            int index3 = 0;
+            dp[0] = 1;
+            for (int i = 1; i < n + 1; i++)
+            {
+                dp[i] = Math.Min(Math.Min(dp[index1] * 2, dp[index2] * 3), dp[index3] * 5);
+                if (dp[i] == dp[index1] * 2) { index1++; }
+                if (dp[i] == dp[index2] * 3) { index2++; }
+                if (dp[i] == dp[index3] * 5) { index3++; }
+            }
+            return dp[n - 1];
+        }
+        #endregion
     }
 }

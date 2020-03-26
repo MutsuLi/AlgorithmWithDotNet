@@ -80,10 +80,12 @@ namespace UniTest
             Console.WriteLine("FindMinII:" + test4.FindMinII(Arr154));
             //[279. Perfect Squares]
             Console.WriteLine("279. Perfect Squares:" + DP.NumSquares(43));
-            int[][] newArr48 = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
-            Console.WriteLine(ArrayProblems.toString(newArr48));
-            APS.Rotate(newArr48);
-            Console.WriteLine("48. Rotated:" + ArrayProblems.toString(newArr48));
+            // int[][] newArr48 = { new int[] { 1, 2, 3 }, new int[] { 4, 5, 6 }, new int[] { 7, 8, 9 } };
+            // Console.WriteLine(ArrayProblems.toString(newArr48));
+            // APS.Rotate(newArr48);
+            // Console.WriteLine("48. Rotated:" + ArrayProblems.toString(newArr48));
+
+            Console.WriteLine("264. Ugly Number II:" + DP.NthUglyNumber(10));
             //int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
             //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             // test1.SetZeroes(newArr73);
