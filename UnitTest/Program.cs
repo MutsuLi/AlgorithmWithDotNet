@@ -88,6 +88,8 @@ namespace UniTest
             string[] Arr49 = { "eat", "tea", "tan", "ate", "nat", "bat" };
             Console.WriteLine("48. Rotated:" + SP.GroupAnagrams(Arr49));
             Console.WriteLine("264. Ugly Number II:" + DP.NthUglyNumber(10));
+            int[] newArr228 = { 0, 1, 2, 4, 5, 7 };
+            Console.WriteLine("228. Summary Ranges:" + APS.SummaryRanges(newArr228));
             //int[][] newArr73 = { new int[] { 0, 1, 1, 0 }, new int[] { 1, 1, 3, 4 }, new int[] { 6, 5, 7, 1 } };
             //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             // test1.SetZeroes(newArr73);
