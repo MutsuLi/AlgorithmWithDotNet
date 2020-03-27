@@ -692,7 +692,28 @@ namespace Algorithms
             }
             return maxValue;
         }
-
+        #endregion
+        #region 228. Summary Ranges
+        public IList<string> SummaryRanges(int[] nums)
+        {
+            List<string> result = new List<string>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int j = i + 1;
+                StringBuilder sb = new StringBuilder(nums[i].ToString());
+                if (j <= nums.Length - 1 && nums[j] - nums[i] == 1)
+                {
+                    while (j < nums.Length - 1 && nums[j + 1] - nums[j] == 1)
+                    {
+                        j++;
+                    }
+                    sb.AppendFormat($"->{nums[j]}");
+                    i = j;
+                }
+                result.Add(sb.ToString());
+            }
+            return result;
+        }
 
         #endregion
     }

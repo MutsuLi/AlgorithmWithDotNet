@@ -565,5 +565,25 @@ namespace Algorithms
             return dp[n - 1];
         }
         #endregion
+
+        #region 139. Word Break
+        //Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
+        //determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+        //Note:
+        //1.The same word in the dictionary may be reused multiple times in the segmentation.
+        //2.You may assume the dictionary does not contain duplicate words.
+
+        // Input: s = "applepenapple", wordDict = ["apple", "pen"]
+        // Output: true
+
+        // Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
+        // Output: false
+
+        public bool WordBreak(string s, IList<string> wordDict)
+        {
+            return false;
+        }
+        #endregion
     }
+
 }

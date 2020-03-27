@@ -367,5 +367,29 @@ namespace Algorithms
 
 
         #endregion
+        #region 131. Palindrome Partitioning
+        // Input: "aab"
+        // Output:
+        // [
+        //   ["aa","b"],
+        //   ["a","a","b"]
+        // ]
+        public IList<IList<string>> Partition(string s)
+        {
+            List<IList<string>> result = new List<IList<string>>();
+            char[] targetCharArr = s.ToCharArray();
+            for (int i = 0; i < s.Length; i++)
+            {
+
+            }
+
+            return result;
+        }
+        public void PartitionBacktrack(char[] targetCharArr, List<int> recursionList, List<IList<string>> result, int k, int layer)
+        {
+
+        }
+        #endregion
+
     }
 }
