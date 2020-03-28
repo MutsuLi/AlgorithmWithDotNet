@@ -97,6 +97,7 @@ namespace UniTest
             //Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             // test1.SetZeroes(newArr73);
             // Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
+            Console.WriteLine("5. Longest Palindromic Substring:" + DP.LongestPalindrome("aaaaab"));
         }
 
         //private static void ThreadFuncOne()

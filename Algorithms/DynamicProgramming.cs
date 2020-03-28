@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 
 namespace Algorithms
@@ -584,6 +585,48 @@ namespace Algorithms
             return false;
         }
         #endregion
+
+
+        #region 5. Longest Palindromic Substring
+        // Input: "babad"
+        // Output: "bab"
+        // Note: "aba" is also a valid answer.
+        public string LongestPalindrome(string s)
+        {
+
+            if (s.Length == 0) return s;
+            Dictionary<int, int> dp = new Dictionary<int, int>();
+            int maxLength = 1;
+            dp.Add(1, 0);
+            for (int i = 0; i < s.Length - 1; i++)
+            {
+                i = findMiddle(s, i, dp);
+            }
+            foreach (var each in dp)
+            {
+                maxLength = Math.Max(maxLength, each.Key);
+            }
+            return s.Substring(dp[maxLength], maxLength);
+        }
+        public int findMiddle(string s, int low, Dictionary<int, int> dp)
+        {
+            int high = low;
+            while (high < s.Length - 1 && s[high + 1] == s[low])
+            {
+                high++;
+            }
+            int middle = high;
+            while (low > 0 && high < s.Length - 1 && s[low - 1] == s[high + 1])
+            {
+                low--;
+                high++;
+            }
+            dp[high - low + 1] = low;
+            return middle;
+        }
+
+        #endregion
+
     }
 
 }
