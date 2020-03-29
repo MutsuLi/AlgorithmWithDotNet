@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections.Generic;
 using Algorithms;
 namespace UniTest
 {
@@ -98,6 +99,10 @@ namespace UniTest
             // test1.SetZeroes(newArr73);
             // Console.WriteLine("NumSquares:" + ArrayProblems.toString(newArr73));
             Console.WriteLine("5. Longest Palindromic Substring:" + DP.LongestPalindrome("aaaaab"));
+
+            int[] newArr238 = { 1 ,2};
+            Console.WriteLine("238. Product of Array Except Self:" + ArrayProblems.toString(new List<int>(APS.ProductExceptSelf(newArr238))));
+
         }
 
         //private static void ThreadFuncOne()

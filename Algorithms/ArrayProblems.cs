@@ -716,6 +716,28 @@ namespace Algorithms
         }
 
         #endregion
+
+        #region 
+        public int[] ProductExceptSelf(int[] nums)
+        {
+            if (nums.Length == 1 || nums.Length == 0) return nums;
+            int pre = 1;
+            int next = 1;
+            int[] result = new int[nums.Length];
+            result[0] = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                pre *= nums[i - 1];
+                result[i] = pre;
+            }
+            for (int j = nums.Length - 2; j >= 0; j--)
+            {
+                next *= nums[j + 1];
+                result[j] *= next;
+            }
+            return result;
+        }
+        #endregion
     }
 }
 
