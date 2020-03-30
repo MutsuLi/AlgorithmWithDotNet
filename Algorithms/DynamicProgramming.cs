@@ -579,10 +579,52 @@ namespace Algorithms
 
         // Input: s = "catsandog", wordDict = ["cats", "dog", "sand", "and", "cat"]
         // Output: false
-
+        #region recursion
+        // public bool WordBreak(string s, IList<string> wordDict)
+        // {
+        //     HashSet<string> wordDicts = new HashSet<string>(wordDict);
+        //     Dictionary<int, bool> temp = new Dictionary<int, bool>();
+        //     if (s.Length == 0 || wordDict.Count == 0)
+        //     {
+        //         return false;
+        //     }
+        //     return RecursiveWordBreak(s, wordDicts, 0, temp);
+        // }
+        // public bool RecursiveWordBreak(string s, HashSet<string> wordDicts, int recurIndex, Dictionary<int, bool> temp)
+        // {
+        //     if (s.Length == recurIndex) return true;
+        //     if (temp.ContainsKey(recurIndex)) return temp[recurIndex];
+        //     for (int currIndex = recurIndex + 1; currIndex <= s.Length; currIndex++)
+        //     {
+        //         if (wordDicts.Contains(s.Substring(recurIndex, currIndex - recurIndex)))
+        //         {
+        //             if (RecursiveWordBreak(s, wordDicts, currIndex, temp))
+        //             {
+        //                 return temp[recurIndex] = true;
+        //             }
+        //         }
+        //     }
+        //     return temp[recurIndex] = false;
+        // }
+        #endregion recursion
         public bool WordBreak(string s, IList<string> wordDict)
         {
-            return false;
+            HashSet<string> wordDictSet = new HashSet<string>(wordDict);
+            bool[] dp = new bool[s.Length + 1];
+            dp[0] = true;
+            for (int i = 1; i <= s.Length; i++)
+            {
+                for (int j = 0; j < i; j++)
+                {
+                    //Console.WriteLine(s.Substring(j, i - j));
+                    if (dp[j] && wordDictSet.Contains(s.Substring(j, i - j)))
+                    {
+                        dp[i] = true;
+                        break;
+                    }
+                }
+            }
+            return dp[s.Length];
         }
         #endregion
 
@@ -625,6 +667,9 @@ namespace Algorithms
             return middle;
         }
 
+        #endregion
+
+        #region
         #endregion
 
     }
