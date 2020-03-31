@@ -738,6 +738,40 @@ namespace Algorithms
             return result;
         }
         #endregion
+        #region 611. Valid Triangle Number
+        // Input: [2,2,3,4]
+        // Output: 3
+        // Explanation:
+        // Valid combinations are: 
+        // 2,3,4 (using the first 2)
+        // 2,3,4 (using the second 2)
+        // 2,2,3
+
+        public int TriangleNumber(int[] nums)
+        {
+            Dictionary<string, bool> used = new Dictionary<string, bool>();
+            if (nums == null && nums.Length < 3) return 0;
+            int count = 0;
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                int rectA = nums[i];
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    int rectB = nums[j];
+                    for (int k = j + 1; k < nums.Length; k++)
+                    {
+                        int rectC = nums[k];
+                        if (!used.ContainsKey($"{i}{j}{k}") && rectC < rectA + rectB && rectA < rectB + rectC && rectB < rectA + rectC)
+                        {
+                            used.Add($"{i}{j}{k}", true);
+                            count++;
+                        }
+                    }
+                }
+            }
+            return count;
+        }
+        #endregion
     }
 }
 
