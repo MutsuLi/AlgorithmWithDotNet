@@ -669,19 +669,6 @@ namespace Algorithms
 
         #endregion
 
-<<<<<<< HEAD
-        #region 55. Jump Game
-        //dp[i+1]=max(dp[i],dp[i]+nums[dp[i]])
-        public bool CanJump(int[] nums)
-        {
-            int k = 0;
-            for (int i = 0; i < nums.Length; i++)
-            {
-                if (i > k) return false;
-                k = Math.Max(k, i + nums[i]);
-            }
-            return true;
-=======
         #region  55. Jump Game
         // Input: [2,3,1,1,4]
         // Output: true
@@ -711,7 +698,6 @@ namespace Algorithms
             }
             memo[sum] = false;
             return false;
->>>>>>> c33320c64c485e27614d58fc95f5f6a53cf8ae22
         }
         #endregion
 
