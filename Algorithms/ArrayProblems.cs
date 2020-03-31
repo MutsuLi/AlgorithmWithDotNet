@@ -749,23 +749,20 @@ namespace Algorithms
 
         public int TriangleNumber(int[] nums)
         {
-            Dictionary<string, bool> used = new Dictionary<string, bool>();
             if (nums == null && nums.Length < 3) return 0;
             int count = 0;
+            Array.Sort(nums);
             for (int i = 0; i < nums.Length - 2; i++)
             {
                 int rectA = nums[i];
-                for (int j = i + 1; j < nums.Length; j++)
+                for (int j = nums.Length - 1; j > i; j--)
                 {
                     int rectB = nums[j];
-                    for (int k = j + 1; k < nums.Length; k++)
+                    int k = j - 1;
+                    while (k > i && nums[k] > Math.Abs(rectA - rectB))
                     {
-                        int rectC = nums[k];
-                        if (!used.ContainsKey($"{i}{j}{k}") && rectC < rectA + rectB && rectA < rectB + rectC && rectB < rectA + rectC)
-                        {
-                            used.Add($"{i}{j}{k}", true);
-                            count++;
-                        }
+                        count++;
+                        k--;
                     }
                 }
             }
