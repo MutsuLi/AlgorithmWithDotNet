@@ -759,7 +759,7 @@ namespace Algorithms
                 {
                     int rectB = nums[j];
                     int k = j - 1;
-                    while (k > i && nums[k] > Math.Abs(rectA - rectB))
+                    while (k > i && nums[k] > rectB - rectA)
                     {
                         count++;
                         k--;
