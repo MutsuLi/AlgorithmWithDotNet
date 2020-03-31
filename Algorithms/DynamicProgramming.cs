@@ -669,7 +669,36 @@ namespace Algorithms
 
         #endregion
 
-        #region
+        #region  55. Jump Game
+        // Input: [2,3,1,1,4]
+        // Output: true
+        // dp[i]=Math.max(dp[i-1]+1,dp[i-1]+nums[dp[i-1]]])
+        // 3 1 3 2 7
+        public bool CanJump(int[] nums)
+        {
+            if (nums.Length == 0 && nums[0] == 0) return false;
+            bool?[] memo = new bool?[nums.Length];
+            memo[nums.Length - 1] = true;
+            return RecursiveCanJump(nums, 0, memo);
+        }
+        public bool RecursiveCanJump(int[] nums, int sum, bool?[] memo)
+        {
+            if (memo[sum] != null)
+            {
+                return memo[sum] == true ? true : false;
+            }
+            int maxLength = Math.Min(sum + nums[sum], nums.Length - 1);
+            for (int i = sum + 1; i <= maxLength; i++)
+            {
+                if (RecursiveCanJump(nums, i, memo))
+                {
+                    memo[sum] = true;
+                    return true;
+                }
+            }
+            memo[sum] = false;
+            return false;
+        }
         #endregion
 
     }
