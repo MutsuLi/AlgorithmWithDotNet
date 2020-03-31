@@ -669,7 +669,18 @@ namespace Algorithms
 
         #endregion
 
-        #region
+        #region 55. Jump Game
+        //dp[i+1]=max(dp[i],dp[i]+nums[dp[i]])
+        public bool CanJump(int[] nums)
+        {
+            int k = 0;
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > k) return false;
+                k = Math.Max(k, i + nums[i]);
+            }
+            return true;
+        }
         #endregion
 
     }
