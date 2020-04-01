@@ -115,7 +115,7 @@ namespace UniTest
             Console.WriteLine("611. Valid Triangle Number:" + APS.TriangleNumber(newArr611));
 
             int[] newArr92 = { 1, 2, 3, 4, 5, 6, 7 };
-            Console.WriteLine("92. Reverse Linked List II:" + DSP.ReverseBetween(ListNode.arrayToListNode(newArr92), 2, 4));
+            Console.WriteLine("92. Reverse Linked List II:" + DSP.ReverseBetween(ListNode.arrayToListNode(newArr92), 3, 6));
 
         }
     }
