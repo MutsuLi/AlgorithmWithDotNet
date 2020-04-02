@@ -390,6 +390,26 @@ namespace Algorithms
 
         }
         #endregion
+        #region 22. Generate Parentheses
+        //Given n pairs of parentheses, write a function to generate all combinations of well-formed parentheses.
+        //For example, given n = 3, a solution set is:
+        // [
+        //   "((()))",
+        //   "(()())",
+        //   "(())()",
+        //   "()(())",
+        //   "()()()"
+        // ]
+        // ()() (())
+        public IList<string> GenerateParenthesis(int n)
+        {
+            List<String> result = new List<string>();
+            for (int i = 0; i < n; i++)
+            {
 
+            }
+            return result;
+        }
+        #endregion
     }
 }
