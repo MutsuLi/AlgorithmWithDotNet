@@ -8,6 +8,31 @@ namespace Algorithms
 
         //Definition for singly-linked list
 
+        #region 24. Swap Nodes in Pairs
+        // Given a linked list, swap every two adjacent nodes and return its head.
+        // You may not modify the values in the list's nodes, only nodes itself may be changed.
+        // Given 1->2->3->4, you should return the list as 2->1->4->3.
+        public ListNode SwapPairs(ListNode head)
+        {
+            if (head == null || head.next == null) return head;
+            ListNode first = new ListNode(int.MinValue);
+            first.next = head;
+            ListNode pre = head;
+            ListNode next = head.next;
+            while (next != null)
+            {
+                pre.next = next.next;
+                next.next = pre;
+                first.next = next;
+                if (pre.next == null) break;
+                first = pre;
+                pre = pre.next;
+                next = pre.next;
+            }
+            return head.next;
+        }
+
+        #endregion
 
         #region 92. Reverse Linked List II
         // Input: 1->2->3->4->5->NULL, m = 2, n = 4
