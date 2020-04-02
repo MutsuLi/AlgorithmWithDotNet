@@ -19,6 +19,7 @@ namespace Algorithms
             first.next = head;
             ListNode pre = head;
             ListNode next = head.next;
+            ListNode result = head.next;
             while (next != null)
             {
                 pre.next = next.next;
@@ -29,7 +30,7 @@ namespace Algorithms
                 pre = pre.next;
                 next = pre.next;
             }
-            return head.next;
+            return result;
         }
 
         #endregion
