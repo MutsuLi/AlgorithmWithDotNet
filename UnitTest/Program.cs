@@ -120,6 +120,9 @@ namespace UniTest
             int[] newArr24 = { 1, 2 };
             Console.WriteLine("24. Swap Nodes in Pairs:" + DSP.SwapPairs(ListNode.arrayToListNode(newArr24)).toString());
 
+            int[] newArr61 = { 1, 2, 3, 4, 5, 6, 7, 8 };
+            Console.WriteLine("61. Rotate List:" + DSP.RotateRight(ListNode.arrayToListNode(newArr61), 8).toString());
+
         }
     }
 }

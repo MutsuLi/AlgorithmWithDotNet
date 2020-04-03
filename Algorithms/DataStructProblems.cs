@@ -34,6 +34,46 @@ namespace Algorithms
         }
 
         #endregion
+        #region 61. Rotate List
+        // Given a linked list, rotate the list to the right by k places, where k is non-negative.
+        // Input: 1->2->3->4->5->NULL, k = 2
+        // Output: 4->5->1->2->3->NULL
+        // Input: 0->1->2->NULL, k = 4
+        // Output: 2->0->1->NUL
+        public ListNode RotateRight(ListNode head, int k)
+        {
+            if (head == null || head.next == null) return head;
+            ListNode dummy = new ListNode(-1);
+            dummy.next = head;
+            ListNode curr = head;
+            ListNode pre = head;
+            ListNode lengthPoint = head;
+            int length = 1;
+            while (lengthPoint.next != null)
+            {
+                lengthPoint = lengthPoint.next;
+                length++;
+            }
+            int count = 1;
+            while (curr.next != null)
+            {
+                if (count - 1 >= k % length)
+                {
+                    pre = pre.next;
+                }
+                curr = curr.next;
+                count++;
+            }
+            if (k % length > 0)
+            {
+                ListNode first = pre.next;
+                pre.next = null;
+                curr.next = dummy.next;
+                dummy.next = first;
+            }
+            return dummy.next;
+        }
+        #endregion
 
         #region 92. Reverse Linked List II
         // Input: 1->2->3->4->5->NULL, m = 2, n = 4
@@ -79,6 +119,17 @@ namespace Algorithms
                 end.next = curr;
             }
             return result;
+        }
+        #endregion
+        #region 147. Insertion Sort List
+        // Sort a linked list using insertion sort.
+        // Input: 4->2->1->3
+        // Output: 1->2->3->4
+        // Input: -1->5->3->4->0
+        // Output: -1->0->3->4->5
+        public ListNode InsertionSortList(ListNode head)
+        {
+            return head;
         }
         #endregion
     }
