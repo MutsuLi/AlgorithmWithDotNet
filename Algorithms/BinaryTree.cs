@@ -5,6 +5,34 @@ namespace Algorithms
 {
     public class BinaryTree
     {
+        #region 144. Binary Tree Preorder Traversal
+        //Given a binary tree, return the preorder traversal of its nodes' values.
+        //Input: [1,null,2,3]
+        //Output: [1,2,3]
+        public IList<int> PreorderTraversal(TreeNode root)
+        {
+            List<int> result = new List<int>();
+            if (root == null) return result;
+            Stack<TreeNode> assist = new Stack<TreeNode>();
+            assist.Push(root);
+            TreeNode curr = root;
+            while (assist.Count != 0)
+            {
+                curr = assist.Pop();
+                result.Add((int)curr.val);
+                if (curr.right != null)
+                {
+                    assist.Push(curr.right);
+                }
+                if (curr.left != null)
+                {
+                    assist.Push(curr.left);
+                }
+            }
+            return result;
+        }
+        #endregion
+
         #region 94. Binary Tree Inorder Traversal
         // Input: [1,null,2,3]
         // Output: [1,3,2]
@@ -24,6 +52,30 @@ namespace Algorithms
                 curr = assit.Pop();
                 result.Add((int)curr.val);
                 curr = curr.right;
+            }
+            return result;
+        }
+        #endregion
+
+        #region 145. Binary Tree Postorder Traversal
+        public IList<int> PostorderTraversal(TreeNode root)
+        {
+            List<int> result = new List<int>();
+            if (root == null) return result;
+            Stack<TreeNode> assist = new Stack<TreeNode>();
+            Stack<TreeNode> output = new Stack<TreeNode>();
+            assist.Push(root);
+            TreeNode curr = null;
+            while (assist.Count != 0)
+            {
+                curr = assist.Pop();
+                output.Push(curr);
+                if (curr.left != null) assist.Push(curr.left);
+                if (curr.right != null) assist.Push(curr.right);
+            }
+            while (output.Count != 0)
+            {
+                result.Add((int)output.Pop().val);
             }
             return result;
         }
@@ -96,5 +148,7 @@ namespace Algorithms
             return 0;
         }
         #endregion
+
+
     }
 }

@@ -130,6 +130,11 @@ namespace UniTest
             int?[] newArr102 = { 3, 9, 20, null, null, 15, 7 };
             Console.WriteLine("102. Binary Tree Level Order Traversal:" + BT.LevelOrder(TreeNode.makeTree(newArr102)));
 
+            int?[] newArr145 = { 1, null, 2, 3 };
+            Console.WriteLine("145. Binary Tree Postorder Traversal:" + BT.PostorderTraversal(TreeNode.makeTree(newArr145)));
+
+            int?[] newArr144 = { 3, 1, 2};
+            Console.WriteLine("144. Binary Tree Preorder Traversal:" + BT.PreorderTraversal(TreeNode.makeTree(newArr144)));
         }
     }
 }
