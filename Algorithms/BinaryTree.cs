@@ -5,13 +5,66 @@ namespace Algorithms
 {
     public class BinaryTree
     {
-        public class TreeNode
+        #region 94. Binary Tree Inorder Traversal
+        // Input: [1,null,2,3]
+        // Output: [1,3,2]
+        public List<int> InorderTraversal(TreeNode root)
         {
-            public int val;
-            public TreeNode left;
-            public TreeNode right;
-            public TreeNode(int x) { val = x; }
+            List<int> result = new List<int>();
+            if (root == null) return result;
+            Stack<TreeNode> assit = new Stack<TreeNode>();
+            TreeNode curr = root;
+            while (assit.Count != 0 || curr != null)
+            {
+                while (curr != null)
+                {
+                    assit.Push(curr);
+                    curr = curr.left;
+                }
+                curr = assit.Pop();
+                result.Add((int)curr.val);
+                curr = curr.right;
+            }
+            return result;
         }
+        #endregion
+
+        #region 102. Binary Tree Level Order Traversal
+        // Given binary tree [3,9,20,null,null,15,7]
+        // [
+        //   [3],
+        //   [9,20],
+        //   [15,7]
+        // ]
+        public IList<IList<int>> LevelOrder(TreeNode root)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            if (root == null) return result;
+            Queue<TreeNode> assist = new Queue<TreeNode>();
+            assist.Enqueue(root);
+            while (assist.Count != 0)
+            {
+                List<int> temp = new List<int>();
+                int levelCount = assist.Count;     //notice be used to record quantity of nodes in current level
+                for (int i = 0; i < levelCount; i++)
+                {
+                    TreeNode curr = assist.Dequeue();
+                    temp.Add((int)curr.val);
+                    if (curr.left != null)
+                    {
+                        assist.Enqueue(curr.left);
+                    }
+                    if (curr.right != null)
+                    {
+                        assist.Enqueue(curr.right);
+                    }
+                }
+                result.Add(temp);
+            }
+            return result;
+        }
+        #endregion
+
         #region 113. Path Sum II
 
         //Given a binary tree and a sum, find all root-to-leaf paths where each path's sum equals the given sum.

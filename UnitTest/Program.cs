@@ -15,6 +15,7 @@ namespace UniTest
             ArrayProblems APS = new ArrayProblems();
             StringProblems SP = new StringProblems();
             DataStructProblems DSP = new DataStructProblems();
+            BinaryTree BT = new BinaryTree();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
             // var result = test1.ThreeSum(newArr);
@@ -122,6 +123,12 @@ namespace UniTest
 
             int[] newArr61 = { 1, 2, 3, 4, 5, 6, 7, 8 };
             Console.WriteLine("61. Rotate List:" + DSP.RotateRight(ListNode.arrayToListNode(newArr61), 8).toString());
+
+            int?[] newArr94 = { 1, null, 2, 3 };
+            Console.WriteLine("94. Rotate List:" + BT.InorderTraversal(TreeNode.makeTree(newArr94)));
+
+            int?[] newArr102 = { 3, 9, 20, null, null, 15, 7 };
+            Console.WriteLine("102. Binary Tree Level Order Traversal:" + BT.LevelOrder(TreeNode.makeTree(newArr102)));
 
         }
     }
