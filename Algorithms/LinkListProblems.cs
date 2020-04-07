@@ -154,7 +154,7 @@ namespace Algorithms
         #endregion
 
         #region 142. Linked List Cycle II
-        
+
         // Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
         // Input: head = [3,2,0,-4], pos = 1
         // Output: tail connects to node index 1
@@ -165,7 +165,23 @@ namespace Algorithms
         // Explanation: There is no cycle in the linked list.
         public ListNode DetectCycle(ListNode head)
         {
-            ListNode result = null;
+            if (head == null || head.next == null) return null;
+            ListNode slowPointer = head;
+            ListNode fastPointer = head;
+            do
+            {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next.next;
+            } while (slowPointer != fastPointer && slowPointer != null && fastPointer != null && slowPointer.next != null && fastPointer.next != null);
+
+            if (slowPointer != fastPointer) return null;
+            ListNode result = head;
+            // Find the "entrance" to the cycle.
+            while (result != slowPointer)
+            {
+                result = result.next;
+                slowPointer = slowPointer.next;
+            }
             return result;
         }
         #endregion
