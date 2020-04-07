@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Algorithms
 {
-    public class DataStructProblems
+    public class LinkListProblems
     {
 
         //Definition for singly-linked list
@@ -130,6 +130,59 @@ namespace Algorithms
         public ListNode InsertionSortList(ListNode head)
         {
             return head;
+        }
+        #endregion
+
+        #region 141. Linked List Cycle
+        //Given a linked list, determine if it has a cycle in it.
+        //To represent a cycle in the given linked list, we use an integer pos which represents the position (0-indexed) in the linked list where tail connects to. 
+        //If pos is -1, then there is no cycle in the linked list.
+        //Input: head = [3,2,0,-4], pos = 1
+        //Output: true
+        public bool HasCycle(ListNode head)
+        {
+            if (head == null || head.next == null) return false;
+            ListNode slowPointer = head;
+            ListNode fastPointer = head;
+            do
+            {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next.next;
+            } while (slowPointer != fastPointer && slowPointer != null && fastPointer != null && slowPointer.next != null && fastPointer.next != null);
+            return (slowPointer == fastPointer);
+        }
+        #endregion
+
+        #region 142. Linked List Cycle II
+
+        // Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+        // Input: head = [3,2,0,-4], pos = 1
+        // Output: tail connects to node index 1
+        // Explanation: There is a cycle in the linked list, where tail connects to the second node.
+
+        // Input: head = [1], pos = -1
+        // Output: no cycle
+        // Explanation: There is no cycle in the linked list.
+        public ListNode DetectCycle(ListNode head)
+        {
+            if (head == null || head.next == null) return null;
+            ListNode slowPointer = head;
+            ListNode fastPointer = head;
+            do
+            {
+                slowPointer = slowPointer.next;
+                fastPointer = fastPointer.next.next;
+            } while (slowPointer != fastPointer && slowPointer != null && fastPointer != null && slowPointer.next != null && fastPointer.next != null);
+
+            if (slowPointer != fastPointer) return null;
+            ListNode result = head;
+            // Find the "entrance" to the cycle.
+            while (result != slowPointer)
+            {
+                result = result.next;
+                slowPointer = slowPointer.next;
+            }
+            return result;
         }
         #endregion
     }
