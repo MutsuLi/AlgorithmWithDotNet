@@ -40,6 +40,32 @@ namespace Algorithms
             return nodes[0];
         }
 
+        public static ListNode arrayToListNode(int[] arr, int index)
+        {
+            ListNode[] nodes = new ListNode[arr.Length];
+            ListNode next = null;
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != int.MaxValue)
+                {
+                    nodes[i] = new ListNode(arr[i]);
+                    if (i == index) next = nodes[i];
+                }
+                else
+                {
+                    nodes[i] = null;
+                }
+            }
+            ListNode node;
+            for (int i = 0; i < nodes.Length - 1; i++)
+            {
+                node = nodes[i];
+                node.next = nodes[i + 1];
+            }
+            if (index > -1) nodes[nodes.Length - 1].next = next;
+            return nodes[0];
+        }
+
         public static int[] ListNodeToArray(ListNode headNode)
         {
             List<int> result = new List<int>();
@@ -50,6 +76,9 @@ namespace Algorithms
             }
             return result.ToArray();
         }
+
+
+
 
         public String toString()
         {

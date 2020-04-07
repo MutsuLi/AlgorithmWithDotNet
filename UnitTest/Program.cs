@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Collections;
 using System.Collections.Generic;
 using Algorithms;
 namespace UniTest
@@ -14,7 +15,7 @@ namespace UniTest
             BinarySearch test4 = new BinarySearch();
             ArrayProblems APS = new ArrayProblems();
             StringProblems SP = new StringProblems();
-            DataStructProblems DSP = new DataStructProblems();
+            LinkListProblems LLP = new LinkListProblems();
             BinaryTree BT = new BinaryTree();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
@@ -116,13 +117,13 @@ namespace UniTest
             Console.WriteLine("611. Valid Triangle Number:" + APS.TriangleNumber(newArr611));
 
             int[] newArr92 = { 1, 2, 3, 4, 5, 6, 7 };
-            Console.WriteLine("92. Reverse Linked List II:" + DSP.ReverseBetween(ListNode.arrayToListNode(newArr92), 3, 6).toString());
+            Console.WriteLine("92. Reverse Linked List II:" + LLP.ReverseBetween(ListNode.arrayToListNode(newArr92), 3, 6).toString());
 
             int[] newArr24 = { 1, 2 };
-            Console.WriteLine("24. Swap Nodes in Pairs:" + DSP.SwapPairs(ListNode.arrayToListNode(newArr24)).toString());
+            Console.WriteLine("24. Swap Nodes in Pairs:" + LLP.SwapPairs(ListNode.arrayToListNode(newArr24)).toString());
 
             int[] newArr61 = { 1, 2, 3, 4, 5, 6, 7, 8 };
-            Console.WriteLine("61. Rotate List:" + DSP.RotateRight(ListNode.arrayToListNode(newArr61), 8).toString());
+            Console.WriteLine("61. Rotate List:" + LLP.RotateRight(ListNode.arrayToListNode(newArr61), 8).toString());
 
             int?[] newArr94 = { 1, null, 2, 3 };
             Console.WriteLine("94. Rotate List:" + BT.InorderTraversal(TreeNode.makeTree(newArr94)));
@@ -133,8 +134,12 @@ namespace UniTest
             int?[] newArr145 = { 1, null, 2, 3 };
             Console.WriteLine("145. Binary Tree Postorder Traversal:" + BT.PostorderTraversal(TreeNode.makeTree(newArr145)));
 
-            int?[] newArr144 = { 3, 1, 2};
+            int?[] newArr144 = { 3, 1, 2 };
             Console.WriteLine("144. Binary Tree Preorder Traversal:" + BT.PreorderTraversal(TreeNode.makeTree(newArr144)));
+
+            int[] newArr141 = { -21, 10, 17, 8, 4, 26, 5, 35, 33, -7, -16, 27, -12, 6, 29, -12, 5, 9, 20, 14, 14, 2, 13, -24, 21, 23, -21, 5 };
+            Console.WriteLine("141. Linked List Cycle:" + LLP.HasCycle(ListNode.arrayToListNode(newArr141, -1)));
+
         }
     }
 }
