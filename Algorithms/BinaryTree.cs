@@ -116,6 +116,30 @@ namespace Algorithms
             return result;
         }
         #endregion
+        #region 226. Invert Binary Tree
+        public TreeNode InvertTree(TreeNode root)
+        {
+            List<TreeNode> result = new List<TreeNode>();
+            if (root == null) return null;
+            Queue<TreeNode> queue = new Queue<TreeNode>();
+            queue.Enqueue(root);
+            TreeNode curr = root;
+            while (queue.Count != 0)
+            {
+                int levelCount = queue.Count;
+                for (int i = 0; i < levelCount; i++)
+                {
+                    curr = queue.Dequeue();
+                    if (curr.right != null) queue.Enqueue(curr.right);
+                    if (curr.left != null) queue.Enqueue(curr.left);
+                    TreeNode temp = curr.left;
+                    curr.left = curr.right;
+                    curr.right = temp;
+                }
+            }
+            return root;
+        }
+        #endregion
 
         #region 113. Path Sum II
 
