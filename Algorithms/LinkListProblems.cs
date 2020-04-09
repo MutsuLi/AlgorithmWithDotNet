@@ -185,5 +185,50 @@ namespace Algorithms
             return result;
         }
         #endregion
+
+        #region 82. Remove Duplicates from Sorted List II
+        // Given a sorted linked list, delete all nodes that have duplicate numbers, leaving only distinct numbers from the original list.
+        // Return the linked list sorted as well.
+        // Input: 1->2->3->3->4->4->5
+        // Output: 1->2->5
+        // Input: 1->1->1->2->3
+        // Output: 2->3
+        public ListNode DeleteDuplicates(ListNode head)
+        {
+            if (head == null || head.next == null) return head;
+            ListNode dummy = new ListNode(int.MinValue);
+            ListNode former = dummy;
+            ListNode end = null;
+            ListNode pre = head;
+            ListNode next = head.next;
+            dummy.next = head;
+            bool hasDuplicate = false;
+            while (pre != null && next != null)
+            {
+                if (pre.val == next.val)
+                {
+                    end = next.next;
+                    hasDuplicate = true;
+                }
+                else
+                {
+                    if (hasDuplicate)
+                    {
+                        former.next = end;
+                        hasDuplicate = false;
+                    }
+                    else
+                    {
+                        former = pre;
+                    }
+                }
+                pre = pre.next;
+                next = next.next;
+                if (pre == null || next == null) break;
+            }
+            if (hasDuplicate) former.next = end;
+            return dummy.next;
+        }
+        #endregion
     }
 }

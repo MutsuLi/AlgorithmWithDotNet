@@ -146,7 +146,8 @@ namespace UniTest
             int[] newArr142 = { -21, 10, 17, 8, 4, 26, 5, 35, 33, -7, -16, 27, -12, 6, 29, -12, 5, 9, 20, 14, 14, 2, 13, -24, 21, 23, -21, 5 };
             Console.WriteLine("142. Linked List Cycle II:" + LLP.DetectCycle(ListNode.arrayToListNode(newArr142, -1)));
 
-
+            int[] newArr82 = { 1, 2, 3, 3, 4, 4, 5 };
+            Console.WriteLine("82. Remove Duplicates from Sorted List II:" + LLP.DeleteDuplicates(ListNode.arrayToListNode(newArr82)).toString());
 
         }
     }
