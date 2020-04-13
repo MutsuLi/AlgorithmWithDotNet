@@ -63,52 +63,57 @@ namespace Algorithms
             return result.ToArray();
         }
 
-        //4Sum
+        #region 18. 4Sum
+
+        // Given an array nums of n integers and an integer target, are there elements a, b, c, and d in nums such that a + b + c + d = target? 
+        // Find all unique quadruplets in the array which gives the sum of target.
         //数组+双指针
+        // Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
         public IList<IList<int>> FourSum(int[] nums, int target)
         {
             IList<IList<int>> result = new List<IList<int>>();
             int length = nums.Length;
             if (nums == null || nums.Length < 4) return result;
             Array.Sort(nums);
-            for (int i = 0; i < length - 3; i++)
+            for (int i = 0; i < nums.Length - 3; i++)
             {
                 if (i > 0 && nums[i] == nums[i - 1]) continue;
                 if (nums[i] + nums[i + 1] + nums[i + 2] + nums[i + 3] > target) break;
-                if (nums[length - 4] + nums[length - 3] + nums[length - 2] + nums[length - 1] < target) continue;
-                for (int j = i + 1; j < length - 2; j++)
+                if (nums[nums.Length - 1] + nums[nums.Length - 2] + nums[nums.Length - 3] + nums[nums.Length - 4] < target) continue;
+                for (int j = i + 1; j < nums.Length - 2; j++)
                 {
                     if (j > i + 1 && nums[j] == nums[j - 1]) continue;
                     int l = j + 1;
-                    int r = length - 1;
-                    int currMax = nums[j] + nums[j + 1] + nums[r - 1] + nums[r];
-                    int currMin = nums[j] + nums[i] + nums[j + 1] + nums[j];
+                    int h = length - 1;
+                    int currMax = nums[j] + nums[j + 1] + nums[h - 1] + nums[h];
+                    int currMin = nums[j] + nums[i] + nums[j + 1] + nums[j + 2];
                     if (currMin > target) break;
                     if (currMax < target) continue;
-                    while (l < r)
+                    while (l < h)
                     {
-                        int sum = nums[i] + nums[j] + nums[l] + nums[r];
-                        if (sum < target)
+                        int temp = nums[i] + nums[j] + nums[h] + nums[l];
+                        if (temp == target)
+                        {
+                            result.Add(new List<int>() { nums[i], nums[j], nums[h], nums[l] });
+                            while (l < h && nums[l] == nums[l + 1]) l++;
+                            while (l < h && nums[h] == nums[h - 1]) h--;
+                            l++;
+                            h--;
+                        }
+                        else if (temp < target)
                         {
                             l++;
                         }
-                        else if (sum == target)
+                        else
                         {
-                            result.Add(new List<int>() { nums[i], nums[j], nums[l], nums[r] });
-                            while (l < r && nums[l] == nums[l + 1]) l++;
-                            while (i < j && l < r && nums[r] == nums[r - 1]) r--;
-                            l++;
-                            r--;
-                        }
-                        else if (sum > target)
-                        {
-                            r--;
+                            h--;
                         }
                     }
                 }
             }
             return result;
         }
+        #endregion
 
         //三数之和
         //数组+双指针
@@ -377,31 +382,26 @@ namespace Algorithms
         // Output: 3
 
         #region 287. Find the Duplicate Number
-        //Floyd's Tortoise and Hare
+        // Floyd's Tortoise and Hare
         // tag:low&&quick pointer 
         public int FindDuplicate(int[] nums)
         {
             int length = nums.Length;
             if (null == nums || length == 0) return 0;
             int tortoise = nums[0], hare = nums[0];
-
             do
             {
-                //(motivate linkedlist)
                 tortoise = nums[tortoise];
                 hare = nums[nums[hare]];
-            } while (hare != tortoise);
-
-            int ptr1 = nums[0];
-            int ptr2 = tortoise;
-
-            // Find the "entrance" to the cycle.
-            while (ptr1 != ptr2)
+            } while (tortoise != hare);
+            int pst1 = nums[0];
+            int pst2 = tortoise;
+            while (pst1 != pst2)
             {
-                ptr1 = nums[ptr1];
-                ptr2 = nums[ptr2];
+                pst1 = nums[pst1];
+                pst2 = nums[pst2];
             }
-            return ptr1;
+            return pst1;
         }
 
         #endregion
@@ -420,17 +420,7 @@ namespace Algorithms
         public IList<int> MajorityElement(int[] nums)
         {
             List<int> result = new List<int>();
-            // Array.Sort(nums);
-            // int width = nums.Length / 3;
-            // for (int i = 0; i < nums.Length - width; i++)
-            // {
-            //     if ((nums[i] == nums[i + width]) && !result.Contains(nums[i]))
-            //     {
-            //         result.Add(nums[i]);
-            //         i = i + width;
-            //     }
-            // }
-            // return result;
+            if (nums == null || nums.Length == 0) return result;
             int count1 = 0, count2 = 0;
             int target1 = nums[0], target2 = nums[0];
             for (int i = 0; i < nums.Length; i++)
@@ -460,7 +450,6 @@ namespace Algorithms
                 count1--;
                 count2--;
             }
-
             int numcount1 = 0, numcount2 = 0;
             foreach (int each in nums)
             {
@@ -568,17 +557,17 @@ namespace Algorithms
             if (nums.Length == 0 || nums == null) return 0;
             int sum = 0;
             int result = int.MaxValue;
-            int frontIndex = 0;
+            int index = 0;
             for (int i = 0; i < nums.Length; i++)
             {
                 sum += nums[i];
                 while (sum >= s)
                 {
-                    result = Math.Min(result, i + 1 - frontIndex);
-                    sum -= nums[frontIndex++];
+                    result = Math.Min(result, i - index + 1);
+                    sum -= nums[index++];
                 }
             }
-            return (sum == int.MaxValue) ? 0 : result;
+            return result == int.MaxValue ? 0 : result;
         }
         #endregion
 
@@ -638,14 +627,19 @@ namespace Algorithms
         #region 48. Rotate Image
         // You are given an n x n 2D matrix representing an image.
         // Rotate the image by 90 degrees (clockwise).
-        //matrix = 
+        // Given input matrix = 
         // [
-        //   [1,2,3], 
-        //   [4,5,6],  
-        //   [7,8,9]     
-        //   
+        //   [1,2,3],
+        //   [4,5,6],
+        //   [7,8,9]
         // ],
-        // (2,0) (1,-1) (0,-2)  y=x-(m-1) y=-x+b
+
+        // rotate the input matrix in-place such that it becomes:
+        // [
+        //   [7,4,1],
+        //   [8,5,2],
+        //   [9,6,3]
+        // ]
 
         public void Rotate(int[][] matrix)
         {
