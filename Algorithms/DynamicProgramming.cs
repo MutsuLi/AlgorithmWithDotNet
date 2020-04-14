@@ -24,8 +24,19 @@ namespace Algorithms
             return max;
         }
 
-        //70. 爬楼梯
-        //面试题 08.01. 三步问题
+        // 70. Climbing Stairs
+        // You are climbing a stair case. It takes n steps to reach to the top.
+        // Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+        // Note: Given n will be a positive integer.
+
+        // Input: 3
+        // Output: 3
+        // Explanation: There are three ways to climb to the top.
+        // 1. 1 step + 1 step + 1 step
+        // 2. 1 step + 2 steps
+        // 3. 2 steps + 1 step
+
+
         public int climbStair(int n)
         {
             if (n == 1) return 1;
@@ -156,9 +167,9 @@ namespace Algorithms
 
         #region 62. Unique Paths
 
-        //A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+        // A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
         // The robot can only move either down or right at any point in time. 
-        //The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+        // The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
         // How many possible unique paths are there?
 
         // Input: m = 3, n = 2
@@ -265,10 +276,9 @@ namespace Algorithms
                     dpMax = dpMin;
                     dpMin = temp;
                 }
-                dpMax = Math.Max(dpMax * nums[i], nums[i]);
-                dpMin = Math.Min(dpMin * nums[i], nums[i]);
+                dpMax = Math.Max(nums[i], nums[i] * dpMax);
+                dpMin = Math.Min(nums[i], nums[i] * dpMin);
                 max = Math.Max(dpMax, max);
-                // Console.WriteLine($"{i}----dpMax:{dpMax} dpMin:{dpMin} max:{max}");
             }
             return max;
         }
@@ -312,6 +322,7 @@ namespace Algorithms
             //     }
             // }
             // return maxLength;
+            #endregion first try
             if (nums.Length == 0 || nums == null) return 0;
             if (nums.Length == 1) return 1;
             int[] dp = new int[nums.Length];
@@ -332,7 +343,6 @@ namespace Algorithms
                 maxlength = Math.Max(dp[i], maxlength);
             }
             return maxlength;
-            #endregion first try
         }
 
         #endregion
@@ -358,7 +368,6 @@ namespace Algorithms
             int prev = 0;
             for (int i = 0; i < rowNum; i++)
             {
-                int columnNum = triangle[i].Count;
                 for (int j = 0; j <= i; j++)
                 {
                     int curr = dp[j];
@@ -476,7 +485,6 @@ namespace Algorithms
                     {
                         dp[i][j] = Math.Min(Math.Min(dp[i - 1][j - 1], dp[i - 1][j]), dp[i][j - 1]) + 1;
                         maxsqlen = Math.Max(maxsqlen, dp[i][j]);
-                        Console.WriteLine(maxsqlen);
                     }
 
                 }
@@ -504,7 +512,7 @@ namespace Algorithms
         // Input: n = 12
         // Output: 3 
         // Explanation: 12 = 4 + 4 + 4.
-        //dp[i]=dp[i-1]+max(...)
+        // dp[i]=dp[i-1]+max(...)
         public int NumSquares(int n)
         {
 
