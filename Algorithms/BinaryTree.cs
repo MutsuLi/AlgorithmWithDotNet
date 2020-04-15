@@ -20,6 +20,7 @@ namespace Algorithms
             {
                 curr = assist.Pop();
                 result.Add((int)curr.val);
+                //Notice: as using stack to save the node, order of Traversal should reverse.
                 if (curr.right != null)
                 {
                     assist.Push(curr.right);
@@ -119,8 +120,7 @@ namespace Algorithms
         #region 226. Invert Binary Tree
         public TreeNode InvertTree(TreeNode root)
         {
-            List<TreeNode> result = new List<TreeNode>();
-            if (root == null) return null;
+            if (root == null) return root;
             Queue<TreeNode> queue = new Queue<TreeNode>();
             queue.Enqueue(root);
             TreeNode curr = root;
