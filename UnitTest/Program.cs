@@ -149,6 +149,9 @@ namespace UniTest
             int[] newArr82 = { 1, 2, 3, 3, 4, 4, 5 };
             Console.WriteLine("82. Remove Duplicates from Sorted List II:" + LLP.DeleteDuplicates(ListNode.arrayToListNode(newArr82)).toString());
 
+            int[] newArr80 = { 0, 0, 0, 0, 1, 1, 1, 1, 2, 3, 3 };
+            Console.WriteLine("80. Remove Duplicates from Sorted Array II:" + APS.RemoveDuplicates(newArr80));
+
         }
     }
 }
