@@ -154,6 +154,9 @@ namespace UniTest
 
             int[] Arr219 = { 1, 0, 1, 1 };
             Console.WriteLine("219. Contains Duplicate II:" + APS.ContainsNearbyDuplicate(Arr219, 1));
+
+            int[] Arr448 = { 1, 1 };
+            Console.WriteLine("448. Find All Numbers Disappeared in an Array:" + ArrayProblems.toString(new List<int>(APS.FindDisappearedNumbers(Arr448))));
         }
     }
 }

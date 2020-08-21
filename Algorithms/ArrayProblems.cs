@@ -848,6 +848,22 @@ namespace Algorithms
             return false;
         }
         #endregion
+
+        #region 448. Find All Numbers Disappeared in an Array
+        public IList<int> FindDisappearedNumbers(int[] nums)
+        {
+            List<int> result = new List<int>();
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[Math.Abs(nums[i]) - 1] > 0) nums[Math.Abs(nums[i]) - 1] *= -1;
+            }
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] > 0) result.Add(i + 1);
+            }
+            return result;
+        }
+        #endregion
     }
 }
 
