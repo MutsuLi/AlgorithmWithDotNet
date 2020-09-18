@@ -157,6 +157,9 @@ namespace UniTest
 
             int[] Arr448 = { 1, 1 };
             Console.WriteLine("448. Find All Numbers Disappeared in an Array:" + ArrayProblems.toString(new List<int>(APS.FindDisappearedNumbers(Arr448))));
+
+            Console.WriteLine("Parallelization");
+            Parallelization.Main(new string[] { });
         }
     }
 }

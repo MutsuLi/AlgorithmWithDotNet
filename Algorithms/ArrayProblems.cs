@@ -864,6 +864,14 @@ namespace Algorithms
             return result;
         }
         #endregion
+
+        #region 118. Pascal's Triangle
+        public IList<IList<int>> Generate(int numRows)
+        {
+            List<IList<int>> result = new List<IList<int>>();
+            return result;
+        }
+        #endregion
     }
 }
 
