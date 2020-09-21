@@ -17,6 +17,7 @@ namespace UniTest
             StringProblems SP = new StringProblems();
             LinkListProblems LLP = new LinkListProblems();
             BinaryTree BT = new BinaryTree();
+            ParallelProblems pp = new ParallelProblems();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
             // var result = test1.ThreeSum(newArr);
@@ -159,7 +160,9 @@ namespace UniTest
             Console.WriteLine("448. Find All Numbers Disappeared in an Array:" + ArrayProblems.toString(new List<int>(APS.FindDisappearedNumbers(Arr448))));
 
             Console.WriteLine("Parallelization");
-            Parallelization.Main(new string[] { });
+            ParallelProblems.ConcurrentQueue.Main(new string[] { });
+            ParallelProblems.ConcurrentBag.Main(new string[] { });
+            ParallelProblems.BlockingCollection.Main(new string[] { });
         }
     }
 }
