@@ -32,7 +32,7 @@
     * 职位: 软件工程师
     * 工作内容
         * 负责MES系统中任务模块开发
-            * 开发语言(技术): C#.
+            * 开发语言(技术): C#
             * 主要框架: asp.net
             * 相关技术: castsle + Topshelf
             * 技术要点:
@@ -51,7 +51,7 @@
 
         * 负责全渠道订单中台(OMS)中订单/售后+商品+发票模块开发
             * 简介: 2B应用,接入各个线上电商平台与公司内部平台的订单数据,实现订单,库存相关业务的统一管理.
-            * 开发语言(技术): : javascript + nodejs + java(少量).
+            * 开发语言(技术): javascript + nodejs + java(少量).
             * 主要框架:miniui + express
             * 相关技术: mongodb + redis + sybase + nginx + pm2 + shell + zeromq.
             * 技术要点:
