@@ -6,6 +6,7 @@
  * 居住地: 上海市嘉定区
  * 出生日期: 1995.2.11
  * 邮箱: alucard_invidia@hotmail.com
+ * Github: https://github.com/MutsuLi
  * 个⼈博客：http://47.102.128.186/
 
 #### 个⼈技术简介
@@ -16,29 +17,18 @@
  * 了解数据库事务机制,存储过程等.具有一定sql调优能力;
  * 了解docker,shell,nginx,pm2;
 
-#### ⼯作经历
-* 2020/4-至今 
-    * 开源项目
-        * 个人博客
-            * 开发语言(技术): asp.net webapi(dotnet core) + vue 3.0(typescript)
-            * 主要框架: webapi(dotnet core) + vue 3.0+ vuetify(UI)
-            * 相关技术: Entityframework core(mysql) + castsle + autofac + automapper + redis + swagger + etc.
-            * 技术要点:
-               * 后端项目主要基于dotnet core latest 开发,主要使用原生asp .net core框架,采用DDD仓储模式构建
-               * 前端项目主要采用基于typescript的vue 3.0框架,UI框架采用Vuetify
-               * 项目运行于aliyun ecs,基于docker容器部署,通过nginx反向代理
-              
+#### ⼯作经历         
 * 2019/9-至今 上海捷敏电子
     * 职位: 软件工程师
     * 工作内容
         * 负责MES系统中任务模块开发
             * 简介: 
-            * 开发语言(技术): C#.(.net framework 4.0)
+            * 开发语言(技术): C#(.net framework 4.0)
             * 主要框架: asp.net
             * 相关技术: castsle + Topshelf + Dapper + etc.
             * 技术要点:
                 * 任务模块主要监控待打印的任务,经过一定数据处理后,推送至打印队列进行打印.
-                * 该模块由于历史原因基于单线程开发,使用BlockingCollection与task改写为多线程后优化了任务的数据生成与打印的调度,提高了一定性能.              
+                * 该模块由于历史原因基于单线程开发,使用BlockingCollection与task改写为多线程后优化了数据生成与打印的任务调度,提高了一定性能.              
 
 * 2018/4-2019/6 上海浪沙软件
     * 职位: 后端工程师
@@ -61,3 +51,13 @@
             * 技术要点:
                 * 使用技术与OMS的大致相同.主要侧重接口的重构与业务封装.与OMS的交互主要通过消息队列(zeromq)与内部接口.
 
+#### 其他项目
+* 开源项目
+    * 个人博客
+        * 开发语言(技术): asp.net webapi(dotnet core) + vue 3.0(typescript)
+        * 主要框架: webapi(dotnet core) + vue 3.0+ vuetify(UI)
+        * 相关技术: Entityframework core(mysql) + castsle + autofac + automapper + redis + swagger + etc.
+        * 技术要点:
+            * 后端项目主要基于dotnet core latest 开发,主要使用原生asp .net core框架,采用DDD仓储模式构建
+            * 前端项目主要采用基于typescript的vue 3.0框架,UI框架采用Vuetify
+            * 项目运行于aliyun ecs,基于docker容器部署,通过nginx反向代理
