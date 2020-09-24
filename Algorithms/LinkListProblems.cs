@@ -5,6 +5,8 @@ namespace Algorithms
 {
     public class LinkListProblems
     {
+        public string name;
+        public IList<List<int>> paramList;
         public enum Methods
         {
             SwapNodesInPairs = 24,
