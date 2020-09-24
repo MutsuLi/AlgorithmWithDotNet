@@ -163,29 +163,13 @@ namespace UnitTest
 
             Console.WriteLine("Parallelization");
             Dictionary<string, List<List<int>>> ParallelList = new Dictionary<string, List<List<int>>>();
-            List<List<int>> valueList = new List<List<int>>();
-            BlockingCollection<string> BlockList = new BlockingCollection<string>();
             ParallelList.Add("SwapNodesInPairs", new List<List<int>>() { new List<int>(newArr24) });
             ParallelList.Add("RemoveDuplicatesfromSortedListII", new List<List<int>>() { new List<int>(newArr82) });
             ParallelList.Add("LinkedListCycle", new List<List<int>>() { new List<int>(newArr141) });
             ParallelList.Add("LinkedListCycleII", new List<List<int>>() { new List<int>(newArr142) });
 
-            Dictionary<string, string> result = new Dictionary<string, string>();
-            Parallel.ForEach(ParallelList, async (pair) =>
-            {
-                await Task.Run(() =>
-                {
-                    result.Add(pair.Key, LinkListProblems.handler(pair.Key, ParallelList[pair.Key]));
-                    BlockList.Add(pair.Key);
-                });
-            });
-            Parallel.ForEach(BlockList.GetConsumingEnumerable(), async (name) =>
-            {
-                await Task.Run(() =>
-               {
-                   Console.WriteLine(name + ": " + result[name] + "\r\n");
-               });
-            });
+            Problems.prepareParams(ParallelList);
+            Problems.prepareResult();
         }
     }
 }
