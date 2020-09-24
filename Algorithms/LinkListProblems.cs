@@ -5,14 +5,50 @@ namespace Algorithms
 {
     public class LinkListProblems
     {
+        public string name;
+        public IList<List<int>> paramList;
+        public enum Methods
+        {
+            SwapNodesInPairs = 24,
+            //RotateList = 61,
+            RemoveDuplicatesfromSortedListII = 82,
+            //ReverseLinkedListII = 92,
+            LinkedListCycle = 141,
+            LinkedListCycleII = 142,
+            //InsertionSortList = 147
+        }
+        public static string handler(string name, IList<List<int>> paramList, int index = -1)
+        {
+            Methods method = (Methods)Enum.Parse(typeof(Methods), name);
+            ListNode head = ListNode.arrayToListNode(paramList[0]);
+            switch (method)
+            {
+                case Methods.SwapNodesInPairs:
+                    return SwapPairs(head).toString();
+                // case Methods.RotateList:
+                //     return RotateRight(head, paramList[1][0]).toString();
+                case Methods.RemoveDuplicatesfromSortedListII:
+                    return DeleteDuplicates(head).toString();
+                // case Methods.ReverseLinkedListII:
+                //     return ReverseBetween(head, paramList[1][0], paramList[1][1]).toString();
+                case Methods.LinkedListCycle:
+                    HasCycle(head);
+                    return head.toString();
+                case Methods.LinkedListCycleII:
+                    DetectCycle(head);
+                    return head.toString();
+                    // case Methods.InsertionSortList:
+                    //     return InsertionSortList(head).toString();
+            }
+            return "";
+        }
 
-        //Definition for singly-linked list
-
+        // Definition for singly-linked list
         #region 24. Swap Nodes in Pairs
         // Given a linked list, swap every two adjacent nodes and return its head.
         // You may not modify the values in the list's nodes, only nodes itself may be changed.
         // Given 1->2->3->4, you should return the list as 2->1->4->3.
-        public ListNode SwapPairs(ListNode head)
+        public static ListNode SwapPairs(ListNode head)
         {
             if (head == null || head.next == null) return head;
             ListNode first = new ListNode(int.MinValue);
@@ -40,7 +76,7 @@ namespace Algorithms
         // Output: 4->5->1->2->3->NULL
         // Input: 0->1->2->NULL, k = 4
         // Output: 2->0->1->NUL
-        public ListNode RotateRight(ListNode head, int k)
+        public static ListNode RotateRight(ListNode head, int k)
         {
             if (head == null || head.next == null) return head;
             ListNode dummy = new ListNode(-1);
@@ -79,7 +115,7 @@ namespace Algorithms
         // Input: 1->2->3->4->5->NULL, m = 2, n = 4
         // Output: 1->4->3->2->5->NULL
         // Input: 1->2->3->4->5->NULL m=1 n=5
-        public ListNode ReverseBetween(ListNode head, int m, int n)
+        public static ListNode ReverseBetween(ListNode head, int m, int n)
         {
             if (head.next == null || head == null || m == n) return head;
             ListNode curr = head;
@@ -127,7 +163,7 @@ namespace Algorithms
         // Output: 1->2->3->4
         // Input: -1->5->3->4->0
         // Output: -1->0->3->4->5
-        public ListNode InsertionSortList(ListNode head)
+        public static ListNode InsertionSortList(ListNode head)
         {
             return head;
         }
@@ -139,7 +175,7 @@ namespace Algorithms
         //If pos is -1, then there is no cycle in the linked list.
         //Input: head = [3,2,0,-4], pos = 1
         //Output: true
-        public bool HasCycle(ListNode head)
+        public static bool HasCycle(ListNode head)
         {
             if (head == null || head.next == null) return false;
             ListNode slowPointer = head;
@@ -163,7 +199,7 @@ namespace Algorithms
         // Input: head = [1], pos = -1
         // Output: no cycle
         // Explanation: There is no cycle in the linked list.
-        public ListNode DetectCycle(ListNode head)
+        public static ListNode DetectCycle(ListNode head)
         {
             if (head == null || head.next == null) return null;
             ListNode slowPointer = head;
@@ -193,7 +229,7 @@ namespace Algorithms
         // Output: 1->2->5
         // Input: 1->1->1->2->3
         // Output: 2->3
-        public ListNode DeleteDuplicates(ListNode head)
+        public static ListNode DeleteDuplicates(ListNode head)
         {
             if (head == null || head.next == null) return head;
             ListNode dummy = new ListNode(int.MinValue);
