@@ -17,14 +17,14 @@ namespace Algorithms
             this.val = x;
             //        length++;
         }
-        public static ListNode arrayToListNode(int[] arr)
+        public static ListNode arrayToListNode(IList<int> list)
         {
-            ListNode[] nodes = new ListNode[arr.Length];
-            for (int i = 0; i < arr.Length; i++)
+            ListNode[] nodes = new ListNode[list.Count];
+            for (int i = 0; i < list.Count; i++)
             {
-                if (arr[i] != int.MaxValue)
+                if (list[i] != int.MaxValue)
                 {
-                    nodes[i] = new ListNode(arr[i]);
+                    nodes[i] = new ListNode(list[i]);
                 }
                 else
                 {
@@ -40,15 +40,15 @@ namespace Algorithms
             return nodes[0];
         }
 
-        public static ListNode arrayToListNode(int[] arr, int index)
+        public static ListNode arrayToListNode(IList<int> list, int index)
         {
-            ListNode[] nodes = new ListNode[arr.Length];
+            ListNode[] nodes = new ListNode[list.Count];
             ListNode next = null;
-            for (int i = 0; i < arr.Length; i++)
+            for (int i = 0; i < list.Count; i++)
             {
-                if (arr[i] != int.MaxValue)
+                if (list[i] != int.MaxValue)
                 {
-                    nodes[i] = new ListNode(arr[i]);
+                    nodes[i] = new ListNode(list[i]);
                     if (i == index) next = nodes[i];
                 }
                 else
