@@ -6,7 +6,7 @@ using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Diagnostics;
-
+using System.Threading.Tasks.Dataflow;
 
 namespace Algorithms
 {
@@ -267,6 +267,22 @@ namespace Algorithms
                 Console.WriteLine("总时间：{0}", sw.Elapsed);
             }
         }
+        public static class TplProblems
+        {
+            public static void Main()
+            {
+                var multiplyBlock = new TransformBlock<int, int>(item => item * 2);
+                var subtractBlock = new TransformBlock<int, int>(item => item - 2);
+                var options = new DataflowLinkOptions { PropagateCompletion = true };
+                multiplyBlock.LinkTo(subtractBlock, options);
+                // 第一个块的完成情况自动传递给第二个块。    
+                multiplyBlock.Complete();
+                Task.Run(async () =>
+                {
+                    await subtractBlock.Completion;
+                });
 
+            }
+        }
     }
 }

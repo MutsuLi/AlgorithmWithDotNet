@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 using System.Collections.Concurrent;
 namespace UnitTest
 {
-    class Program
+    public class Program
     {
 
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             BacktrackProlems test = new BacktrackProlems();
             DynamicProgramming DP = new DynamicProgramming();
@@ -170,6 +170,9 @@ namespace UnitTest
 
             Problems.prepareParams(ParallelList);
             Problems.prepareResult();
+
+            ParallelProblems.TplProblems.Main();
+
         }
     }
 }
