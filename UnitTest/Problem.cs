@@ -14,39 +14,34 @@ namespace UnitTest
         public string name;
         public List<int> ParamsList;
         private static readonly BlockingCollection<string> _blockqueue = new BlockingCollection<string>();
-        private static Dictionary<string, string> _result = new Dictionary<string, string>();
+        private static ConcurrentDictionary<string, string> _result = new ConcurrentDictionary<string, string>();
         public Problems(int id, string name, List<int> ParamsList)
         {
             this.id = id;
             this.name = name;
             this.ParamsList = ParamsList;
         }
-        public static async void prepareParams(Dictionary<string, List<List<int>>> ParallelList)
+        public static void prepareParams(Dictionary<string, List<List<int>>> ParallelList)
         {
-             Parallel.ForEach(ParallelList,  (pair) =>
-               {
-                    Task.Run(() =>
-                   {
-                       _result.Add(pair.Key, LinkListProblems.handler(pair.Key, ParallelList[pair.Key]));
-                       _blockqueue.Add(pair.Key);
-                   });
-               });
+            List<Task> tasklist = new List<Task>();
+            Parallel.ForEach(ParallelList, (pair) =>
+             {
+                 lock (_result)
+                 {
+                     _result.TryAdd(pair.Key, LinkListProblems.handler(pair.Key, ParallelList[pair.Key]));
+                 }
+                 _blockqueue.Add(pair.Key);
+             });
+             _blockqueue.CompleteAdding();
         }
 
         public static void prepareResult()
         {
-            while (!_blockqueue.IsCompleted)
+            foreach (var name in _blockqueue.GetConsumingEnumerable())
             {
-                Parallel.ForEach(_blockqueue.GetConsumingEnumerable(), async (name) =>
-                {
-                    await Task.Run(() =>
-                    {
-                        Console.WriteLine(name + ": " + _result[name] + "\r\n");
-                    });
-                });
+                Console.WriteLine(name + ": " + _result[name] + "\r\n");
             }
         }
-
     }
 
 }
