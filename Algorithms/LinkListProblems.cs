@@ -17,7 +17,7 @@ namespace Algorithms
             LinkedListCycleII = 142,
             //InsertionSortList = 147
         }
-        public static string handler(string name, IList<List<int>> paramList, int index = -1)
+        public static string handler(string name, IList<List<int>> paramList)
         {
             Methods method = (Methods)Enum.Parse(typeof(Methods), name);
             ListNode head = ListNode.arrayToListNode(paramList[0]);

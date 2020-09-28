@@ -168,7 +168,7 @@ namespace UnitTest
             ParallelList.Add("LinkedListCycle", new List<List<int>>() { new List<int>(newArr141) });
             ParallelList.Add("LinkedListCycleII", new List<List<int>>() { new List<int>(newArr142) });
 
-            Problems.prepareParams(ParallelList);
+            Problems.prepareParams(ParallelList, LinkListProblems.handler);
             Problems.prepareResult();
 
             ParallelProblems.TplProblems.Main();

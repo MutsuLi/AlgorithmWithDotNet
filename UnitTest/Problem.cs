@@ -21,18 +21,18 @@ namespace UnitTest
             this.name = name;
             this.ParamsList = ParamsList;
         }
-        public static void prepareParams(Dictionary<string, List<List<int>>> ParallelList)
+        public static void prepareParams(Dictionary<string, List<List<int>>> ParallelList, Func<string, IList<List<int>>, string> function)
         {
-            List<Task> tasklist = new List<Task>();
+            List<Task> tasklist = new List<Task>();;
             Parallel.ForEach(ParallelList, (pair) =>
              {
                  lock (_result)
                  {
-                     _result.TryAdd(pair.Key, LinkListProblems.handler(pair.Key, ParallelList[pair.Key]));
+                     _result.TryAdd(pair.Key, function(pair.Key, ParallelList[pair.Key]));
                  }
                  _blockqueue.Add(pair.Key);
              });
-             _blockqueue.CompleteAdding();
+            _blockqueue.CompleteAdding();
         }
 
         public static void prepareResult()
