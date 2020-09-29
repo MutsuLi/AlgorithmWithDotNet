@@ -20,6 +20,7 @@ namespace UnitTest
             LinkListProblems LLP = new LinkListProblems();
             BinaryTree BT = new BinaryTree();
             ParallelProblems pp = new ParallelProblems();
+            RecursionProblems rp = new RecursionProblems();
             // Console.WriteLine("---1.ArrayProblems---");
             // int[] newArr = { -1, 0, 1, 2, -1, -4 };
             // var result = test1.ThreeSum(newArr);
@@ -171,8 +172,12 @@ namespace UnitTest
             Problems.prepareParams(ParallelList, LinkListProblems.handler);
             Problems.prepareResult();
 
-            await ParallelProblems.TplProblems.Main();
-
+            //await ParallelProblems.TplProblems.Main();
+            List<int> newArr0809A = new List<int> { 4, 3, 2, 1 };
+            List<int> newArr0809B = new List<int> { };
+            List<int> newArr0809C = new List<int> { };
+            rp.Hanota(newArr0809A, newArr0809B, newArr0809C);
+            Console.WriteLine("08.06. Hanota LCCI:" + ArrayProblems.toString(newArr0809C));
         }
     }
 }
