@@ -10,7 +10,7 @@ namespace UnitTest
     public class Program
     {
 
-        public static void Main(string[] args)
+        public async static Task Main(string[] args)
         {
             BacktrackProlems test = new BacktrackProlems();
             DynamicProgramming DP = new DynamicProgramming();
@@ -171,7 +171,7 @@ namespace UnitTest
             Problems.prepareParams(ParallelList, LinkListProblems.handler);
             Problems.prepareResult();
 
-            ParallelProblems.TplProblems.Main();
+            await ParallelProblems.TplProblems.Main();
 
         }
     }

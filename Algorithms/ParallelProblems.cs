@@ -269,7 +269,7 @@ namespace Algorithms
         }
         public static class TplProblems
         {
-            public static void Main()
+            public async static Task Main()
             {
                 var multiplyBlock = new TransformBlock<int, int>(item => item * 2);
                 var subtractBlock = new TransformBlock<int, int>(item => item - 2);
@@ -277,11 +277,7 @@ namespace Algorithms
                 multiplyBlock.LinkTo(subtractBlock, options);
                 // 第一个块的完成情况自动传递给第二个块。    
                 multiplyBlock.Complete();
-                Task.Run(async () =>
-                {
-                    await subtractBlock.Completion;
-                });
-
+                await subtractBlock.Completion;
             }
         }
     }
