@@ -182,6 +182,9 @@ namespace UnitTest
             string str392s = "";
             string str392t = "ahbgdc";
             Console.WriteLine("392. Is Subsequence:" + SP.IsSubsequence(str392s, str392t));
+
+            int[] newArr121 = { 7, 1, 5, 3, 6, 4 };
+            Console.WriteLine("121. Best Time to Buy and Sell Stock:" + DP.MaxProfit(newArr121));
         }
     }
 }
