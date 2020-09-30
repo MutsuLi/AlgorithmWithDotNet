@@ -185,6 +185,9 @@ namespace UnitTest
 
             int[] newArr121 = { 7, 1, 5, 3, 6, 4 };
             Console.WriteLine("121. Best Time to Buy and Sell Stock:" + DP.MaxProfit(newArr121));
+
+            int[] newArr198 = { 2, 1 };
+            Console.WriteLine("198. House Robber:" + DP.Rob(newArr198));
         }
     }
 }
