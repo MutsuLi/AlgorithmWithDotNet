@@ -178,6 +178,10 @@ namespace UnitTest
             List<int> newArr0809C = new List<int> { };
             rp.Hanota(newArr0809A, newArr0809B, newArr0809C);
             Console.WriteLine("08.06. Hanota LCCI:" + ArrayProblems.toString(newArr0809C));
+
+            string str392s = "";
+            string str392t = "ahbgdc";
+            Console.WriteLine("392. Is Subsequence:" + SP.IsSubsequence(str392s, str392t));
         }
     }
 }

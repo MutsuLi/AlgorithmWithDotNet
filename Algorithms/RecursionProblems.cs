@@ -19,12 +19,6 @@ namespace Algorithms
         // Example2:
         // Input: A = [1, 0], B = [], C = []
         // Output: C = [1, 0]
-
-        //public static void hanoi(int n, int a, int b, int c)
-        //hanoi(n-1, a, c, b);
-        //move(a,b);
-        //hanoi(n-1, c, b, a);
-
         public void Hanota(IList<int> A, IList<int> B, IList<int> C)
         {
             int num = A.Count;
