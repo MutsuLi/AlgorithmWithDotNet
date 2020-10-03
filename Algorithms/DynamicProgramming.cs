@@ -838,5 +838,26 @@ namespace Algorithms
         }
         #endregion
 
+        #region 303. Range Sum Query - Immutable
+        public class NumArray
+        {
+            public int[] dp;
+            public int[] nums;
+            public NumArray(int[] nums)
+            {
+                this.nums = nums;
+                dp = new int[nums.Length + 1];
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    dp[i + 1] = dp[i] + nums[i];
+                }
+            }
+            public int SumRange(int i, int j)
+            {
+                return dp[j + 1] - dp[i];
+            }
+        }
+        #endregion
+
     }
 }
