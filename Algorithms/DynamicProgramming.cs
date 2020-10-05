@@ -859,5 +859,39 @@ namespace Algorithms
         }
         #endregion
 
+        #region 322. Coin Change
+
+        // Example 1:
+        // Input: coins = [1,2,5], amount = 11
+        // Output: 3
+        // Explanation: 11 = 5 + 5 + 1
+        // ---0-1背包问题 
+        // 由上述分析，“状态”对应的“值”即为背包容量为j时，求前i个物品所能达到最大价值，设为dp[i][j]。初始时，dp[0][j](0<=j<=V)为0，没有物品也就没有价值
+        // 第i个物品的体积为w,价值为v，则状态转移方程为
+        // j<w，dp[i][j] = dp[i-1][j] //背包装不下该物品，最大价值不变
+        // j>=w, dp[i][j] = max{ dp[i-1][j-list[i].w] + v, dp[i-1][j] } //和不放入该物品时同样达到该体积的最大价值比较
+        // dp[j] = max{ dp[j-list[i].w] + v, dp[j] }
+        public int CoinChange(int[] coins, int amount)
+        {
+            int[] dp = new int[amount + 1];
+            for (int i = 0; i < dp.Length; i++)
+            {
+                dp[i] = amount + 1;
+            }
+            dp[0] = 0;
+            for (int i = 1; i <= amount; i++)
+            {
+                for (int j = 0; j < coins.Length; j++)
+                {
+                    if (coins[j] <= i)
+                    {
+                        dp[i] = Math.Min(dp[i], 1 + dp[i - coins[j]]);
+                    }
+                }
+            }
+            return dp[amount] > amount ? -1 : dp[amount];
+        }
+        #endregion
+
     }
 }

@@ -191,6 +191,10 @@ namespace UnitTest
 
             int[] newArr213 = { 2, 3, 2 };
             Console.WriteLine("213. House Robber II:" + DP.RobII(newArr213));
+
+            int[] newArr322 = { 2 };
+            int newInt322 = 3;
+            Console.WriteLine("322. Coin Change:" + DP.CoinChange(newArr322, newInt322));
         }
     }
 }
