@@ -893,5 +893,28 @@ namespace Algorithms
         }
         #endregion
 
+        #region  983. Minimum Cost For Tickets
+        public int MincostTickets(int[] days, int[] costs)
+        {
+            int maxDay = days[days.Length - 1];
+            int minDay = days[0];
+            int[] dp = new int[maxDay + 31];
+            HashSet<int> dayset = new HashSet<int>(days);
+            for (int d = maxDay; d >= minDay; d--)
+            {
+                if (!dayset.Contains(d))
+                {
+                    dp[d] = dp[d + 1];
+                }
+                else
+                {
+                    dp[d] = Math.Min(dp[d + 1] + costs[0], dp[d + 7] + costs[1]);
+                    dp[d] = Math.Min(dp[d], dp[d + 30] + costs[2]);
+                }
+            }
+            return dp[minDay];
+        }
+        #endregion
+
     }
 }

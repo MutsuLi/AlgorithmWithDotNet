@@ -195,6 +195,10 @@ namespace UnitTest
             int[] newArr322 = { 2 };
             int newInt322 = 3;
             Console.WriteLine("322. Coin Change:" + DP.CoinChange(newArr322, newInt322));
+
+            int[] newArr983 = { 1, 4, 6, 7, 8, 20 };
+            int[] newInt983 = { 2, 7, 15 };
+            Console.WriteLine("983. Minimum Cost For Tickets:" + DP.MincostTickets(newArr983, newInt983));
         }
     }
 }
