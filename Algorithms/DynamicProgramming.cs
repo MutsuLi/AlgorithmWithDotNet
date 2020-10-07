@@ -916,5 +916,54 @@ namespace Algorithms
         }
         #endregion
 
+        #region 304. Range Sum Query 2D - Immutable
+        //   给定 matrix = [
+        //   [3, 0, 1, 4, 2],
+        //   [5, 6, 3, 2, 1],
+        //   [1, 2, 0, 1, 5],
+        //   [4, 1, 0, 1, 7],
+        //   [1, 0, 3, 0, 5]
+        // ]
+        // sumRegion(2, 1, 4, 3) -> 8
+        // sumRegion(1, 1, 2, 2) -> 11
+        // sumRegion(1, 2, 2, 4) -> 12
+        public class NumMatrix
+        {
+            public int[][] matrix;
+            public int[][] dp;
+            public NumMatrix(int[][] matrix)
+            {
+                this.matrix = matrix;
+                dp = new int[matrix.Length][];
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    dp[i] = new int[matrix[0].Length + 1];
+                    for (int j = 0; j < matrix[0].Length; j++)
+                    {
+                        dp[i + 1][j + 1] = dp[i][j] + matrix[i][j];
+                    }
+                }
+            }
+
+            public int SumRegion(int row1, int col1, int row2, int col2)
+            {
+                int sum = 0;
+                for (int i = row1; i < row2 + 1; i++)
+                {
+                    sum += this.dp[i][col2 + 1] - this.dp[i][col1];
+                }
+                return sum;
+            }
+            public static void Main()
+            {
+                int[][] array = new int[][] { new int[5] { 3, 0, 1, 4, 2 }, new int[5] { 5, 6, 3, 2, 1 }, new int[5] { 1, 2, 0, 1, 5 }, new int[5] { 4, 1, 0, 1, 7 }, new int[5] { 1, 0, 3, 0, 5 } };
+                NumMatrix matrix = new NumMatrix(array);
+                Console.WriteLine(matrix.SumRegion(2, 1, 4, 3));
+                Console.WriteLine(matrix.SumRegion(1, 1, 2, 2));
+                Console.WriteLine(matrix.SumRegion(1, 2, 2, 4));
+            }
+        }
+        #endregion
+
     }
 }

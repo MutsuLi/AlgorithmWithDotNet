@@ -172,7 +172,8 @@ namespace UnitTest
             Problems.prepareParams(ParallelList, LinkListProblems.handler);
             Problems.prepareResult();
 
-            //await ParallelProblems.TplProblems.Main();
+            await ParallelProblems.TplProblems.Main();
+
             List<int> newArr0809A = new List<int> { 4, 3, 2, 1 };
             List<int> newArr0809B = new List<int> { };
             List<int> newArr0809C = new List<int> { };
@@ -199,6 +200,8 @@ namespace UnitTest
             int[] newArr983 = { 1, 4, 6, 7, 8, 20 };
             int[] newInt983 = { 2, 7, 15 };
             Console.WriteLine("983. Minimum Cost For Tickets:" + DP.MincostTickets(newArr983, newInt983));
+
+            DynamicProgramming.NumMatrix.Main();
         }
     }
 }
