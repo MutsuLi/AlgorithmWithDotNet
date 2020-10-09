@@ -940,7 +940,7 @@ namespace Algorithms
                     dp[i] = new int[matrix[0].Length + 1];
                     for (int j = 0; j < matrix[0].Length; j++)
                     {
-                        dp[i + 1][j + 1] = dp[i][j] + matrix[i][j];
+                        dp[i][j + 1] = dp[i][j] + matrix[i][j];
                     }
                 }
             }
@@ -965,5 +965,39 @@ namespace Algorithms
         }
         #endregion
 
+        #region 1143. Longest Common Subsequence
+
+        // Input: text1 = "abcde", text2 = "ace" 
+        // Output: 3  
+        // Explanation: The longest common subsequence is "ace" and its length is 3.
+
+        //dp[i][j]=Max(dp[i-1][j],dp[i][j-1])
+        // 
+        //--算法导论例题
+
+        public int LongestCommonSubsequence(string text1, string text2)
+        {
+            int[][] dp = new int[text1.Length + 1][];
+            for (int i = 0; i <= text1.Length; i++)
+            {
+                dp[i] = new int[text2.Length + 1];
+            }
+            for (int i = 1; i <= text1.Length; i++)
+            {
+                for (int j = 1; j <= text2.Length; j++)
+                {
+                    if (text1[i - 1] == text2[j - 1])
+                    {
+                        dp[i][j] = dp[i - 1][j - 1] + 1;
+                    }
+                    else
+                    {
+                        dp[i][j] = Math.Max(dp[i - 1][j], dp[i][j - 1]);
+                    }
+                }
+            }
+            return dp[text1.Length][text2.Length];
+        }
+        #endregion
     }
 }

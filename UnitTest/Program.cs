@@ -202,6 +202,10 @@ namespace UnitTest
             Console.WriteLine("983. Minimum Cost For Tickets:" + DP.MincostTickets(newArr983, newInt983));
 
             DynamicProgramming.NumMatrix.Main();
+
+            string text1_1143 = "abcde";
+            string text2_1143 = "ace";
+            Console.WriteLine("1143. Longest Common Subsequence:" + DP.LongestCommonSubsequence(text1_1143, text2_1143));
         }
     }
 }
