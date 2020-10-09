@@ -206,6 +206,13 @@ namespace UnitTest
             string text1_1143 = "abcde";
             string text2_1143 = "ace";
             Console.WriteLine("1143. Longest Common Subsequence:" + DP.LongestCommonSubsequence(text1_1143, text2_1143));
+
+
+            string[] arr_474 = new string[] { "10", "0001", "111001", "1", "0" };
+            int m_474 = 5;
+            int n_474 = 3;
+            //string[] strs, int m, int n
+            Console.WriteLine("474. Ones and Zeroes:" + DP.FindMaxForm(arr_474, m_474, n_474));
         }
     }
 }

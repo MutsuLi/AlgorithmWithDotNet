@@ -999,5 +999,53 @@ namespace Algorithms
             return dp[text1.Length][text2.Length];
         }
         #endregion
+
+        #region 474. Ones and Zeroes
+
+        // Given an array, strs, with strings consisting of only 0s and 1s. Also two integers m and n.
+        // Now your task is to find the maximum number of strings that you can form with given m 0s and n 1s. Each 0 and 1 can be used at most once.
+
+        // Input: strs = ["10","0001","111001","1","0"], m = 5, n = 3
+        // Output: 4
+        // Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are "10","0001","1","0".
+        // dp[i][j]   i:vol of i  j: vol of j
+        // dp[i][j] = max(dp[i-cost1[k]][j-cost2[k]]+1,dp[i][j])
+
+        public int FindMaxForm(string[] strs, int m, int n)
+        {
+            int[][] dp = new int[m + 1][];
+            for (int i = 0; i <= m; i++)
+            {
+                dp[i] = new int[n + 1];
+            }
+            for (int k = 0; k < strs.Length; k++)
+            {
+                int[] cost = countZeroOne(strs[k]);
+                for (int i = m; i >= 0; i--)
+                {
+                    for (int j = n; j >= 0; j--)
+                    {
+                        if (i >= cost[0] && j >= cost[1])
+                        {
+                            dp[i][j] = Math.Max(dp[i - cost[0]][j - cost[1]] + 1, dp[i][j]);
+                        }
+                    }
+                }
+            }
+            return dp[m][n];
+        }
+
+        public int[] countZeroOne(string str)
+        {
+            int zero_num = 0;
+            int one_num = 0;
+            foreach (var each in str)
+            {
+                if (each == '0') zero_num++;
+                else if (each == '1') one_num++;
+            }
+            return new int[] { zero_num, one_num };
+        }
+        #endregion
     }
 }
