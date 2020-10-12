@@ -213,6 +213,8 @@ namespace UnitTest
             int n_474 = 3;
             //string[] strs, int m, int n
             Console.WriteLine("474. Ones and Zeroes:" + DP.FindMaxForm(arr_474, m_474, n_474));
+
+            DynamicProgramming.Question309.Main();
         }
     }
 }

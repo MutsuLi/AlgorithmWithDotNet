@@ -1047,5 +1047,39 @@ namespace Algorithms
             return new int[] { zero_num, one_num };
         }
         #endregion
+
+        #region 309. Best Time to Buy and Sell Stock with Cooldown
+        // Input: [1,2,3,0,2]
+        // Output: 3 
+        // Explanation: transactions = [buy, sell, cooldown, buy, sell]
+        // hold[i]=max(nohold[i-2]-prices[i],hold[i-1])
+        // nohold[i]=max(nohold[i-1], hold[i-1] + prices[i])
+        public class Question309
+        {
+            private string name;
+            private string id;
+            public int MaxProfit(int[] prices)
+            {
+                if (prices == null && prices.Length < 2) return 0;
+                int[] hold = new int[prices.Length];
+                int[] nohold = new int[prices.Length];
+                hold[0] = -prices[0];
+                nohold[0] = 0;
+                for (int i = 1; i < prices.Length; i++)
+                {
+                    hold[i] = Math.Max(hold[i - 1], i > 2 ? nohold[i - 2] - prices[i] : -prices[i]);
+                    nohold[i] = Math.Max(nohold[i - 1], hold[i - 1] + prices[i]);
+                }
+                return nohold[prices.Length - 1];
+            }
+            public static void Main()
+            {
+                int[] array = new int[] { 1, 2, 3, 0, 2 };
+                Question309 test = new Question309() { id = "309", name = "Best Time to Buy and Sell Stock with Cooldown" };
+                Console.WriteLine($"{test.id}.{test.name}" + ":" + test.MaxProfit(array));
+            }
+
+        }
+        #endregion
     }
 }
