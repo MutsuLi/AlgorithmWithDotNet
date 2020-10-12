@@ -1081,5 +1081,48 @@ namespace Algorithms
 
         }
         #endregion
+
+        #region 377. Combination Sum IV
+        //Example:
+        // nums = [1, 2, 3]
+        // target = 4
+        // (1, 1, 1, 1)
+        // (1, 1, 2)
+        // (1, 2, 1)
+        // (1, 3)
+        // (2, 1, 1)
+        // (2, 2)
+        // (3, 1)
+        // Therefore the output is 7
+        //dp[i]=max(dp[i],dp[i-nums[i]]+1)
+        public class Question377
+        {
+            private string name;
+            private string id;
+            public int CombinationSum4(int[] nums, int target)
+            {
+                int[] dp = new int[target + 1];
+                dp[0] = 1;
+                for (int i = 1; i <= target; i++) //如果物品顺序颠倒也生效则先遍历物品;反之则先遍历容积
+                {
+                    for (int j = 0; j < nums.Length; j++)
+                    {
+                        if (i >= nums[j])
+                        {
+                            dp[i] += dp[i - nums[j]];
+                        }
+                    }
+                }
+                return dp[target];
+            }
+            public static void Main()
+            {
+                int[] param1 = new int[] { 1, 2, 3 };
+                int param2 = 4;
+                Question377 test = new Question377() { id = "377", name = "Combination Sum IV" };
+                Console.WriteLine($"{test.id}.{test.name}" + ":" + test.CombinationSum4(param1, param2));
+            }
+        }
+        #endregion
     }
 }
