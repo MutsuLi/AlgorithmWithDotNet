@@ -871,6 +871,7 @@ namespace Algorithms
         // j<w，dp[i][j] = dp[i-1][j] //背包装不下该物品，最大价值不变
         // j>=w, dp[i][j] = max{ dp[i-1][j-list[i].w] + v, dp[i-1][j] } //和不放入该物品时同样达到该体积的最大价值比较
         // dp[j] = max{ dp[j-list[i].w] + v, dp[j] }
+        // 完全背包
         public int CoinChange(int[] coins, int amount)
         {
             int[] dp = new int[amount + 1];
@@ -1010,6 +1011,7 @@ namespace Algorithms
         // Explanation: This are totally 4 strings can be formed by the using of 5 0s and 3 1s, which are "10","0001","1","0".
         // dp[i][j]   i:vol of i  j: vol of j
         // dp[i][j] = max(dp[i-cost1[k]][j-cost2[k]]+1,dp[i][j])
+        // 0-1背包
 
         public int FindMaxForm(string[] strs, int m, int n)
         {
@@ -1133,8 +1135,9 @@ namespace Algorithms
         // 5=2+2+1
         // 5=2+1+1+1
         // 5=1+1+1+1+1
+        // 完全背包
 
-        // dp[i]=1+dp[i-1]
+        // dp[i][j]=1+dp[i-1]
         // dp[0]=0
 
         public class Question518
@@ -1163,6 +1166,57 @@ namespace Algorithms
                 int param2 = 5;
                 Question518 test = new Question518() { id = "518", name = "Coin Change 2" };
                 Console.WriteLine($"{test.id}.{test.name}" + ":" + test.Change(param2, param1));
+            }
+        }
+        #endregion
+        #region 494. Target Sum
+        // Input: nums is [1, 1, 1, 1, 1], S is 3. 
+        // Output: 5
+        // Explanation: 
+
+        // -1+1+1+1+1 = 3
+        // +1-1+1+1+1 = 3
+        // +1+1-1+1+1 = 3
+        // +1+1+1-1+1 = 3
+        // +1+1+1+1-1 = 3
+
+        // There are 5 ways to assign symbols to make the sum of nums be target 3.
+        // sum= ∑nums[i] s1=(sum+S)/2 =>转换为和为s1的0-1背包问题
+        // 0-1背包
+        //dp[i]=sum(dp[i-num],dp[i-1])
+        public class Question494
+        {
+            private string name;
+            private string id;
+            public int FindTargetSumWays(int[] nums, int S)
+            {
+                int sum = 0;
+                foreach (var num in nums)
+                {
+                    sum += num;
+                }
+                if ((sum + S) % 2 == 1 || sum < S)
+                {
+                    return 0;
+                }
+                int sum2 = (sum + S) / 2;
+                int[] dp = new int[sum2 + 1];
+                dp[0] = 1;
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    for (int j = sum2; j >= nums[i]; j--)
+                    {
+                        dp[j] += dp[j - nums[i]];
+                    }
+                }
+                return dp[sum2];
+            }
+            public static void Main()
+            {
+                int[] param1 = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 1 };
+                int param2 = 1;
+                Question494 test = new Question494() { id = "494", name = "Target Sum" };
+                Console.WriteLine($"{test.id}.{test.name}" + ":" + test.FindTargetSumWays(param1, param2));
             }
         }
         #endregion
