@@ -1124,5 +1124,47 @@ namespace Algorithms
             }
         }
         #endregion
+
+        #region 518. Coin Change 2
+        // Input: amount = 5, coins = [1, 2, 5]
+        // Output: 4
+        // Explanation: there are four ways to make up the amount:
+        // 5=5
+        // 5=2+2+1
+        // 5=2+1+1+1
+        // 5=1+1+1+1+1
+
+        // dp[i]=1+dp[i-1]
+        // dp[0]=0
+
+        public class Question518
+        {
+            private string name;
+            private string id;
+            public int Change(int amount, int[] coins)
+            {
+                int[] dp = new int[amount + 1];
+                dp[0] = 1;
+                for (int i = 0; i < coins.Length; i++)
+                {
+                    for (int j = 1; j <= amount; j++)
+                    {
+                        if (j >= coins[i])
+                        {
+                            dp[j] += dp[j - coins[i]];
+                        }
+                    }
+                }
+                return dp[amount];
+            }
+            public static void Main()
+            {
+                int[] param1 = new int[] { 1, 2, 5 };
+                int param2 = 5;
+                Question518 test = new Question518() { id = "518", name = "Coin Change 2" };
+                Console.WriteLine($"{test.id}.{test.name}" + ":" + test.Change(param2, param1));
+            }
+        }
+        #endregion
     }
 }
