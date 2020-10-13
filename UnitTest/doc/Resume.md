@@ -26,8 +26,8 @@
             * 主要框架: asp.net
             * 相关技术: castsle + Topshelf + Dapper + etc.
             * 技术要点:
-                * 任务模块主要监控待打印的任务,经过一定数据处理后,推送至打印队列进行打印.
-                * 该模块由于历史原因基于单线程开发,使用BlockingCollection与Task改写为多线程后优化了数据生成与打印的任务调度,提高了一定性能.              
+                * 该模块主要监控待打印的任务,经过一定数据处理后,推送至打印队列进行打印.
+                * 该模块由于历史原因基于单线程开发,使用阻塞队列与Task改写,优化了数据生成与任务打印之间的任务调度,提高了一定性能.              
 
 * 2018/4-2019/6 上海浪沙软件
     * 职位: 后端工程师
@@ -38,9 +38,9 @@
             * 主要框架:miniui + express
             * 相关技术: mongodb + redis + sybase + nginx + pm2 + shell + zeromq.
             * 技术要点:
-                * 对接第三方电商平台api与完成内部系统api,基本的crud业务,存储过程等
+                * 负责对接第三方电商平台api与完成内部系统api,基本的crud业务,存储过程等
                 * 底层使用java访问sybase数据库
-                * mongodb用于订单同步的中间库与记录日志;
+                * mongodb用作订单同步的中间库与记录日志;
                 * redis用于缓存用户session与项目配置数据;
                 * 通过消息队列(zeromq)同步中间库至主数据库;
                 * 通过pm2+nginx部署应用,shell脚本实现自动部署.
@@ -57,6 +57,6 @@
         * 主要框架: webapi(dotnet core) + vue 3.0+ vuetify(UI)
         * 相关技术: Entityframework core(mysql) + castsle + autofac + automapper + redis + swagger + etc.
         * 技术要点:
-            * 后端项目主要基于dotnet core latest 开发,主要使用原生asp .net core框架,采用DDD仓储模式构建
-            * 前端项目主要采用基于typescript的vue 3.0框架,UI框架采用Vuetify
-            * 项目运行于aliyun ecs,基于docker容器部署,通过nginx反向代理
+            * 后端主要基于dotnet core latest 开发,主要使用原生asp .net core框架,采用DDD仓储模式构建各个模块
+            * 前端主要采用基于typescript的vue 3.0框架,UI框架采用Vuetify
+            * 项目运行于aliyun ECS,基于docker容器部署,通过nginx反向代理
