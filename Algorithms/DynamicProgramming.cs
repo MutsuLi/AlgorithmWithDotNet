@@ -1258,5 +1258,45 @@ namespace Algorithms
             }
         }
         #endregion
+
+        #region 516. Longest Palindromic Subsequence
+        //input:"cbbd" output:2  "bb"
+        //input:"bbbab" output:4 "bbbb"
+        //bbbab babbb
+        public class Question516 : BaseQuestion
+        {
+            public int LongestPalindromeSubseq(string s)
+            {
+                int[][] dp = new int[s.Length + 1][];
+
+                for (int i = 0; i <= s.Length; i++)
+                {
+                    dp[i] = new int[s.Length + 1];
+                }
+                for (int i = s.Length - 1; i >= 0; i--)
+                {
+                    for (int j = 1; j <= s.Length; j++)
+                    {
+                        if (s[i] == s[j - 1])
+                        {
+                            dp[i][j] = dp[i + 1][j - 1] + 1;
+                        }
+                        else
+                        {
+                            dp[i][j] = Math.Max(dp[i][j - 1], dp[i + 1][j]);
+                        }
+                    }
+                }
+                return dp[0][s.Length];
+            }
+            public static void Main()
+            {
+                string param1 = "bbbab";
+                Question516 test = new Question516() { id = 516, name = "Maximum Length of Repeated Subarray" };
+                test.answer = test.LongestPalindromeSubseq(param1).ToString();
+                Console.WriteLine(test.showResult());
+            }
+        }
+        #endregion
     }
 }
