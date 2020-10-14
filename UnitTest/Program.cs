@@ -203,8 +203,8 @@ namespace UnitTest
 
             DynamicProgramming.NumMatrix.Main();
 
-            string text1_1143 = "abcde";
-            string text2_1143 = "ace";
+            string text1_1143 = "01111";
+            string text2_1143 = "10101";
             Console.WriteLine("1143. Longest Common Subsequence:" + DP.LongestCommonSubsequence(text1_1143, text2_1143));
 
 
@@ -218,6 +218,7 @@ namespace UnitTest
             DynamicProgramming.Question377.Main();
             DynamicProgramming.Question518.Main();
             DynamicProgramming.Question494.Main();
+            DynamicProgramming.Question718.Main();
         }
     }
 }

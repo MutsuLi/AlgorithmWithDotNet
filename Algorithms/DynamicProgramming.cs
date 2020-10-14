@@ -1220,5 +1220,43 @@ namespace Algorithms
             }
         }
         #endregion
+
+        #region 718. Maximum Length of Repeated Subarray
+        // Input:
+        // A: [1,2,3,2,1]
+        // B: [3,2,1,4,7]
+        // Output: 3
+        // Explanation: 
+        // The repeated subarray with maximum length is [3, 2, 1].
+        // if(A[i]==B[i]) dp[i][j]=dp[i-1][j-1]+1;
+        // dp[i][j]=max(dp[i-1][j],dp[i][j-1]);
+        // Subarray must be in sequence
+        public class Question718 : BaseQuestion
+        {
+            public int FindLength(int[] A, int[] B)
+            {
+                int[] dp = new int[B.Length + 1];
+                int result = 0;
+                for (int i = 1; i <= A.Length; i++)
+                {
+                    for (int j = B.Length; j >= 1; j--)
+                    {
+                        dp[j] = (A[i - 1] == B[j - 1]) ? dp[j - 1] + 1 : 0;
+                        result = Math.Max(result, dp[j]);
+                    }
+                }
+                return result;
+            }
+            public static void Main()
+            {
+                int[] param1 = new int[] { 0, 1, 1, 1, 1 };
+                int[] param2 = new int[] { 1, 0, 1, 0, 1 };
+
+                Question718 test = new Question718() { id = 718, name = "Maximum Length of Repeated Subarray" };
+                test.answer = test.FindLength(param1, param2).ToString();
+                Console.WriteLine(test.showResult());
+            }
+        }
+        #endregion
     }
 }
