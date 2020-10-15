@@ -1,30 +1,57 @@
 # 读书笔记--C#并发编程经典实例--同步
+
 ## 1. 同步
+
 ### 简述
+
 > 同步的类型主要有两种：通信和数据保护。当一段代码把某些情况（例如收到新消息）通知给另一段代码时，就得用到通信。在后面的有关案例中会详细讲述通信。本章的概述部分主要讨论数据保护。
 > 同步的条件: 
->>(1) 多段代码正在并发运行。
->>(2) 这几段代码在访问（读或写）同一个数据。
->>(3) 至少有一段代码在修改（写）数据。
+>> (1) 多段代码正在并发运行。
+>> (2) 这几段代码在访问（读或写）同一个数据。
+>> (3) 至少有一段代码在修改（写）数据。
 
+## 2. 阻塞锁(同步)
 
-### 2. 阻塞锁
-#### 使用场景
+### 使用场景
+
 > 多个线程需要安全地读写共享数据。
-#### 解决方案
->>决解方案这种情况最好的办法是使用lock语句。一个线程进入锁后，在锁被释放之前其他线程是无法进入的：
->>.NET框架中还有很多其他类型的锁，如Monitor、SpinLock、ReaderWriterLockSlim.
+
+### 解决方案
+
+>> 决解方案这种情况最好的办法是使用lock语句。
+>> 一个线程进入锁后，在锁被释放之前其他线程是无法进入的：
+
+``` 
+class MyClass
+{
+    // 这个锁会保护_value。        
+    private readonly object _mutex = new object();
+    private int _value;
+    public void Increment()
+    {
+        lock (_mutex)
+        { _value = _value + 1; }
+    }
+}
+```
+
+>> . NET框架中还有很多其他类型的锁，如Monitor、SpinLock、ReaderWriterLockSlim.
 >> 对大多数程序来说，这些类型的锁基本上用不到。尤其是程序员会习惯性地使用ReaderWriterLockSlim，即使没必要用那么复杂的技术。
 >> 基本的lock语句就可以很好地处理99%的情况了.
-#### 使用限制
-> 关于锁的使用，有四条重要的规则:
->>限制锁的作用范围.
->>文档中写清锁保护的内容.
->>锁范围内的代码尽量少.
->>在控制锁的时候绝不运行随意的代码.
-#### 使用场景
 
-```
+### 使用限制
+
+> 1. 关于锁的使用，有四条重要的规则:
+>> 要尽量限制锁的作用范围。应该把lock语句使用的对象设为私有成员，并且永远不要暴露给非本类的方法。每个类型通常最多只有一个锁。如果一个类型有多个锁，可考虑通过重构把它分拆成多个独立的类型。可以锁定任何引用类型，但是我建议为lock语句定义一个专用的成员，就像最后的例子那样。尤其是千万不要用lock(this)，也不要锁定Type或string类型的实例。因为这些对象是可以被其他代码访问的，这样锁定会产生死锁.
+>> 要在文档中描述锁定的内容。这种做法在最初编写代码时很容易被忽略，但是在代码变得复杂后就会变得很重要。
+>> 在锁定时执行的代码要尽可能得少。要特别小心阻塞调用。在锁定时不要做任何阻塞操作。
+>> 在锁定时绝不要调用随意的代码。随意的代码包括引发事件、调用虚拟方法、调用委托。如果一定要运行随意的代码，就在释放锁之后运行。
+> 2. lock语句是用来保护共享数据的，而不是在线程间发送信号.
+> 3. lock语句与await并不兼容.
+
+### 使用场景
+
+``` 
 var stack = ImmutableStack<int>.Empty;
 stack = stack.Push(13);
 var biggerStack = stack.Push(7);
@@ -36,115 +63,149 @@ foreach (var item in stack)
 Trace.WriteLine(item);
 ```
 
-### 1.3 不可变列表(ImmutableList)
-#### 简述
-> 不可变列表的内部是用二叉树组织数据的。这么做是为了让不可变列表的实例之间共享的内
-存最大化,但同时造成了性能上的降低.
-> 不可变列表的性能差异
+## 2.1. 异步锁
 
-action | List<T> | ImmutableList<T>
------|-------|---------
-Add | O(1) | O(log N)
-Insert | O(N) | O(log N)
-RemoveAt | O(N) | O(log N)
-Item[index] | O(1) | O(log N)
+### 使用场景
 
-应该尽量使用foreach 而不是用for。对ImmutableList<T> 进行foreach 循环的耗
-时是O(N)，而对同一个集合进行for 循环的耗时是O(N*logN)：
+> 多个代码块需要安全地读写共享数据，并且这些代码块可能使用await语句。
+
+### 解决方案
+
+>> . NET 4.5对框架中的SemaphoreSlim类进行了升级以兼容async。可以这样使用：
+
+``` 
+class MyClass
+{         // 这个锁保护_value。        
+     private readonly SemaphoreSlim _mutex = new SemaphoreSlim(1);
+     private int _value;
+     public async Task DelayAndIncrementAsync()
+     {
+        await _mutex.WaitAsync();
+        try
+        {
+            var oldValue = _value; await Task.Delay(TimeSpan.FromSeconds(oldValue)); _value = oldValue + 1;
+        }
+        finally 
+        {
+             _mutex.Release(); 
+        }
+     }
+ }
 ```
-// 遍历ImmutableList<T> 的最好方法。
-foreach (var item in list)
-Trace.WriteLine(item);
-// 这个方法运行正常，但速度会慢得多。
-for (int i = 0; i != list.Count; ++i)
-Trace.WriteLine(list[i]);
+
+>> 一个线程进入锁后，在锁被释放之前其他线程是无法进入的：
+
+## 3. 阻塞信号
+
+### 使用场景
+
+> 需要从一个线程发送信号给另一个线程。
+
+### 解决方案
+
+> 最常见和通用的跨线程信号是ManualResetEventSlim。一个人工重置的事件处于这两种状态其中之一：标记的（signaled）或未标记的（unsignaled）。每个线程都可以把事件设置为signaled状态，也可以把它重置为unsignaled状态。线程也可等待事件变为signaled状态。
+> 下面的两个方法被两个独立的线程调用，一个线程等待另一个线程的信号：
+
+``` 
+class MyClass
+{
+    private readonly ManualResetEventSlim _initialized = new ManualResetEventSlim();
+    private int _value;
+    public int WaitForInitialization()
+     {
+          _initialized.Wait(); 
+          return _value;
+    }
+    public void InitializeFromAnotherThread()
+    {
+        value = 13; 
+        _initialized.Set();
+    }
+}
 ```
 
-### 1.4 不可变Set(ImmutableHashSet && ImmutableSortedSet)
-#### 简述
-> 有两种不可变Set 集合类型：ImmutableHashSet<T> 只是一个不含重复元素的集合，
-ImmutableSortedSet<T> 是一个已排序的不含重复元素的集合。
-> 不可变Set的性能差异
+### 小结
 
-action | ImmutableHashSet<T> | ImmutableSortedSet<T>
------|-------|---------
-Add | O(log N) | O(log N)
-RemoveAt | O(log N) | O(log N)
-Item[index] | / | O(log N)
+> ManualResetEventSlim是功能强大、通用的线程间信号，但必须合理地使用。如果这个信号其实是一个线程间发送小块数据的消息，那可考虑使用生产者/消费者队列。
+> 另一方面，如果信号只是用来协调对共享数据的访问，那可改用锁。
 
-同理,由于Item[Index] 性能较差,使用ImmutableSortedSet<T> 时，应该尽量用foreach 而不是用for。
+## 3.1 异步信号
 
-应该尽量使用foreach 而不是用for。对ImmutableList<T> 进行foreach 循环的耗
-时是O(N)，而对同一个集合进行for 循环的耗时是O(N*logN)：
-#### 总结
->不可变Set 集合是非常实用的数据结构，但是填充较大不可变Set 集合的速度会很慢。大
-多数不可变集合有特殊的构建方法，可以先快速地以可变方式构建，然后转换成不可变集
-合
+### 使用场景
 
-### 1.5 不可变字典(ImmutableDictionary && ImmutableSortedDictionary)
-#### 简述
-> 适用场景: 不经常修改且可被多个线程安全访问的键/ 值集合。
+> 需要在代码的各个部分间发送通知，并且要求接收方必须进行异步等待。
 
-> 不可变字典的性能差异:
+### 解决方案
 
-action | ImmutableHashSet<T> | ImmutableSortedSet<T>
------|-------|---------
-Add | O(log N) | O(log N)
-SetItem  | O(log N) | O(log N)
-Remove | O(log N) | O(log N)
-Item[key] | O(log N) | O(log N)
+> 如果该通知只需要发送一次，那可用TaskCompletionSource<T>异步发送。发送代码调用TrySetResult，接收代码等待它的Task属性：
 
-> 未排序字典和已排序字典在性能上差别不大,未排序字典的速度稍微快一点。但未排序字典可以使用任何键类型，而已排序字典要求键的类型必须是完全可比较的。因此推荐适用使用未排序字典.
-
-#### 总结
-> 字典是处理应用状态时很普遍又实用的工具。它能用在任何类型的键/ 值或询。跟其他不可变集合一样，不可变字典有一个在元素较多时进行快速构建的机制。例如，想要在启动时装载初始参考数据，就可以使用这种构建机制构造出初始的不可变字典。相反，如果参考数据是在程序运行时逐步构建的，那可以使用常规的Add方法。
-
-
-
-## 2 线程安全集合
-### 描述
-> 线程安全集合是可同时被多个线程修改的可变集合。线程安全集合混合使用了细粒度锁定和无锁技术，以确保线程被阻塞的时间最短（通常情况下是根本不阻塞）。对很多线程安全集合进行枚举操作时，内部创建了该集合的一个快照（snapshot），并对这个快照进行枚举操作。线程安全集合的主要优点是多个线程可以安全地对其进行访问，而代码只会被阻塞很短的时间，或根本不阻塞。
-
->>  以下是常用的线程安全集合:
->> * ConcurrentDictionary<TKey, TValue>
->> * BlockingCollection<T>
->> * ConcurrentStack<T>
->> * ConcurrentQueue<T> 
->> * ConcurrentBag<T>
-
-### 2.1 线程安全字典
-#### 简述
-> 适用场景: 需要有一个键/值集合，多个线程同时读写时仍能保持同步。
-> ConcurrentDictionary<TKey, TValue>是线程安全的，混合使用了细粒度锁定和无锁技术，以确保绝大多数情况下能进行快速访问.
-#### 总结
->ConcurrentDictrionary<TKey,TValue>并不适合于所有场合。如果多个线程读写一个共享集合，使用ConcurrentDictrionary<TKey,TValue> 是最合适的。如果不会频繁修改（很少修改），那更适合使用ImmutableDictionary<TKey, TValue>.
->ConcurrentDictrionary<TKey,TValue> 最适合用在需要共享数据的场合，即多个线程共享同一个集合。如果一些线程只添加元素，另一些线程只移除元素，那最好使用生产者/ 消费者集合。
-
-### 2.2 阻塞队列
-#### 简述
-> 适用场景: 适用于独立的线程（如线程池线程）作为生产者或消费者.如果要以异步方式访问管道,例如UI线程作为消费者，用阻塞队列就不大合适了。
-> BlockingCollection<T> 默认是阻塞队列，具有“先进先出”的特征,但它也可以作为任何类型的生产者/ 消费者集合。
-> 可以在创建BlockingCollection<T> 实例时指明规则，可选择后进先出（栈）或无序（包），如下例所示：
+``` 
+class MyClass
+{
+    private readonly TaskCompletionSource<object> _initialized = new TaskCompletionSource<object>();
+    private int _value1; private int _value2;
+    public async Task<int> WaitForInitializationAsync() 
+    {
+      await _initialized.Task; return _value1 + _value2;
+    }
+    public void Initialize()
+    {
+         _value1 = 13;
+         _value2 = 17;
+         _initialized.TrySetResult(null);
+    }
+}
 ```
-BlockingCollection<int> _blockingStack = new BlockingCollection<int>(
-new ConcurrentStack<int>());
-BlockingCollection<int> _blockingBag = new BlockingCollection<int>(
-new ConcurrentBag<int>());
-```
-> 由于要被多个线程共用，通常把它定义成私有和只读.
-```
-private readonly BlockingCollection<int> _blockingQueue =
-new BlockingCollection<int>();
-```
-> 生产者线程通过调用Add 方法来添加项目，所有项目都已经添加完毕后调用CommpleteAdding方法,然后该集合会通知消费者线程.
-> 消费者线程通过调用GetConsumingEnumerable或take消费一个项目,前者用一个循环使用所有的项目,后者每次只会消费一个项目.
-> 除非能保证消费者的速度总是比生产者快，使用这种管道时，都要考虑一旦生产者比消费者快，会发生什么情况。如果生产者的速度比消费者快，就需要对队列进行限流。
-```
-下面的例子把集合的项目数量限制为1 个：
-BlockingCollection<int> _blockingQueue = new BlockingCollection<int>(boundedCapacity: 1);
-```
-#### 总结
-> ConcurrentDictrionary<TKey,TValue>并不适合于所有场合。如果多个线程读写一个共享集合，使用ConcurrentDictrionary<TKey,TValue> 是最合适的。如果不会频繁修改（很少修改），那更适合使用ImmutableDictionary<TKey, TValue>.
-> ConcurrentDictrionary<TKey,TValue> 最适合用在需要共享数据的场合，即多个线程共享同一个集合。如果一些线程只添加元素，另一些线程只移除元素，那最好使用生产者/ 消费者集合。
 
+### 小结
 
+> 信号是一种通用的通知机制。但如果这个“信号”是一个用来在代码段之间发送数据的消息，那就考虑使用生产者/消费者队列。
+> 同样，不要让通用的信号只是用来协调对共享数据的访问。那种情况下，可使用锁。
+
+> 在所有情况下都可以用TaskCompletionSource\<T>来异步地等待：本例中，通知来自于另一部分代码。如果只需要发送一次信号，这种方法很适合。但是如果要打开和关闭信号，这种方法就不大合适了
+
+## 4. 限流
+
+### 使用场景
+
+> 有一段高度并发的代码，由于它的并发程度实在太高了，需要有方法对并发性进行限流。代码并发程度太高，是指程序中的一部分无法跟上另一部分的速度，导致数据项累积并消耗内存。这种情况下对部分代码进行限流，可以避免占用太多内存。
+
+### 解决方案
+
+> 根据代码的并发类型，解决方法各有不同。这些解决方案都是把并发性限制在某个范围之内。响应式扩展有更多功能强大的方法可以选择，例如滑动时间窗口。
+> 并行代码自带的对并发性限流的方法:
+
+``` 
+// 使用Parallel类    
+void ParallelRotateMatrices(IEnumerable<Matrix> matrices, float degrees)
+{
+    var options = new ParallelOptions { MaxDegreeOfParallelism = 10 };
+    Parallel.ForEach(matrices, options, matrix => matrix.Rotate(degrees));
+}
+```
+
+> 并发性异步代码可以用SemaphoreSlim来限流:
+
+``` 
+async Task<string[]> DownloadUrlsAsync(IEnumerable<string> urls)
+{
+    var httpClient = new HttpClient();
+    var semaphore = new SemaphoreSlim(10);
+    var tasks = urls.Select(async url =>{
+        await semaphore.WaitAsync();
+        try
+        {
+            return await httpClient.GetStringAsync(url);
+        }
+        finally 
+        {
+            semaphore.Release(); 
+        }
+    }).ToArray();
+    return await Task.WhenAll(tasks);
+}
+```
+
+### 小结
+
+> 如果发现程序使用的资源（例如CPU或网络连接）太多，说明可能需要使用限流了。需要牢记一点，最终用户的电脑性能可能不如开发者的电脑，因此限流得稍微严格一点，比限流不充分要好
