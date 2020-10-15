@@ -220,6 +220,7 @@ namespace UnitTest
             DynamicProgramming.Question494.Main();
             DynamicProgramming.Question718.Main();
             DynamicProgramming.Question516.Main();
+            DynamicProgramming.Question343.Main();
         }
     }
 }

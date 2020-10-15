@@ -1298,5 +1298,38 @@ namespace Algorithms
             }
         }
         #endregion
+        #region 343. Integer Break
+        // Example 2:
+        // Input: 10
+        // Output: 36
+        // Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
+        // i-- amount of number;  dp[i]=max(p[i]+r[i])
+
+        public class Question343 : BaseQuestion
+        {
+            public int IntegerBreak(int n)
+            {
+                int[] dp = new int[n + 1];
+                dp[0] = 1;
+                int max = int.MinValue;
+                for (int i = 1; i <= n; i++)
+                {
+                    for (int j = 1; j <= i && j < n; j++)
+                    {
+                        max = Math.Max(max, dp[i - j] * j);
+                    }
+                    dp[i] = max;
+                }
+                return dp[n];
+            }
+            public static void Main()
+            {
+                int param1 = 2;
+                Question343 test = new Question343() { id = 343, name = "Integer Break" };
+                test.answer = test.IntegerBreak(param1).ToString();
+                Console.WriteLine(test.showResult());
+            }
+        }
+        #endregion
     }
 }
