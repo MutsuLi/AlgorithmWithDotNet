@@ -1331,5 +1331,34 @@ namespace Algorithms
             }
         }
         #endregion
+
+        #region 96. Unique Binary Search Trees
+        // Input: 3
+        // Output: 5
+        // Explanation:
+        // Given n = 3, there are a total of 5 unique BST's:
+        // 1 2 5
+        //    1         3     3      2      1
+        //     \       /     /      / \      \
+        //      3     2     1      1   3      2
+        //     /     /       \                 \
+        //    2     1         2                 3
+        public class Question96 : BaseQuestion
+        {
+            public int NumTrees(int n)
+            {
+                return 0;
+            }
+
+            public static void Main()
+            {
+                int param1 = 2;
+                Question96 test = new Question96() { id = 96, name = "Unique Binary Search Trees" };
+                test.answer = test.NumTrees(param1).ToString();
+                Console.WriteLine(test.showResult());
+            }
+        }
+
+        #endregion
     }
 }
