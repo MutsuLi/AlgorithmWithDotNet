@@ -2,16 +2,13 @@
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
-    "tasks": [
-        {
+    "tasks": [{
             "label": "build",
             "command": "dotnet",
             "type": "shell",
             "args": [
                 "build",
-                // Ask dotnet build to generate full paths for file names.
                 "/property:GenerateFullPaths=true",
-                // Do not generate summary otherwise it leads to duplicate errors in Problems panel
                 "/consoleloggerparameters:NoSummary"
             ],
             "group": "build",
@@ -19,6 +16,36 @@
                 "reveal": "silent"
             },
             "problemMatcher": "$msCompile"
+        },
+        {
+            "type": "process",
+            "label": "task g++",
+            "command": "D:\\develop\\mingw64\\bin\\g++.exe",
+            "args": [
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "-m64", // 不知为何有时会生成16位应用而无法运行，加上此条可强制生成64位的
+                "-Wall", // 开启额外警告
+                "-static-libgcc", // 静态链接libgcc，一般都会加上
+            ],
+            "options": {
+                "cwd": "D:\\develop\\mingw64\\bin"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always", // 执行任务时是否跳转到终端面板，可以为always，silent，never。具体参见VSC的文档
+                "focus": false, // 设为true后可以使执行task时焦点聚集在终端，但对编译C/C++来说，设为true没有意义
+                "panel": "shared" // 不同的文件的编译信息共享一个终端面板
+            },
+            "problemMatcher": "$gcc", // 捕捉编译时终端里的报错信息到问题面板中，修改代码后需要重新编译才会再次触发
+            // 本来有Lint，再开problemMatcher就有双重报错，但MinGW的Lint效果实在太差了；用Clang可以注释掉
+            "group": {
+                "kind": "build",
+                "isDefault": true // 不为true时ctrl shift B就要手动选择了
+            },
+            "detail": "compiler: D:\\develop\\mingw64\\bin\\g++.exe"
         }
     ]
 }
