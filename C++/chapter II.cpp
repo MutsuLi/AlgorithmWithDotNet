@@ -41,6 +41,25 @@ int main()
           << endl;
      cout << ri
           << endl;
+     //1. pointer to const => const * ;const pointer=>*const
+     int errNumb = 0;
+     const int *curErr = &errNumb;
+     int errNumb2 = 1;
+     errNumb = 10;
+     curErr = &errNumb2;
+     // *curErr = 2; fobidden
+     cout
+         << *curErr
+         << endl;
+
+     // const pointer to a const
+     // const int p1 = 1;
+     // const int *const pp = &p1;
+     // const int p2 = 1;
+     //pp = &p2;
+     //*pp = 2;
+     constexpr int *q = nullptr;
+     *q = 0;
      system("pause");
      return 0;
 }
