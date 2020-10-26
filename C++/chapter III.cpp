@@ -5,6 +5,10 @@ using namespace std;
 /*
 * Chapter 3. Strings, Vectors, and Arrays
 */
+constexpr unsigned txt_size()
+{
+    return 10;
+}
 int main()
 {
     //String 大同小异
@@ -57,7 +61,20 @@ int main()
     string a4[3] = {"hi", "bye"}; // same as a4[] = {"hi", "bye", ""}
     int *ptrs[10];                // ptrs is an array of ten pointers to int
     int(*Parray)[10] = &arr;      // Parray points to an array of ten ints
-    int(&arrRef)[10] = arr;       // arrRef refers to an array of ten ints
+    cout << *Parray[0] << endl;
+    int(&arrRef)[10] = arr; // arrRef refers to an array of ten ints
+
+    constexpr unsigned number = 10;
+    string test123[txt_size()];
+
+    //3.5.3. Pointers and Arrays
+    int ia[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9}; // ia is an array of ten ints
+    auto ia2 = ia;                             // ia2 is an int* that points to the first element in ia
+    *ia2 = 42;                                 // error: ia2 is a pointer, and we can't assign an int to a pointer
+
+    int arrs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    for (int *b = begin(arrs); b != end(arrs); ++b)
+        cout << *b << endl; // print the elements in arr
     system("pause");
     return 0;
 }
