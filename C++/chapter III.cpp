@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <cstring>
 
 using namespace std;
 /*
@@ -75,6 +76,34 @@ int main()
     int arrs[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     for (int *b = begin(arrs); b != end(arrs); ++b)
         cout << *b << endl; // print the elements in arr
+
+    const char ca[] = {'h', 'e', 'l', 'l', 'o'};
+    const char *cp = ca;
+    while (*cp)
+    {
+        cout << *cp << endl;
+        ++cp;
+    }
+    //3.5.5. Interfacing to Older Code
+    string s2("Hello World");
+    //char *str = s;               // error: can't initialize a char* from a string
+    const char *str = s2.c_str(); // ok
+    int int_arr[] = {0, 1, 2, 3, 4, 5};
+    // ivec has six elements; each is a copy of the corresponding element in int_arr
+    vector<int> ivec22(begin(int_arr), end(int_arr));
+    //3.6. Multidimensional Arrays
+    int arr2[10][20][30] = {0};
+    int ia3[3][4] = {
+        {0, 1, 2, 3},
+        {4, 5, 6, 7},
+        {8, 9, 10, 11}};
+    //int ia[3][4] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    //int ia[3][4] = {{ 0 }, { 4 }, { 8 }};
+    //int ix[3][4] = {0, 3, 6, 9}; //initializes the elements of the first row.
+    // assigns the first element of arr to the last element in the last row of ia
+    ia3[2][3] = arr2[0][0][0];
+    int(&row)[4] = ia3[1]; // binds row to the second four-element array in ia
+    cout << row[3] << endl;
     system("pause");
     return 0;
 }
