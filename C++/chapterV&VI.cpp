@@ -31,7 +31,7 @@ void error_msg(initializer_list<string> il)
         cout << *beg << " ";
     cout << endl;
 }
-
+bool lengthCompare(const string &, const string &);
 int main()
 {
     //Chapter 5
@@ -53,6 +53,17 @@ int main()
     string::size_type ctr = 0;
     cout << find_char("Hello World!", 'o', ctr) << endl;
     error_msg({"functionX", "okay"});
+    // Func and Func2 have function type
+    typedef bool Func(const string &, const string &);
+    typedef decltype(lengthCompare) Func2; // equivalent type
+    // FuncP and FuncP2 have pointer to function type
+    typedef bool (*FuncP)(const string &, const string &);
+    typedef decltype(lengthCompare) *FuncP2; // equivalent type
+    // equivalent declarations of useBigger using type aliases
+    void useBigger(const string &, const string &, Func);
+    // the compiler will automatically convert the function type represented by Func to a pointer.
+    void useBigger(const string &, const string &, FuncP2);
+
     system("pause");
     return 0;
 }
