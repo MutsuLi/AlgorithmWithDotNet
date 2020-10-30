@@ -41,21 +41,26 @@ int main()
           << endl;
      cout << ri
           << endl;
-     //1. pointer to const => const * ;const pointer=>*const
+
+     //1.pointer to const
      int errNumb = 0;
      const int *curErr = &errNumb;
      int errNumb2 = 1;
      errNumb = 10;
+     //*curErr = errNumb2; forbidden
      curErr = &errNumb2;
      // *curErr = 2; fobidden
-     cout
-         << *curErr
-         << endl;
-
+     cout << *curErr << endl;
+     //2.const pointer
+     int a1 = 10;
+     int *const pp = &a1;
+     *pp = 120;
+     a1 = 100;
+     cout << *curErr << endl;
      // const pointer to a const
-     // const int p1 = 1;
-     // const int *const pp = &p1;
-     // const int p2 = 1;
+     const int p1 = 1;
+     const int *const pp = &p1;
+     const int p2 = 1;
      //pp = &p2;
      //*pp = 2;
      constexpr int *q = nullptr;
