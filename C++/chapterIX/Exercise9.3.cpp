@@ -141,6 +141,23 @@ int e931()
         cout << j << endl;
     return 0;
 }
+int ep32()
+{
+    vector<int> vi = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    auto iter = vi.begin();
+    while (iter != vi.end()) {
+        if (*iter % 2) {
+            iter = vi.insert(iter, *iter++);
+            iter += 2;
+        }
+        else
+            iter = vi.erase(iter);
+    }
+
+    for (auto i : vi) cout << i << " ";
+
+    return 0;
+}
 int main()
 {
     vector<string> svec; // empty vector
@@ -177,6 +194,7 @@ int main()
     e927();
     cout << "9.31: " << endl;
     e931();
+    //ep32();
     system("pause");
     return 0;
 }
