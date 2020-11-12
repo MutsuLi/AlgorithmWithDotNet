@@ -3,6 +3,7 @@
 #include <list>
 #include <forward_list>
 #include <deque>
+#include <stack>
 
 using namespace std;
 int e918()
@@ -183,21 +184,16 @@ int e938()
     Replace(str, "thru", "through");
     Replace(str, "tho", "though");
     std::cout << str << std::endl;
+    return 0;
 }
 void ReplaceII(string &s, const string &oldVal, const string &newVal)
 {
-    for (auto beg = s.begin(); std::distance(beg, s.end()) >=
-                               std::distance(oldVal.begin(), oldVal.end());)
-    {
-        if (string{beg, beg + oldVal.size()} == oldVal)
+    for (string::size_type i = 0; i != s.size(); ++i)
+        if (s.substr(i, oldVal.size()) == oldVal)
         {
-            beg = s.erase(beg, beg + oldVal.size());
-            beg = s.insert(beg, newVal.cbegin(), newVal.cend());
-            std::advance(beg, newVal.size());
+            s.replace(i, oldVal.size(), newVal);
+            i += newVal.size() - 1;
         }
-        else
-            ++beg;
-    }
 }
 int e944()
 {
@@ -205,6 +201,85 @@ int e944()
     ReplaceII(str, "thru", "through");
     ReplaceII(str, "tho", "though");
     std::cout << str << std::endl;
+    return 0;
+}
+int e945(string name, string preffix, string subffix)
+{
+    string ret(name);
+    ret.insert(ret.begin(), preffix.begin(), preffix.end());
+    ret.append(subffix);
+    cout << ret << endl;
+    return 0;
+}
+int e946(string name, string preffix, string subffix)
+{
+    string ret(name);
+    ret.insert(0, preffix);
+    ret.insert(ret.size(), subffix);
+    cout << ret << endl;
+    return 0;
+}
+int e947()
+{
+    string numbers{"0123456789"};
+    string alphabet{"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"};
+    string str{"ab2c3d7R4E6"};
+    vector<char> numberResult;
+    vector<char> alphaResult;
+    cout << "numeric characters: ";
+    for (string::size_type pos = 0; (pos = str.find_first_of(numbers, pos)) != string::npos; ++pos)
+        cout << str[pos] << " ";
+    cout << "alpha characters: ";
+    for (string::size_type pos = 0; (pos = str.find_first_of(alphabet, pos)) != string::npos; ++pos)
+        cout << str[pos] << " ";
+    cout << endl;
+    return 0;
+}
+int e950()
+{
+    vector<string> v = {"1", "2", "3", "4.5"};
+    int sum1 = 0;
+    for (auto &each : v)
+    {
+        sum1 += stoi(each);
+    }
+    float sum2 = 0;
+    for (auto &each : v)
+    {
+        sum2 += stof(each);
+    }
+    cout << sum1 << endl;
+    cout << sum2 << endl;
+    return 0;
+}
+int e952()
+{
+    string expr = "This is (Mooophy(awesome)((((wooooooooo))))) and (ocxs) over";
+    auto repl = '#';
+    bool flag = false;
+    stack<char> stk;
+    for (auto &each : expr)
+    {
+        stk.push(each);
+        if (each == '(')
+            flag = true;
+        if (flag && each == ')')
+        {
+            while (stk.top() != '(')
+            {
+                stk.pop();
+            }
+            stk.pop();
+            stk.push(repl);
+            flag = false;
+        }
+    }
+    // Test
+    string output;
+    for (; !stk.empty(); stk.pop())
+        output.insert(output.begin(), stk.top());
+    cout << output << endl; // "This is # and # over"
+    return 0;
 }
 int main()
 {
@@ -244,6 +319,11 @@ int main()
     e931();
     e938();
     //e932();
+    e945(" Ricardo ", "Mr.", "Jr.");
+    e946(" Ricardo ", "Mr.", "Jr.");
+    e947();
+    e950();
+    e952();
     system("pause");
     return 0;
 }
