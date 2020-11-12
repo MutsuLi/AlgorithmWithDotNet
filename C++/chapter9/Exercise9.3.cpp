@@ -141,12 +141,14 @@ int e931()
         cout << j << endl;
     return 0;
 }
-int ep32()
+int e932()
 {
     vector<int> vi = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
     auto iter = vi.begin();
-    while (iter != vi.end()) {
-        if (*iter % 2) {
+    while (iter != vi.end())
+    {
+        if (*iter % 2)
+        {
             iter = vi.insert(iter, *iter++);
             iter += 2;
         }
@@ -154,9 +156,55 @@ int ep32()
             iter = vi.erase(iter);
     }
 
-    for (auto i : vi) cout << i << " ";
+    for (auto i : vi)
+        cout << i << " ";
 
     return 0;
+}
+
+void Replace(string &s, const string &oldVal, const string &newVal)
+{
+    for (auto beg = s.begin(); std::distance(beg, s.end()) >=
+                               std::distance(oldVal.begin(), oldVal.end());)
+    {
+        if (string{beg, beg + oldVal.size()} == oldVal)
+        {
+            beg = s.erase(beg, beg + oldVal.size());
+            beg = s.insert(beg, newVal.cbegin(), newVal.cend());
+            std::advance(beg, newVal.size());
+        }
+        else
+            ++beg;
+    }
+}
+int e938()
+{
+    string str{"To drive straight thru is a foolish, tho courageous act."};
+    Replace(str, "thru", "through");
+    Replace(str, "tho", "though");
+    std::cout << str << std::endl;
+}
+void ReplaceII(string &s, const string &oldVal, const string &newVal)
+{
+    for (auto beg = s.begin(); std::distance(beg, s.end()) >=
+                               std::distance(oldVal.begin(), oldVal.end());)
+    {
+        if (string{beg, beg + oldVal.size()} == oldVal)
+        {
+            beg = s.erase(beg, beg + oldVal.size());
+            beg = s.insert(beg, newVal.cbegin(), newVal.cend());
+            std::advance(beg, newVal.size());
+        }
+        else
+            ++beg;
+    }
+}
+int e944()
+{
+    string str{"To drive straight thru is a foolish, tho courageous act."};
+    ReplaceII(str, "thru", "through");
+    ReplaceII(str, "tho", "though");
+    std::cout << str << std::endl;
 }
 int main()
 {
@@ -194,7 +242,8 @@ int main()
     e927();
     cout << "9.31: " << endl;
     e931();
-    //ep32();
+    e938();
+    //e932();
     system("pause");
     return 0;
 }
